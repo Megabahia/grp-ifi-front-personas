@@ -1,34 +1,33 @@
-import { CoreMenu } from '@core/types'
-import { Role } from '../auth/models/role';
+import { CoreMenu } from "@core/types";
+import { Role } from "../auth/models/role";
 
 export const menu: CoreMenu[] = [
   {
-    id: 'inicio',
-    title: 'Inicio',
+    id: "inicio",
+    title: "Inicio",
     // translate: 'MENU.HOME',
     role: [Role.SuperMonedas],
-    type: 'item',
-    icon: 'home',
-    url: 'personas/inicio',
-
+    type: "item",
+    icon: "home",
+    url: "personas/inicio",
   },
   {
-    id: 'que-es',
-    title: '¿Qué es super monedas?',
+    id: "que-es",
+    title: "¿Qué es super monedas?",
     // translate: 'MENU.SAMPLE',
-    type: 'item',
-    icon: 'info',
-    url: 'personas/que-es'
+    type: "item",
+    icon: "info",
+    url: "personas/que-es",
   },
   {
-    id: 'apps',
-    type: 'section',
-    title: 'Administración',
+    id: "apps",
+    type: "section",
+    title: "Administración",
     role: [Role.SuperMonedas],
     // translate: 'MENU.APPS.SECTION',
-    icon: 'package',
+    icon: "package",
     children: [
-      {
+      /*    {
         id: 'superMonedas',
         title: 'Super monedas',
         role: [Role.SuperMonedas],
@@ -85,98 +84,96 @@ export const menu: CoreMenu[] = [
             url: 'personas/supermonedas/pagar-con-supermonedas'
           }
         ]
-      },
+      }, */
       {
-        id: 'creditosAutonomos',
-        title: 'Créditos para Autónomos',
+        id: "creditosAutonomos",
+        title: "Créditos para Autónomos",
         role: [Role.SuperMonedas],
         // translate: 'MENU.PAGES.SECTION',
-        type: 'collapsible',
-        icon: 'credit-card',
+        type: "collapsible",
+        icon: "credit-card",
         children: [
           {
-            id: 'solicitarCreditoAut',
-            title: 'Solicitar crédito',
+            id: "solicitarCreditoAut",
+            title: "Solicitar crédito",
             // translate: 'MENU.APPS.EMAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'personas/creditos-autonomos/solicitar-credito'
+            type: "item",
+            icon: "circle",
+            url: "personas/creditos-autonomos/solicitar-credito",
           },
-        ]
+        ],
       },
       {
-        id: 'creditosEmpleado',
-        title: 'Empleado',
+        id: "creditosEmpleado",
+        title: "Empleado",
         role: [Role.SuperMonedas],
         // translate: 'MENU.PAGES.SECTION',
-        type: 'collapsible',
-        icon: 'credit-card',
+        type: "collapsible",
+        icon: "credit-card",
         children: [
           {
-            id: 'creditosPreEmp',
-            title: 'Créditos preaprobados',
+            id: "creditosPreEmp",
+            title: "Créditos preaprobados",
             // translate: 'MENU.APPS.EMAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'personas/creditos-empleados/creditos-pre-aprobados'
-          }
-        ]
+            type: "item",
+            icon: "circle",
+            url: "personas/creditos-empleados/creditos-pre-aprobados",
+          },
+        ],
       },
       {
-        id: 'creditosPreAprobados',
-        title: 'Créditos Pre Aprobados',
+        id: "creditosPreAprobados",
+        title: "Créditos Pre Aprobados",
         role: [Role.SuperMonedas],
         // translate: 'MENU.PAGES.SECTION',
-        type: 'collapsible',
-        icon: 'credit-card',
+        type: "collapsible",
+        icon: "credit-card",
         children: [
           {
-            id: 'listadoCreditosPre',
-            title: 'Listado de créditos Pre Aprobados',
+            id: "listadoCreditosPre",
+            title: "Listado de créditos Pre Aprobados",
             // translate: 'MENU.APPS.EMAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'personas/creditos-pre-aprobados/listado'
-          }
-        ]
+            type: "item",
+            icon: "circle",
+            url: "personas/creditos-pre-aprobados/listado",
+          },
+        ],
       },
       {
-        id: 'misCreditos',
-        title: 'Mis créditos',
+        id: "misCreditos",
+        title: "Mis créditos",
         role: [Role.SuperMonedas],
         // translate: 'MENU.PAGES.SECTION',
-        type: 'collapsible',
-        icon: 'credit-card',
+        type: "collapsible",
+        icon: "credit-card",
         children: [
           {
-            id: 'estadoCreditos',
-            title: 'Estado de mis créditos',
+            id: "estadoCreditos",
+            title: "Estado de mis créditos",
             // translate: 'MENU.APPS.EMAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'personas/mis-creditos/estado-creditos'
+            type: "item",
+            icon: "circle",
+            url: "personas/mis-creditos/estado-creditos",
           },
           {
-            id: 'registrarPagoCuotas',
-            title: 'Registrar pago de cuota',
+            id: "registrarPagoCuotas",
+            title: "Registrar pago de cuota",
             // translate: 'MENU.APPS.EMAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'personas/mis-creditos/registrar-pagos-cuotas'
-          }
-        ]
+            type: "item",
+            icon: "circle",
+            url: "personas/mis-creditos/registrar-pagos-cuotas",
+          },
+        ],
       },
       {
-        id: 'reclamosRequerimientos',
-        title: 'Reclamos y Requerimientos',
+        id: "reclamosRequerimientos",
+        title: "Reclamos y Requerimientos",
         role: [Role.SuperMonedas],
         // translate: 'MENU.PAGES.SECTION',
-        type: 'item',
-        icon: 'message-circle',
-        url: 'personas/inicio',
+        type: "item",
+        icon: "message-circle",
+        url: "personas/inicio",
       },
-
-    ]
+    ],
   },
-
-]
+];
