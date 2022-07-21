@@ -236,7 +236,7 @@ export class ListadoComponent implements OnInit {
     this._creditosPreAprobadosService.obtenerListaCreditos({
       page: this.page - 1,
       page_size: this.page_size,
-      tipoCredito: 'PreAprobado',
+      // tipoCredito: 'PreAprobado',
       user_id: this.usuario.id
     }).subscribe((info) => {
       this.listaCreditos = info.info;
