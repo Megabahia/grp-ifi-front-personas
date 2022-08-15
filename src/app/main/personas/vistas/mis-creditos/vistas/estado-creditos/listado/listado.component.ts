@@ -237,7 +237,8 @@ export class ListadoComponent implements OnInit {
       page: this.page - 1,
       page_size: this.page_size,
       // tipoCredito: 'PreAprobado',
-      user_id: this.usuario.id
+      // user_id: this.usuario.id,
+      identificacion: this.usuario.persona.identificacion
     }).subscribe((info) => {
       this.listaCreditos = info.info;
       this.collectionSize = info.cont;
