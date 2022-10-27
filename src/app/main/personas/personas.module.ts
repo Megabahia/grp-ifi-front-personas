@@ -53,6 +53,7 @@ import { SolicitudCreditosComponent } from './vistas/solicitud-creditos/solicitu
 import { RegistroProveedoresComponent } from './vistas/registro-proveedores/registro-proveedores.component';
 import { PagoProvedorsComponent } from './vistas/pago-provedors/pago-provedors.component';
 import { SaldoProveedoresComponent } from './vistas/saldo-proveedores/saldo-proveedores.component';
+import { CreateComponent } from './vistas/registro-proveedores/create/create.component';
 
 const routes = [
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
@@ -281,6 +282,7 @@ const routes = [
         RegistroProveedoresComponent,
         PagoProvedorsComponent,
         SaldoProveedoresComponent,
+        CreateComponent,
     ],
     imports: [
         CoreCommonModule,
