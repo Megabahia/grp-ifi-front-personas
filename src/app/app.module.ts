@@ -23,82 +23,87 @@ import {AuthGuard} from './auth/helpers/auth.guards';
 import {JwtInterceptor} from './auth/helpers/jwt.interceptor';
 import {ErrorInterceptor} from './auth/helpers/error.interceptor';
 import {
-    FacebookLoginProvider,
-    SocialAuthServiceConfig,
-    SocialLoginModule,
+  FacebookLoginProvider,
+  SocialAuthServiceConfig,
+  SocialLoginModule,
 } from 'angularx-social-login';
 
 const appRoutes: Routes = [
-    {
-        path: '',
-        redirectTo: 'personas',
-        pathMatch: 'full',
-    },
-    {
-        path: 'pages',
-        loadChildren: () =>
-            import('./main/pages/pages.module').then((m) => m.PagesModule),
-    },
-    {
-        path: 'grp',
-        loadChildren: () =>
-            import('./main/center/center.module').then((m) => m.CenterModule),
-    },
-    {
-        path: 'personas',
-        loadChildren: () =>
-            import('./main/personas/personas.module').then((m) => m.PersonasModule),
-    },
-    {
-        path: '**',
-        redirectTo: '/pages/miscellaneous/error', //Error 404 - Page not found
-    },
+  {
+    path: '',
+    redirectTo: 'personas',
+    pathMatch: 'full',
+  },
+  {
+    path: 'pages',
+    loadChildren: () =>
+      import('./main/pages/pages.module').then((m) => m.PagesModule),
+  },
+  {
+    path: 'grp',
+    loadChildren: () =>
+      import('./main/center/center.module').then((m) => m.CenterModule),
+  },
+  {
+    path: 'micro-creditos',
+    loadChildren: () =>
+      import('./main/micro-creditos/micro-creditos.module').then((m) => m.MicroCreditosModule),
+  },
+  {
+    path: 'personas',
+    loadChildren: () =>
+      import('./main/personas/personas.module').then((m) => m.PersonasModule),
+  },
+  {
+    path: '**',
+    redirectTo: '/pages/miscellaneous/error', //Error 404 - Page not found
+  },
 ];
 
 @NgModule({
-    declarations: [AppComponent],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        RouterModule.forRoot(appRoutes, {
-            scrollPositionRestoration: 'enabled', // Add options right here
-            relativeLinkResolution: 'legacy',
-            useHash: true,
-        }),
-        TranslateModule.forRoot(),
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes, {
+      scrollPositionRestoration: 'enabled', // Add options right here
+      relativeLinkResolution: 'legacy',
+      useHash: true,
+    }),
+    TranslateModule.forRoot(),
 
-        //NgBootstrap
-        NgbModule,
-        ToastrModule.forRoot(),
+    //NgBootstrap
+    NgbModule,
+    ToastrModule.forRoot(),
 
-        // Core modules
-        CoreModule.forRoot(coreConfig),
-        CoreCommonModule,
-        CoreSidebarModule,
-        CoreThemeCustomizerModule,
-        // App modules
-        LayoutModule,
-        SampleModule,
-        SocialLoginModule,
-    ],
-    providers: [
-        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-        {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-        {
-            provide: 'SocialAuthServiceConfig',
-            useValue: {
-                autoLogin: false,
-                providers: [
-                    {
-                        id: FacebookLoginProvider.PROVIDER_ID,
-                        provider: new FacebookLoginProvider('340664221170846'),
-                    },
-                ],
-            } as SocialAuthServiceConfig,
-        },
-    ],
-    bootstrap: [AppComponent],
+    // Core modules
+    CoreModule.forRoot(coreConfig),
+    CoreCommonModule,
+    CoreSidebarModule,
+    CoreThemeCustomizerModule,
+    // App modules
+    LayoutModule,
+    SampleModule,
+    SocialLoginModule,
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('340664221170846'),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }
