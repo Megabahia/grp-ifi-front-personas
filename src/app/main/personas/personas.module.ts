@@ -48,6 +48,11 @@ import {
 import {CreditosPreAprobadosEmpComponent} from './vistas/creditos-empleados/creditos-pre-aprobados/creditos-pre-aprobados-emp.component';
 import {ListadoComponent as listadoEstadoCreditos} from './vistas/mis-creditos/vistas/estado-creditos/listado/listado.component';
 import {ListadoComponent as listadoPagoCuotas} from './vistas/mis-creditos/vistas/registrar-pagos-cuotas/listado/listado.component';
+import { RegistroDatosPagosProvedoresComponent } from './vistas/requisito-solicitud-microcreditos/registro-datos-pagos-provedores.component';
+import { SolicitudCreditosComponent } from './vistas/solicitud-creditos/solicitud-creditos.component';
+import { RegistroProveedoresComponent } from './vistas/registro-proveedores/registro-proveedores.component';
+import { PagoProvedorsComponent } from './vistas/pago-provedors/pago-provedors.component';
+import { SaldoProveedoresComponent } from './vistas/saldo-proveedores/saldo-proveedores.component';
 
 const routes = [
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
@@ -188,6 +193,46 @@ const routes = [
         // data: { animation: 'auth' }
     },
     {
+        path: 'registroDatosPagosProvedores',
+        component: RegistroDatosPagosProvedoresComponent,
+        // data: {activacion: [1]},
+        canActivate: [AuthGuard],
+
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'solucitudCredito',
+        component: SolicitudCreditosComponent,
+        // data: {activacion: [1]},
+        canActivate: [AuthGuard],
+
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'registroProveedores',
+        component: RegistroProveedoresComponent,
+        // data: {activacion: [1]},
+        canActivate: [AuthGuard],
+
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'pagoProveedores',
+        component: PagoProvedorsComponent,
+        // data: {activacion: [1]},
+        canActivate: [AuthGuard],
+
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'saldoDisponible',
+        component: SaldoProveedoresComponent,
+        // data: {activacion: [1]},
+        canActivate: [AuthGuard],
+
+        // data: { animation: 'auth' }
+    },
+    {
         path: 'completarPerfil',
         component: CompletarPerfilComponent,
         data: {activacion: [2, 3], animation: 'flatpickr'},
@@ -231,6 +276,11 @@ const routes = [
         CreditosPreAprobadosEmpComponent,
         listadoEstadoCreditos,
         listadoPagoCuotas,
+        RegistroDatosPagosProvedoresComponent,
+        SolicitudCreditosComponent,
+        RegistroProveedoresComponent,
+        PagoProvedorsComponent,
+        SaldoProveedoresComponent,
     ],
     imports: [
         CoreCommonModule,

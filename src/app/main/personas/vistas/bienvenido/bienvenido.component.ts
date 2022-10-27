@@ -18,7 +18,6 @@ import { GanarSuperMoneda } from '../../models/supermonedas';
 })
 export class BienvenidoComponent implements OnInit {
   @ViewChild('mensajeModal') mensajeModal;
-
   //  Public
   public coreConfig: any;
   public loginForm: FormGroup;

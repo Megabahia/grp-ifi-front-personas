@@ -135,7 +135,6 @@ export class LoginComponent implements OnInit {
 
     async loginWithFacebook() {
         await this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
-
         this.logginSubs = await this.socialAuthService.authState.subscribe(
             (user) => {
                 this.socialUser = user;
