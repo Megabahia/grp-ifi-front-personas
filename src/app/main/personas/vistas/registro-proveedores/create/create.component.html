@@ -104,9 +104,15 @@
                                             <h4>Cuenta bancaria del proveedor</h4>
                                         </div>
                                     </div>
-                                    <a (click)="agregarCuenta()" class="btn btn-primary">
+                                    <a (click)="agregarCuenta()" class="btn btn-primary mb-2">
                                         Agregar nuevo
                                     </a>
+                                    <div *ngIf="submitted && proveedorForm.get('cuentas').errors"
+                                         class="invalid-feedback" style="display: block;">
+                                        <div *ngIf="proveedorForm.get('cuentas').errors">
+                                            <h4 class="text text-danger">Se necesita una cuenta es requerido</h4>
+                                        </div>
+                                    </div>
                                     <div class="add-lessons-form" >
                                         <ng-container formArrayName="cuentas">
                                             <ng-container *ngFor="let cuenta of proveedorForm.get('cuentas')['controls']; let i = index">
@@ -131,8 +137,10 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="banco[{{i}}]">Elija el Banco</label>
-                                                            <input type="text" class="form-control"
-                                                                   formControlName="banco">
+                                                            <select class="form-control select2" formControlName="banco">
+                                                                <option value="">- Seleccione -</option>
+                                                                <option *ngFor="let banco of bancos" value="{{banco.nombre}}">{{banco.nombre}}</option>
+                                                            </select>
                                                             <div *ngIf="submitted && cuenta.controls?.banco.errors"
                                                                  class="invalid-feedback" style="display: block;">
                                                                 <div *ngIf="cuenta.controls?.banco.errors.required">

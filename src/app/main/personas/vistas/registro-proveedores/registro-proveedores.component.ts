@@ -4,6 +4,7 @@ import {Subject} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CoreSidebarService} from '../../../../../@core/components/core-sidebar/core-sidebar.service';
 import {DatePipe} from '@angular/common';
+import {RegistroProveedorService} from './registro-proveedor.service';
 
 @Component({
   selector: 'app-registro-proveedores',
@@ -19,13 +20,13 @@ export class RegistroProveedoresComponent implements OnInit, AfterViewInit, OnDe
   public page_size: any = 10;
   public maxSize;
   public collectionSize;
-  public empresas;
+  public proveedores;
   public empresa;
   public imagen;
   private _unsubscribeAll: Subject<any>;
   private idEmpresa;
   public empresaForm: FormGroup;
-  public empresaSubmitted: boolean;
+  public proveedoresubmitted: boolean;
   public empresaFormData = new FormData();
 
   public mensaje = '';
@@ -37,13 +38,13 @@ export class RegistroProveedoresComponent implements OnInit, AfterViewInit, OnDe
   public ciudadOpciones;
 
   public pantalla = 0;
+  public proveedor = {};
 
   constructor
   (
-    // private paramService: ParametrizacionesService,
+    private _proveedorService: RegistroProveedorService,
     private datePipe: DatePipe,
     private _coreSidebarService: CoreSidebarService,
-    // private _empresasService: EmpresasService,
     private _formBuilder: FormBuilder,
     private _modalService: NgbModal,
   ) {
@@ -101,20 +102,19 @@ export class RegistroProveedoresComponent implements OnInit, AfterViewInit, OnDe
 
   ngAfterViewInit() {
     this.iniciarPaginador();
-    this.obtenerListaEmpresas();
-    this.obtenerTipoEmpresaOpciones();
-    this.obtenerCategoriaEmpresaOpciones();
-    this.obtenerPaisOpciones();
-    this.obtenerProvinciaOpciones();
-    this.obtenerCiudadOpciones();
+    this.obtenerListaProveedores();
   }
 
-  cambiarPantalla(pantalla: number): void {
+  cambiarPantalla(pantalla: number, proveedor?): void {
+    this.proveedor = proveedor;
     this.pantalla = pantalla;
+    if (this.pantalla === 0) {
+      this.obtenerListaProveedores();
+    }
   }
 
   visualizarNombreArchivo(nombre) {
-    const stringArchivos = 'https://globalredpymes.s3.amazonaws.com/CORP/imgEmpresas/';
+    const stringArchivos = 'https://globalredpymes.s3.amazonaws.com/CORP/imgproveedores/';
     return nombre.replace(stringArchivos, '');
   }
 
@@ -122,115 +122,24 @@ export class RegistroProveedoresComponent implements OnInit, AfterViewInit, OnDe
     return this.empresaForm.controls;
   }
 
-  guardarEmpresa() {
-    // this.empresaSubmitted = true;
-    // if (this.empresaForm.invalid) {
-    //   return;
-    // }
-    // this.cargandoEmpresa = true;
-    // let productoValores = Object.values(this.empresa);
-    // let productoLlaves = Object.keys(this.empresa);
-    // productoLlaves.map((llaves, index) => {
-    //   if (llaves != 'imagen') {
-    //     if (productoValores[index]) {
-    //       this.empresaFormData.delete(llaves);
-    //       this.empresaFormData.append(llaves, productoValores[index]);
-    //     }
-    //   }
-    // });
-    // if (this.idEmpresa == '') {
-    //   this._empresasService.crearEmpresa(this.empresaFormData).subscribe((info) => {
-    //       this.obtenerListaEmpresas();
-    //       this.mensaje = 'Empresa guardada con éxito';
-    //       this.abrirModal(this.mensajeModal);
-    //       this.toggleSidebar('guardarEmpresa', '');
-    //       this.cargandoEmpresa = false;
-    //
-    //     },
-    //     (error) => {
-    //       const errores = Object.values(error);
-    //       const llaves = Object.keys(error);
-    //       this.mensaje = 'Error al crear empresa';
-    //
-    //       this.abrirModal(this.mensajeModal);
-    //       this.cargandoEmpresa = false;
-    //
-    //     });
-    // } else {
-    //   this._empresasService.actualizarEmpresa(this.empresaFormData, this.idEmpresa).subscribe((info) => {
-    //       this.obtenerListaEmpresas();
-    //       this.mensaje = 'Empresa actualizada con éxito';
-    //       this.abrirModal(this.mensajeModal);
-    //       this.toggleSidebar('guardarEmpresa', '');
-    //       this.cargandoEmpresa = false;
-    //
-    //     },
-    //     (error) => {
-    //       const errores = Object.values(error);
-    //       const llaves = Object.keys(error);
-    //       this.mensaje = 'Error al actualizar empresa';
-    //       this.abrirModal(this.mensajeModal);
-    //       this.cargandoEmpresa = false;
-    //
-    //     });
-    // }
-
+  eliminarProveedor(id) {
+    this._proveedorService.delete(id).subscribe(info => {
+      this.obtenerListaProveedores();
+    });
   }
 
-  obtenerTipoEmpresaOpciones() {
-    // this.paramService.obtenerListaPadres('TIPO_EMPRESA').subscribe((info) => {
-    //   this.tipoEmpresaOpciones = info;
-    // });
-  }
-
-  obtenerCategoriaEmpresaOpciones() {
-    // this.paramService.obtenerListaPadres('CATEGORIA_EMPRESA').subscribe((info) => {
-    //   this.categoriaEmpresaOpciones = info;
-    // });
-  }
-
-  obtenerPaisOpciones() {
-    // this.paramService.obtenerListaPadres('PAIS').subscribe((info) => {
-    //   this.paisOpciones = info;
-    // });
-  }
-
-  obtenerProvinciaOpciones() {
-    // this.paramService.obtenerListaHijos(this.empresa.pais, 'PAIS').subscribe((info) => {
-    //   this.provinciaOpciones = info;
-    // });
-  }
-
-  obtenerCiudadOpciones() {
-    // this.paramService.obtenerListaHijos(this.empresa.provincia, 'PROVINCIA').subscribe((info) => {
-    //   this.ciudadOpciones = info;
-    // });
-  }
-
-  eliminarEmpresa() {
-    // this._empresasService.eliminarEmpresa(this.idEmpresa).subscribe(() => {
-    //     this.obtenerListaEmpresas();
-    //     this.mensaje = 'Empresa eliminada correctamente';
-    //     this.abrirModal(this.mensajeModal);
-    //   },
-    //   (error) => {
-    //     this.mensaje = 'Ha ocurrido un error al eliminar la empresa';
-    //     this.abrirModal(this.mensajeModal);
-    //   });
-  }
-
-  obtenerListaEmpresas() {
-    // this._empresasService.obtenerListaEmpresas({
-    //   page: this.page - 1, page_size: this.page_size
-    // }).subscribe(info => {
-    //   this.empresas = info.info;
-    //   this.collectionSize = info.cont;
-    // });
+  obtenerListaProveedores() {
+    this._proveedorService.list({
+      page: this.page - 1, page_size: this.page_size
+    }).subscribe(info => {
+      this.proveedores = info.info;
+      this.collectionSize = info.cont;
+    });
   }
 
   iniciarPaginador() {
     this.paginator.pageChange.subscribe(() => {
-      this.obtenerListaEmpresas();
+      this.obtenerListaProveedores();
     });
   }
 

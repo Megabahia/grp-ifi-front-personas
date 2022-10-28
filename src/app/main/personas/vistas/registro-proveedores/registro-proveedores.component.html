@@ -51,7 +51,7 @@
                 <div class="row m-75">
                     <div class="col-lg-12 col-xl-6">
                         <label>Mostrar</label>
-                        <select class="form-control-sm" [(ngModel)]="page_size" (change)="obtenerListaEmpresas()">
+                        <select class="form-control-sm" [(ngModel)]="page_size" (change)="obtenerListaProveedores()">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="col-lg-12 col-xl-6 text-right">
                         <a (click)="cambiarPantalla(1)" class="btn btn-primary">
-                            Añadir empresa
+                            Añadir proveedor
                         </a>
                     </div>
                 </div>
@@ -78,40 +78,27 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let empresa of empresas">
+                        <tr *ngFor="let proveedor of proveedores">
                             <td>
-                                {{empresa.nombreEmpresa}}
+                                {{proveedor.tipoPersona}}
                             </td>
                             <td>
-                                {{empresa.pais}}
+                                {{proveedor.identificacion}}
                             </td>
                             <td>
-                                {{empresa.provincia}}
+                                {{proveedor.nombreRepresentante}}
                             </td>
 
                             <td>
-                                {{empresa.ciudad}}
-                            </td>
-                            <td>
-                                {{empresa.direccion}}
-                            </td>
-                            <td>
-                                {{empresa.ruc}}
-                            </td>
-                            <td>
-                                <div class="badge {{empresa.estado == 'Activo' ? 'badge-success':'badge-warning'}}">
-                                    {{empresa.estado}}
-                                </div>
+                                {{proveedor.nombreComercial}}
                             </td>
                             <td>
                                 <a href="javascript:void(0);" container="body" placement="top" ngbTooltip="Editar"
-                                   (click)="toggleSidebar('guardarEmpresa',empresa._id)"><i class="mr-1" size="18"
-                                                                                            data-feather="edit"></i
-                                ></a>
+                                   (click)="cambiarPantalla(1, proveedor)"><i class="mr-1" size="18"
+                                                                              data-feather="edit"></i></a>
                                 <a href="javascript:void(0);" container="body" placement="top" ngbTooltip="Eliminar"
-                                   (click)="eliminarEmpresaModal(empresa._id)"><i class="mr-1" size="18"
-                                                                                  data-feather="trash"></i
-                                ></a>
+                                   (click)="eliminarProveedor(proveedor._id)"><i class="mr-1" size="18"
+                                                                                 data-feather="trash"></i></a>
                             </td>
                         </tr>
                         </tbody>
@@ -127,7 +114,7 @@
         <!-- users list ends -->
     </div>
 </div>
-<app-create *ngIf="pantalla === 1" (pantalla)="cambiarPantalla($event)"></app-create>
+<app-create *ngIf="pantalla === 1" (pantalla)="cambiarPantalla($event)" [proveedorPadre]="proveedor"></app-create>
 <ng-template #mensajeModal let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Mensaje</h4>
@@ -142,7 +129,7 @@
         <button type="button" class="btn btn-light" (click)="cerrarModal()">Cerrar</button>
     </div>
 </ng-template>
-<ng-template #eliminarEmpresaMdl let-modal>
+<ng-template #eliminarproveedorMdl let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Mensaje</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss( 'Cross click')">
@@ -153,6 +140,6 @@
         <p>Confirma eliminar</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="eliminarEmpresa()">SI</button>
+        <button type="button" class="btn btn-light" (click)="eliminarproveedor()">SI</button>
     </div>
 </ng-template>
