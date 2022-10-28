@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
+
+  @Output() pantalla = new EventEmitter<number>();
 
   public proveedorForm: FormGroup;
   public cuentaForm: FormGroup;
@@ -38,6 +40,26 @@ export class CreateComponent implements OnInit {
         })
       ])
     });
+    this.proveedorForm.patchValue({
+      'tipoPersona': 'Natural',
+      'identificacion': 'qqqq',
+      'nombreRepresentante': 'qqqqq',
+      'nombreComercial': 'qqqqqq',
+      'cuentas': [
+        {
+          'tipoCuenta': 'Natural',
+          'banco': 'aaaaa',
+          'cuenta': 'aaaaaa',
+          'titular': 'aaaaa'
+        },
+        {
+          'tipoCuenta': 'Juridico',
+          'banco': 'vvvv',
+          'cuenta': 'vvvvv',
+          'titular': 'vvv'
+        }
+      ]
+    });
   }
 
   get proveedor() {
@@ -49,13 +71,13 @@ export class CreateComponent implements OnInit {
   }
 
   agregarCuenta() {
-    const lessonForm = this._formBuilder.group({
+    const cuentaForm = this._formBuilder.group({
       tipoCuenta: ['', [Validators.required]],
       banco: ['', [Validators.required]],
       cuenta: ['', [Validators.required]],
       titular: ['', [Validators.required]]
     });
-    this.cuentas.push(lessonForm);
+    this.cuentas.push(cuentaForm);
   }
 
   deleteCuenta(index: number) {
@@ -68,6 +90,10 @@ export class CreateComponent implements OnInit {
       return;
     }
     console.log('proveedor', this.proveedorForm.value);
+  }
+
+  cancelar() {
+    this.pantalla.emit(0);
   }
 
 }

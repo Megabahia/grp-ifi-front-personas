@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div *ngIf="pantalla === 0" class="content-wrapper">
     <div class="content-header row">
         <div class="col-12 mb-2">
             <div class="row breadcrumbs-top">
@@ -60,7 +60,7 @@
 
                     </div>
                     <div class="col-lg-12 col-xl-6 text-right">
-                        <a (click)="toggleSidebar('guardarEmpresa','')" class="btn btn-primary">
+                        <a (click)="cambiarPantalla(1)" class="btn btn-primary">
                             Añadir empresa
                         </a>
                     </div>
@@ -127,7 +127,7 @@
         <!-- users list ends -->
     </div>
 </div>
-<app-create></app-create>
+<app-create *ngIf="pantalla === 1" (pantalla)="cambiarPantalla($event)"></app-create>
 <ng-template #mensajeModal let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Mensaje</h4>

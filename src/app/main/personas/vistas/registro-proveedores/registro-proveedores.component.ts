@@ -36,6 +36,8 @@ export class RegistroProveedoresComponent implements OnInit, AfterViewInit, OnDe
   public provinciaOpciones;
   public ciudadOpciones;
 
+  public pantalla = 0;
+
   constructor
   (
     // private paramService: ParametrizacionesService,
@@ -107,25 +109,8 @@ export class RegistroProveedoresComponent implements OnInit, AfterViewInit, OnDe
     this.obtenerCiudadOpciones();
   }
 
-  toggleSidebar(name, id): void {
-    this.idEmpresa = id;
-    if (this.idEmpresa) {
-      // this._empresasService.obtenerEmpresa(this.idEmpresa).subscribe((info) => {
-      //     this.empresa = info;
-      //     this.imagen = this.visualizarNombreArchivo(info.imagen);
-      //     this.obtenerPaisOpciones();
-      //     this.obtenerProvinciaOpciones();
-      //     this.obtenerCiudadOpciones();
-      //   },
-      //   (error) => {
-      //     this.mensaje = 'No se ha podido obtener la empresa';
-      //
-      //     this.abrirModal(this.mensajeModal);
-      //   });
-    } else {
-      this.empresa = this.inicializarEmpresa();
-    }
-    this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
+  cambiarPantalla(pantalla: number): void {
+    this.pantalla = pantalla;
   }
 
   visualizarNombreArchivo(nombre) {
