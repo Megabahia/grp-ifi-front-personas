@@ -10,18 +10,18 @@ export class PerfilUsuarioService {
   constructor(private _httpClient: HttpClient) { }
 
   obtenerInformacion(id) {
-    return this._httpClient.get<any>(`${environment.apiUrl}/personas/personas/listOne/${id}`,);
+    return this._httpClient.get<any>(`${environment.apiUrl}/personas/personas/listOne/${id}`);
   }
   guardarInformacion(datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/personas/personas/update/${datos.user_id}`, datos);
   }
-  guardarImagen(datos,id){
+  guardarImagen(datos, id) {
     return this._httpClient.post<any>(`${environment.apiUrl}/personas/personas/update/imagen/${id}`, datos);
   }
   obtenerHistorialLaboral(user_id) {
     return this._httpClient.get<any>(`${environment.apiUrl}/personas/historialLaboral/listOne/${user_id}`);
   }
-  guardarHistorialLaboral(user_id,datos) {
+  guardarHistorialLaboral(user_id,  datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/personas/historialLaboral/update/${user_id}`, datos);
   }
 }

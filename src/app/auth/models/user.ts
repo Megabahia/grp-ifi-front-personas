@@ -11,4 +11,7 @@ export class User {
   token?: string;
   estado: string;
   tokenExpiracion: string;
+  empresa: any;
+  identificacion: any;
+  empresaInfo: any;
 }

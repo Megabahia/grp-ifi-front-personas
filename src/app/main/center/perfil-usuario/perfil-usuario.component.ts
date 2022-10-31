@@ -1,29 +1,29 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Subject } from "rxjs";
-import { PerfilUsuarioService } from "./perfil-usuario.service";
-import { User } from "../../../auth/models/user";
-import { CoreMenuService } from "../../../../@core/components/core-menu/core-menu.service";
-import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
+import { PerfilUsuarioService } from './perfil-usuario.service';
+import { User } from '../../../auth/models/user';
+import { CoreMenuService } from '../../../../@core/components/core-menu/core-menu.service';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import {
   InformacionBasica,
   HistorialLaboral,
-} from "../../personas/models/persona";
-import { DatePipe } from "@angular/common";
-import moment from "moment";
-import { FlatpickrOptions } from "ng2-flatpickr";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { BienvenidoService } from "../../personas/vistas/bienvenido/bienvenido.service";
-import { Router } from "@angular/router";
-import { ParametrizacionesService } from "../../personas/servicios/parametrizaciones.service";
+} from '../../personas/models/persona';
+import { DatePipe } from '@angular/common';
+import moment from 'moment';
+import { FlatpickrOptions } from 'ng2-flatpickr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BienvenidoService } from '../../personas/vistas/bienvenido/bienvenido.service';
+import { Router } from '@angular/router';
+import { ParametrizacionesService } from '../../personas/servicios/parametrizaciones.service';
 
 @Component({
-  selector: "app-perfil-usuario",
-  templateUrl: "./perfil-usuario.component.html",
-  styleUrls: ["./perfil-usuario.component.scss"],
+  selector: 'app-perfil-usuario',
+  templateUrl: './perfil-usuario.component.html',
+  styleUrls: ['./perfil-usuario.component.scss'],
   providers: [DatePipe],
 })
 export class PerfilUsuarioComponent implements OnInit {
-  @ViewChild("mensajeModal") mensajeModal;
+  @ViewChild('mensajeModal') mensajeModal;
 
   public PerfilSub = false;
 
@@ -37,22 +37,22 @@ export class PerfilUsuarioComponent implements OnInit {
   public informacionBasica: InformacionBasica;
   public persona;
   public imagen;
-  public mensaje = "";
+  public mensaje = '';
   public imagenTemp;
   public fecha;
   public validado = false;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
-    mode: "single",
-    altFormat: "Y-n-j",
+    mode: 'single',
+    altFormat: 'Y-n-j',
     altInputClass:
-      "form-control flat-picker flatpickr-input invoice-edit-input",
+      'form-control flat-picker flatpickr-input invoice-edit-input',
   };
   public paisOpciones;
   public provinciaOpciones;
   public ciudadOpciones;
   public profesionOpciones;
-  private disabledVal = "disabled";
+  private disabledVal = 'disabled';
   // Private
   private _unsubscribeAll: Subject<any>;
   constructor(
@@ -66,30 +66,30 @@ export class PerfilUsuarioComponent implements OnInit {
     private paramService: ParametrizacionesService
   ) {
     this.informacionBasica = {
-      pais: "",
-      provincia: "",
-      ciudad: "",
+      pais: '',
+      provincia: '',
+      ciudad: '',
       edad: 0,
-      emailAdicional: "",
-      facebook: "",
-      fechaNacimiento: "",
-      genero: "",
-      instagram: "",
-      tiktok: "",
-      twitter: "",
-      telefono: "",
-      whatsapp: "",
-      youtube: "",
-      user_id: "",
+      emailAdicional: '',
+      facebook: '',
+      fechaNacimiento: '',
+      genero: '',
+      instagram: '',
+      tiktok: '',
+      twitter: '',
+      telefono: '',
+      whatsapp: '',
+      youtube: '',
+      user_id: '',
     };
     this.datosTrabajo = {
-      fechaInicio: "",
-      imagen: "",
-      nombreEmpresa: "",
+      fechaInicio: '',
+      imagen: '',
+      nombreEmpresa: '',
       tiempoTrabajo: 0,
-      cargoActual: "",
-      profesion: "",
-      _id: "",
+      cargoActual: '',
+      profesion: '',
+      _id: '',
     };
     this._unsubscribeAll = new Subject();
   }
@@ -101,60 +101,60 @@ export class PerfilUsuarioComponent implements OnInit {
   }
   ngOnInit(): void {
     this.personaForm = this._formBuilder.group({
-      created_at: [""],
+      created_at: [''],
       identificacion: [
-        "",
+        '',
         [
           Validators.required,
-          Validators.pattern("^[0-9]*$"),
+          Validators.pattern('^[0-9]*$'),
           Validators.maxLength(10),
           Validators.minLength(10),
           Validators.min(1),
         ],
       ],
-      nombres: ["", [Validators.required]],
-      apellidos: ["", [Validators.required]],
-      genero: ["", [Validators.required]],
-      fechaNacimiento: ["string", [Validators.required]],
-      edad: ["", [Validators.required]],
+      nombres: ['', [Validators.required]],
+      apellidos: ['', [Validators.required]],
+      genero: ['', [Validators.required]],
+      fechaNacimiento: ['string', [Validators.required]],
+      edad: ['', [Validators.required]],
       whatsapp: [
-        "",
+        '',
         [
           Validators.required,
-          Validators.pattern("^[0-9]*$"),
+          Validators.pattern('^[0-9]*$'),
           Validators.maxLength(10),
           Validators.minLength(10),
           Validators.min(1),
         ],
       ],
       telefono: [
-        "",
+        '',
         [
           Validators.required,
-          Validators.pattern("^[0-9]*$"),
+          Validators.pattern('^[0-9]*$'),
           Validators.maxLength(10),
           Validators.minLength(10),
           Validators.min(1),
         ],
       ],
-      pais: ["", [Validators.required]],
-      provincia: ["", [Validators.required]],
-      ciudad: ["", [Validators.required]],
-      email: ["", [Validators.required]],
-      emailAdicional: ["", [Validators.email]],
-      facebook: [""],
-      instagram: [""],
-      twitter: [""],
-      tiktok: [""],
-      youtube: [""],
+      pais: ['', [Validators.required]],
+      provincia: ['', [Validators.required]],
+      ciudad: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      emailAdicional: ['', [Validators.email]],
+      facebook: [''],
+      instagram: [''],
+      twitter: [''],
+      tiktok: [''],
+      youtube: [''],
     });
     this.datosTrabajoForm = this._formBuilder.group({
-      fechaInicio: [""],
-      profesion: ["", [Validators.required]],
-      imagen: [""],
-      nombreEmpresa: [""],
-      tiempoTrabajo: [""],
-      cargoActual: [""],
+      fechaInicio: [''],
+      profesion: ['', [Validators.required]],
+      imagen: [''],
+      nombreEmpresa: [''],
+      tiempoTrabajo: [''],
+      cargoActual: [''],
     });
     this.usuario = this._coreMenuService.grpPersonasUser;
     this._perfilUsuarioService
@@ -167,8 +167,8 @@ export class PerfilUsuarioComponent implements OnInit {
         info.created_at = this.transformarFecha(info.created_at);
         info.fechaNacimiento = this.transformarFecha(info.fechaNacimiento);
 
-        if (typeof info.whatsapp !== "undefined") {
-          info.whatsapp = info.whatsapp ? info.whatsapp.replace("+593", 0) : "";
+        if (typeof info.whatsapp !== 'undefined') {
+          info.whatsapp = info.whatsapp ? info.whatsapp.replace('+593', 0) : '';
         }
 
         this.fecha = this.transformarFecha(info.fechaNacimiento);
@@ -186,21 +186,21 @@ export class PerfilUsuarioComponent implements OnInit {
       });
   }
   transformarFecha(fecha) {
-    let nuevaFecha = this.datePipe.transform(fecha, "yyyy-MM-dd");
+    const nuevaFecha = this.datePipe.transform(fecha, 'yyyy-MM-dd');
     return nuevaFecha;
   }
   omitirContinuar() {
-    let usuario = this._coreMenuService.grpPersonasUser;
+    const usuario = this._coreMenuService.grpPersonasUser;
     this._bienvenidoService
       .cambioDeEstado({
-        estado: "6",
+        estado: '6',
         id: usuario.id,
       })
       .subscribe((info) => {
-        usuario.estado = "6";
-        localStorage.setItem("grpPersonasUser", JSON.stringify(usuario));
+        usuario.estado = '6';
+        localStorage.setItem('grpPersonasUser', JSON.stringify(usuario));
         setTimeout(() => {
-          window.location.href = "/";
+          window.location.href = '/';
         }, 100);
       });
 
@@ -211,7 +211,7 @@ export class PerfilUsuarioComponent implements OnInit {
     if (this.personaForm.invalid) {
       return;
     }
-    let wppAux = "";
+    let wppAux = '';
 
     this.informacionBasica = {
       ...this.personaForm.value,
@@ -225,13 +225,13 @@ export class PerfilUsuarioComponent implements OnInit {
       delete this.informacionBasica.whatsapp;
     }
     this.informacionBasica.whatsapp = this.f.whatsapp.value;
-    wppAux += "+593" + this.f.whatsapp.value.substring(1, 10);
+    wppAux += '+593' + this.f.whatsapp.value.substring(1, 10);
     this.informacionBasica.whatsapp = wppAux;
     this._perfilUsuarioService
       .guardarInformacion(this.informacionBasica)
       .subscribe(
         (info) => {
-          if(info.error){
+          if (info.error) {
             // this.abrirModal(info.error);
             this.mensaje = info.error;
             this.abrirModal(this.mensajeModal);
@@ -239,21 +239,21 @@ export class PerfilUsuarioComponent implements OnInit {
           }
           this.usuario.persona = info;
           if (this.usuario.persona) {
-            this.disabledVal = "disabled";
+            this.disabledVal = 'disabled';
           }
-          localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
+          localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
           if (!this.validado) {
             this.mensaje =
-              "Información guardada correctamente<br>Es necesario validar el usuario";
+              'Información guardada correctamente<br>Es necesario validar el usuario';
             this.abrirModal(this.mensajeModal);
           } else {
-            this.mensaje = "Información guardada correctamente";
+            this.mensaje = 'Información guardada correctamente';
             this.abrirModal(this.mensajeModal);
           }
         },
         (error) => {
           this.mensaje =
-            "Error al guardar la información, verifique que la información sea la correcta";
+            'Error al guardar la información, verifique que la información sea la correcta';
           this.abrirModal(this.mensajeModal);
         }
       );
@@ -261,11 +261,11 @@ export class PerfilUsuarioComponent implements OnInit {
   calcularEdad() {
     this.informacionBasica.edad = moment().diff(
       this.f.fechaNacimiento.value[0],
-      "years"
+      'years'
     );
     this.informacionBasica.fechaNacimiento = moment(
       this.f.fechaNacimiento.value[0]
-    ).format("YYYY-MM-DD");
+    ).format('YYYY-MM-DD');
     this.personaForm.patchValue({
       edad: this.informacionBasica.edad,
     });
@@ -277,26 +277,26 @@ export class PerfilUsuarioComponent implements OnInit {
   }
   async subirImagen(event) {
     if (event.target.files && event.target.files[0]) {
-      let imagen = event.target.files[0];
-      let nuevaImagen = new FormData();
-      nuevaImagen.append("imagen", imagen, imagen.name);
+      const imagen = event.target.files[0];
+      const nuevaImagen = new FormData();
+      nuevaImagen.append('imagen', imagen, imagen.name);
 
       this._perfilUsuarioService
         .guardarImagen(nuevaImagen, this.usuario.id)
         .subscribe(
           (data) => {
-            let reader = new FileReader();
+            const reader = new FileReader();
 
             reader.onload = (event: any) => {
               this.imagenTemp = event.target.result;
             };
 
             reader.readAsDataURL(event.target.files[0]);
-            this.mensaje = "Imagen guardada correctamente";
+            this.mensaje = 'Imagen guardada correctamente';
             this.abrirModal(this.mensajeModal);
           },
           (error) => {
-            this.mensaje = "Error al guardar imagen";
+            this.mensaje = 'Error al guardar imagen';
             this.abrirModal(this.mensajeModal);
           }
         );
@@ -309,26 +309,26 @@ export class PerfilUsuarioComponent implements OnInit {
     this._modalService.dismissAll();
   }
   obtenerPaisOpciones() {
-    this.paramService.obtenerListaPadres("PAIS").subscribe((info) => {
+    this.paramService.obtenerListaPadres('PAIS').subscribe((info) => {
       this.paisOpciones = info;
     });
   }
   obtenerProvinciaOpciones() {
     this.paramService
-      .obtenerListaHijos(this.informacionBasica.pais, "PAIS")
+      .obtenerListaHijos(this.informacionBasica.pais, 'PAIS')
       .subscribe((info) => {
         this.provinciaOpciones = info;
       });
   }
   obtenerCiudadOpciones() {
     this.paramService
-      .obtenerListaHijos(this.informacionBasica.provincia, "PROVINCIA")
+      .obtenerListaHijos(this.informacionBasica.provincia, 'PROVINCIA')
       .subscribe((info) => {
         this.ciudadOpciones = info;
       });
   }
   obtenerProfesionOpciones() {
-    this.paramService.obtenerListaPadres("PROFESIONES").subscribe((info) => {
+    this.paramService.obtenerListaPadres('PROFESIONES').subscribe((info) => {
       this.profesionOpciones = info;
     });
   }
@@ -345,20 +345,20 @@ export class PerfilUsuarioComponent implements OnInit {
         (info) => {
           this.datosTrabajo = info;
           this.datosTrabajoForm.patchValue(info);
-          console.log("datosTrabajo", this.datosTrabajo);
+          console.log('datosTrabajo', this.datosTrabajo);
           // localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
           if (!this.validado) {
             this.mensaje =
-              "Información guardada correctamente<br>Es necesario validar el usuario";
+              'Información guardada correctamente<br>Es necesario validar el usuario';
             this.abrirModal(this.mensajeModal);
           } else {
-            this.mensaje = "Información guardada correctamente";
+            this.mensaje = 'Información guardada correctamente';
             this.abrirModal(this.mensajeModal);
           }
         },
         (error) => {
           this.mensaje =
-            "Error al guardar la información, verifique que la información sea la correcta";
+            'Error al guardar la información, verifique que la información sea la correcta';
           this.abrirModal(this.mensajeModal);
         }
       );
