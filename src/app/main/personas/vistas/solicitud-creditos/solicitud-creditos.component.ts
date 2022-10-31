@@ -2,8 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../auth/models';
 import {CoreMenuService} from '../../../../../@core/components/core-menu/core-menu.service';
-import {PerfilUsuarioService} from '../../../center/perfil-usuario/perfil-usuario.service';
-import {LOADIPHLPAPI} from 'dns';
+import {SolicitudCreditosService} from './solicitud-creditos.service';
 
 @Component({
     selector: 'app-solicitud-creditos',
@@ -21,7 +20,7 @@ export class SolicitudCreditosComponent implements OnInit {
 
     constructor(private _formBuilder: FormBuilder,
                 private _coreMenuService: CoreMenuService,
-                private _perfilUsuarioService: PerfilUsuarioService) {
+                private _serviceUpdateEmpresa: SolicitudCreditosService) {
     }
 
     ngOnInit(): void {
@@ -58,7 +57,7 @@ export class SolicitudCreditosComponent implements OnInit {
                 especificaIngresos: [''], //
             });
         for (const atributo in this.formSolicitud.controls) {
-            this.formSolicitud.controls[atributo].setValue(this.usuario.empresaInfo[atributo]);
+            this.formSolicitud.controls[atributo].setValue(this.usuario.persona.empresaInfo[atributo]);
         }
     }
 
@@ -101,20 +100,26 @@ export class SolicitudCreditosComponent implements OnInit {
         const values = {
             empresaInfo: this.formSolicitud.value,
             user_id: this.usuario.id,
-            ...this.usuario.persona
         };
-        delete values.imagen;
-        this._perfilUsuarioService
-            .guardarInformacion(values)
-            .subscribe(
-                (info) => {
-                    if (info.error) {
-                        return;
-                    }
-                    const newJson = JSON.parse(localStorage.getItem('grpPersonasUser'));
-                    newJson.empresaInfo = values.empresaInfo;
-                    localStorage.setItem('grpPersonasUser', JSON.stringify(newJson));
-                });
+
+        this._serviceUpdateEmpresa.actualiarEmpresa(values).subscribe((valor) => {
+            console.log('guardado', valor);
+            const newJson = JSON.parse(localStorage.getItem('grpPersonasUser'));
+                        newJson.persona.empresaInfo = values.empresaInfo;
+                        localStorage.setItem('grpPersonasUser', JSON.stringify(newJson));
+        });
+        console.log('values', this.formSolicitud.value, values);
+        // this._perfilUsuarioService
+        //     .guardarInformacion(values)
+        //     .subscribe(
+        //         (info) => {
+        //             // if (info.error) {
+        //             //     return;
+        //             // }
+        //             // const newJson = JSON.parse(localStorage.getItem('grpPersonasUser'));
+        //             // newJson.empresaInfo = values.empresaInfo;
+        //             // localStorage.setItem('grpPersonasUser', JSON.stringify(newJson));
+        //         });
     }
 
     get conyuges() {
