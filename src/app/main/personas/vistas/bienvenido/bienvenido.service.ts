@@ -24,11 +24,11 @@ export class BienvenidoService {
     );
   }
   guardarSuperMonedas(datos) {
-    return this._httpClient.post<any>(`${environment.apiUrl}/core/monedas/create/`,datos
+    return this._httpClient.post<any>(`${environment.apiUrl}/core/monedas/create/`, datos
     );
   }
   obtenerEmpresa(datos) {
-    return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/listOne/filtros/`,datos
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/listOne/filtros/`, datos
     );
   }
 }
