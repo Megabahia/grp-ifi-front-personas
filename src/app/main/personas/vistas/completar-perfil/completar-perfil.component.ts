@@ -168,8 +168,6 @@ export class CompletarPerfilComponent implements OnInit {
   subirImagen(event: any) {
     if (event.target.files && event.target.files[0]) {
       let nuevaImagen = event.target.files[0];
-
-
       let imagen = new FormData();
       imagen.append('imagen', nuevaImagen, nuevaImagen.name);
       this._completarPerfilService.subirImagenRegistro(this.usuario.id, imagen).subscribe((info) => {

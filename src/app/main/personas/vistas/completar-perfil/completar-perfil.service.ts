@@ -22,9 +22,9 @@ export class CompletarPerfilService {
     return this._httpClient.get<any>(`${environment.apiUrl}/personas/personas/listOne/${id}`, );
   }
 
-  validarWhatsapp(datos){
+  validarWhatsapp(datos)
+  {
     return this._httpClient.post<any>(`${environment.apiUrl}/personas/personas/validarCodigo/`, datos );
-
   }
 
 }

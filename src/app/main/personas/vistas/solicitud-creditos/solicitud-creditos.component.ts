@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../auth/models';
 import {CoreMenuService} from '../../../../../@core/components/core-menu/core-menu.service';
 import {SolicitudCreditosService} from './solicitud-creditos.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-solicitud-creditos',
@@ -18,9 +19,12 @@ export class SolicitudCreditosComponent implements OnInit {
     public submitted = false;
     public usuario: User;
 
-    constructor(private _formBuilder: FormBuilder,
-                private _coreMenuService: CoreMenuService,
-                private _serviceUpdateEmpresa: SolicitudCreditosService) {
+    constructor(
+        private _formBuilder: FormBuilder,
+        private _coreMenuService: CoreMenuService,
+        private _serviceUpdateEmpresa: SolicitudCreditosService,
+        private _router: Router
+    ) {
     }
 
     ngOnInit(): void {
@@ -105,8 +109,9 @@ export class SolicitudCreditosComponent implements OnInit {
         this._serviceUpdateEmpresa.actualiarEmpresa(values).subscribe((valor) => {
             console.log('guardado', valor);
             const newJson = JSON.parse(localStorage.getItem('grpPersonasUser'));
-                        newJson.persona.empresaInfo = values.empresaInfo;
-                        localStorage.setItem('grpPersonasUser', JSON.stringify(newJson));
+            newJson.persona.empresaInfo = values.empresaInfo;
+            localStorage.setItem('grpPersonasUser', JSON.stringify(newJson));
+            this._router.navigate(['/personas/pagoProveedores']);
         });
         console.log('values', this.formSolicitud.value, values);
         // this._perfilUsuarioService

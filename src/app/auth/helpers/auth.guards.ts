@@ -66,6 +66,12 @@ export class AuthGuard implements CanActivate {
           }
           return true;
         }
+        case 7: {
+          if (!activacion) {
+            this._router.navigate(['/personas/registroDatosPagosProvedores']);
+          }
+          return true;
+        }
       }
 
       if (route.data.roles && !rolEncontrado) {
