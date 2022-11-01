@@ -43,7 +43,11 @@ export class SolicitudCreditosComponent implements OnInit {
                 correo: ['', [Validators.required]], //
                 telefono: ['', [Validators.required]], //
                 celular: ['', [Validators.required]], //
-                conyuge: this.formConyuge,
+                conyuge: this._formBuilder.group({
+                    nombreConyuge: [''], //
+                    telefonoConyuge: [''], //
+                    correoConyuge: [''],
+                }),
                 familiares: this._formBuilder.array([
                     this._formBuilder.group({
                         nombreFamiliar: [''], //
@@ -61,6 +65,9 @@ export class SolicitudCreditosComponent implements OnInit {
                 especificaIngresos: [''], //
             });
         for (const atributo in this.formSolicitud.controls) {
+            if (this.usuario.persona.empresaInfo[atributo] === 'Casado') {
+                this.casado = true;
+            }
             this.formSolicitud.controls[atributo].setValue(this.usuario.persona.empresaInfo[atributo]);
         }
     }
@@ -95,12 +102,16 @@ export class SolicitudCreditosComponent implements OnInit {
         return this.formConyuge.controls;
     }
 
+    get controlsContuge() {
+        return this.formSolicitud.controls['conyuge'] as FormGroup;
+    }
+
     guardar() {
         this.submitted = true;
         if (this.formSolicitud.invalid) {
             return;
         }
-        console.log(this.usuario);
+        // this.formSolicitud.setValue('conyuge', this.formConyuge.value);
         const values = {
             empresaInfo: this.formSolicitud.value,
             user_id: this.usuario.id,
