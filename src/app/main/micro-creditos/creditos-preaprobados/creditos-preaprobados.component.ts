@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GanarSuperMoneda} from '../../personas/models/supermonedas';
 import {MicroCreditosService} from '../micro-creditos.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-creditos-preaprobados',
@@ -16,6 +17,7 @@ export class CreditosPreaprobadosComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _microCreditosServicios: MicroCreditosService,
+    private _router: Router,
   ) {
 
   }
@@ -37,7 +39,7 @@ export class CreditosPreaprobadosComponent implements OnInit {
       return;
     }
     this._microCreditosServicios.compararCodigo(this.validarForm.value).subscribe(info => {
-
+        this._router.navigate(['/personas/solucitudCredito']);
     },
       error => alert('Usted no tiene un credito'));
   }
