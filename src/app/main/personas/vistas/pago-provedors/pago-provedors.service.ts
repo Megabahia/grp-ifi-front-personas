@@ -14,4 +14,8 @@ export class PagoProvedorsService {
     crearCredito(datos) {
         return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPersonas/create/`, datos);
     }
+
+    actualizarCredito(datos) {
+        return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('_id')}`, datos);
+    }
 }

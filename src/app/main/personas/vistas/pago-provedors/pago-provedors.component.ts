@@ -80,8 +80,11 @@ export class PagoProvedorsComponent implements OnInit {
         this.pagoProveedor.append('estado', 'Nuevo');
         this.pagoProveedor.delete('tipoCredito');
         this.pagoProveedor.append('tipoCredito', localStorage.getItem('credito') ? 'Pymes-PreAprobado' : 'Pymes-Normales');
+        this.pagoProveedor.delete('_id');
+        this.pagoProveedor.append('_id', localStorage.getItem('credito') ? JSON.parse(localStorage.getItem('credito'))._id : null);
 
-        this._pagoProvedorsService.crearCredito(this.pagoProveedor).subscribe((info) => {
+        this._pagoProvedorsService[localStorage.getItem('credito') ? 'actualizarCredito' : 'crearCredito'](this.pagoProveedor)
+          .subscribe((info) => {
                 console.log('guardado', info);
                 localStorage.removeItem('credito');
             }
