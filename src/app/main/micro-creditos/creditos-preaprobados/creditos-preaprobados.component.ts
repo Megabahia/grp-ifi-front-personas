@@ -39,9 +39,13 @@ export class CreditosPreaprobadosComponent implements OnInit {
       return;
     }
     this._microCreditosServicios.compararCodigo(this.validarForm.value).subscribe(info => {
+        localStorage.setItem('credito', JSON.stringify(info));
         this._router.navigate(['/personas/solucitudCredito']);
-    },
-      error => alert('Usted no tiene un credito'));
+      },
+      (error) => {
+        alert('Usted no tiene un credito');
+      }
+    );
   }
 
 }

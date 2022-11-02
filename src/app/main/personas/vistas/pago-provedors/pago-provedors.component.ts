@@ -79,10 +79,11 @@ export class PagoProvedorsComponent implements OnInit {
         this.pagoProveedor.delete('estado');
         this.pagoProveedor.append('estado', 'Nuevo');
         this.pagoProveedor.delete('tipoCredito');
-        this.pagoProveedor.append('tipoCredito', 'Pymes-Normales');
+        this.pagoProveedor.append('tipoCredito', localStorage.getItem('credito') ? 'Pymes-PreAprobado' : 'Pymes-Normales');
 
         this._pagoProvedorsService.crearCredito(this.pagoProveedor).subscribe((info) => {
                 console.log('guardado', info);
+                localStorage.removeItem('credito');
             }
         );
         this._router.navigate(['/personas/validarResultados']);
