@@ -1,107 +1,16 @@
 <div class="content-body">
   <!-- users list start -->
   <section class="ecommerce-details">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card bg-warning">
-          <div class="card-body">
-            <h4 class="text-white">{{configTextoBanner}}
-              <a [href]="configLinkBanner" data-target="#" data-toggle="modal"><b>AQUI &gt;&gt; </b> </a>
-            </h4>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 col-sm-12">
-        <div class="card card-congratulations">
-          <div class="card-body text-center">
-            <img src="assets/images/elements/decore-right.png" class="congratulations-img-right" alt="card-img-right" />
-            <div class="text-center">
-              <br>
-              <h1 class="mb-0 text-white">Felicidades {{usuario.persona.nombres}},</h1>
-              <p class="card-text">
-                Tienes <strong>{{cantidadMonedas}}</strong> super monedas acumuladas en tu cuenta SUPER MONEDAS
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-8 col-sm-12">
-        <div class="card card-statistics bg-primary">
-          <div class="card-header border-bottom pb-1 pt-1">
-            <h4 class="card-title">Resumen</h4>
-          </div>
-          <div class="card-body pt-1">
-            <div class="row">
-              <div class="col-xl-6 col-sm-6 col-12 mb-2 mb-sm-0">
-                <div class="media">
-                  <div class="avatar mr-2">
-                    <div class="avatar-content bg-white text-primary">
-                      <i data-feather='package' class="avatar-icon"></i>
-                    </div>
-                  </div>
-                  <div class="media-body my-auto">
-                    <h1 class="font-weight-bolder mb-0">{{productos.cont}}</h1>
-                    <p class="card-text font-small-3 mb-0">Premios disponibles</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-6 col-sm-6 col-12">
-                <a href="/personas/supermonedas/mis-monedas">
-                  <div class="media">
-                    <div class="avatar bg-white mr-2">
-                      <div class="avatar-content">
-                        <i class="super-moneda-icon sm-size-icon"></i>
-                      </div>
-                    </div>
-                    <div class="media-body my-auto">
-                      <h1 class="font-weight-bolder mb-0">${{cantidadMonedas}}</h1>
-                      <p class="text-primary card-text font-small-3 mb-0">Super monedas disponibles
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="card">
       <div class="card-body">
         <div class="mt-4 mb-2 text-center">
-          <h4>Premios que puedes canjear</h4>
-        </div>
-        <div class="swiper-responsive-breakpoints swiper-container px-4 py-2" [swiper]="swiperResponsive">
-          <div class="swiper-wrapper mb-2">
-            <div class="swiper-slide" *ngFor="let producto of productos.info">
-              <a (click)="obtenerProducto(producto._id)">
-                <div class="item-heading">
-                  <h5 class="text-truncate mb-0">{{ producto.nombre }}</h5>
-                  <small class="text-body">by {{ producto.marca }}</small>
-                </div>
-                <div class="img-container mx-auto py-75">
-                  <img width="100px" [src]="producto.imagen" class="img-fluid" alt="image" />
-
-                </div>
-                <div class="item-meta">
-
-                  <p class="card-text text-secondary small mb-0">Precio Normal: ${{ producto.precioNormal }}</p>
-                  <hr />
-                  <h6 class="mt-1">Precio super monedas:</h6>
-                  <h6 class="mt-1 text-info">
-                    <div class="iso-moneda"></div>
-                    {{ producto.precioSupermonedas }} super monedas + ${{ producto.efectivo }}
-                  </h6>
-                </div>
-              </a>
-            </div>
-          </div>
-          <!-- Add Arrows -->
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
+            <img src="assets/images/logo/creditopagos.png">
+            <p>Acceda HOY a su línea de crédito para pago a proveedores a través del siguiente <a
+                    [href]="'#/personas/solucitudCredito'">enlace</a></p>
+            <h4>Con su crédito otorgado por una Entidad Financiera regulada usted podrá:</h4>
+            <a class="btn btn-primary">Realizar el pronto pago de facturas a proveedores</a>
+            <a class="btn btn-primary">Realizar el pronto pago de facturas a proveedores</a>
         </div>
       </div>
     </div>

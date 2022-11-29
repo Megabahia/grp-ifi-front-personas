@@ -60,6 +60,13 @@ import { RegistroFirmaElectronicaComponent } from './vistas/registro-firma-elect
 const routes = [
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
     {
+        path: 'principal',
+        component: PrincipalComponent,
+        data: {roles: [Role.SuperMonedas]},
+        canActivate: [AuthGuard],
+        // data: { animation: 'auth' }
+    },
+    {
         path: 'inicio',
         component: listadoEstadoCreditos,
         data: {roles: [Role.SuperMonedas]},

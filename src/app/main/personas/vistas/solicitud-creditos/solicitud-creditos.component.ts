@@ -4,9 +4,7 @@ import {User} from '../../../../auth/models';
 import {CoreMenuService} from '../../../../../@core/components/core-menu/core-menu.service';
 import {SolicitudCreditosService} from './solicitud-creditos.service';
 import {Router} from '@angular/router';
-import {takeUntil} from 'rxjs/operators';
-import {CoreConfigService} from '../../../../../@core/services/config.service';
-import {Subject} from 'rxjs';
+import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
 
 @Component({
     selector: 'app-solicitud-creditos',
@@ -21,66 +19,93 @@ export class SolicitudCreditosComponent implements OnInit {
     public casado = false;
     public submitted = false;
     public usuario: User;
-    public coreConfig: any;
-    private _unsubscribeAll: Subject<any>;
+    public paisOpciones;
+    public provinciaOpciones;
+    public ciudadOpciones;
+    public tipoParentesco = [];
+
     constructor(
-        private _coreConfigService: CoreConfigService,
+        private paramService: ParametrizacionesService,
         private _formBuilder: FormBuilder,
         private _coreMenuService: CoreMenuService,
         private _serviceUpdateEmpresa: SolicitudCreditosService,
         private _router: Router
     ) {
-        this._unsubscribeAll = new Subject();
     }
 
     ngOnInit(): void {
-        this._coreConfigService.config
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((config) => {
-                this.coreConfig = config;
-            });
         this.usuario = this._coreMenuService.grpPersonasUser;
         this.declareFormConyuge();
         this.formSolicitud = this._formBuilder.group(
             {
-                reprsentante: ['', [Validators.required]], //
+                reprsentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 rucEmpresa: ['', [Validators.required]], //
-                comercial: ['', [Validators.required]], //
-                actividadEconomica: ['', [Validators.required]], //
-                direccionDomiciolRepresentante: ['', [Validators.required]], //
-                direccionEmpresa: ['', [Validators.required]], //
-                referenciaDomicilio: ['', [Validators.required]], //
+                comercial: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                actividadEconomica: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                pais: ['', Validators.required],
+                provincia: ['', Validators.required],
+                ciudad: ['', Validators.required],
+                callePrincipal: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                calleSecundaria: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                refenciaNegocio: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                direccionDomiciolRepresentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 esatdo_civil: ['', [Validators.required]], //
-                correo: ['', [Validators.required]], //
-                telefono: ['', [Validators.required]], //
-                celular: ['', [Validators.required]], //
+                correo: [this.usuario.email, [Validators.required, Validators.email]], //
+                telefono: ['', [Validators.required, Validators.minLength(7), Validators.pattern('^[0-9]*$')]], //
+                celular: ['', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
+                whatsapp: ['', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
                 conyuge: this._formBuilder.group({
                     nombreConyuge: [''], //
-                    telefonoConyuge: [''], //
-                    correoConyuge: [''],
+                    telefonoConyuge: ['', [Validators.pattern('^[0-9]*$')]], //
+                    cedulaConyuge: [''],
                 }),
                 familiares: this._formBuilder.array([
                     this._formBuilder.group({
-                        nombreFamiliar: [''], //
-                        apellidoFamiliar: [''], //
-                        telefonoFamiliar: [''], //
-                        direccionFamiliar: [''],
+                        tipoPariente: ['', [Validators.required]],
+                        nombreFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                        apellidoFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                        telefonoFamiliar: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                        direccionFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                         //
-                    })
+                    }),
+                    this._formBuilder.group({
+                        tipoPariente: ['', [Validators.required]],
+                        nombreFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                        apellidoFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                        telefonoFamiliar: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                        direccionFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                        //
+                    }),
+                    this._formBuilder.group({
+                        tipoPariente: ['', [Validators.required]],
+                        nombreFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                        apellidoFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                        telefonoFamiliar: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                        direccionFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                        //
+                    }),
                 ]),
-                inresosMensualesVentas: ['', [Validators.required]], //
-                sueldoConyuge: [''], //
-                otrosIngresos: [''], //
-                gastosMensuales: ['', [Validators.required]], //
-                gastosFamilaires: ['', [Validators.required]], //
-                especificaIngresos: [''], //
+                inresosMensualesVentas: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                sueldoConyuge: ['', [Validators.pattern('^[0-9]*$')]], //
+                otrosIngresos: ['', [Validators.pattern('^[0-9]*$')]], //
+                gastosMensuales: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                gastosFamilaires: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                especificaIngresos: ['', [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
             });
-        for (const atributo in this.formSolicitud.controls) {
-            if (this.usuario.persona.empresaInfo[atributo] === 'Casado') {
-                this.casado = true;
+        if (this.usuario.persona.empresaInfo) {
+            for (const atributo in this.formSolicitud.controls) {
+                if (this.usuario.persona.empresaInfo[atributo] === 'Casado') {
+                    this.casado = true;
+                }
+                this.formSolicitud.controls[atributo].setValue(this.usuario.persona.empresaInfo[atributo]);
             }
-            this.formSolicitud.controls[atributo].setValue(this.usuario.persona.empresaInfo[atributo]);
         }
+        this.obtenerPaisOpciones();
+        this.obtenerProvinciaOpciones();
+        this.obtenerCiudadOpciones();
+        this.paramService.obtenerListaPadres('TIPO_PARIENTE').subscribe((info) => {
+            this.tipoParentesco = info;
+        });
     }
 
     declareFormConyuge() {
@@ -105,6 +130,24 @@ export class SolicitudCreditosComponent implements OnInit {
         }
     }
 
+    obtenerPaisOpciones() {
+        this.paramService.obtenerListaPadres('PAIS').subscribe((info) => {
+            this.paisOpciones = info;
+        });
+    }
+
+    obtenerProvinciaOpciones() {
+        this.paramService.obtenerListaHijos(this.formSolicitud.get('pais').value, 'PAIS').subscribe((info) => {
+            this.provinciaOpciones = info;
+        });
+    }
+
+    obtenerCiudadOpciones() {
+        this.paramService.obtenerListaHijos(this.formSolicitud.get('provincia').value, 'PROVINCIA').subscribe((info) => {
+            this.ciudadOpciones = info;
+        });
+    }
+
     get controlsFrom() {
         return this.formSolicitud.controls;
     }
@@ -120,6 +163,7 @@ export class SolicitudCreditosComponent implements OnInit {
     guardar() {
         this.submitted = true;
         if (this.formSolicitud.invalid) {
+            console.log('fomulario', this.formSolicitud);
             return;
         }
         // this.formSolicitud.setValue('conyuge', this.formConyuge.value);

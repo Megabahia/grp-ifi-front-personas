@@ -17,7 +17,7 @@ import { CoreConfig } from '@core/types';
 export const coreConfig: CoreConfig = {
   app: {
     appName     : 'Global RedPyme',                                        // App Name
-    appTitle    : 'Super monedas', // App Title
+    appTitle    : 'Global RedPyme', // App Title
     appLogoImage: 'assets/images/logo/red-y-san-jose.png',                  // App Logo
   },
   layout: {
