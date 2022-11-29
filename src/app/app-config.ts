@@ -18,7 +18,7 @@ export const coreConfig: CoreConfig = {
   app: {
     appName     : 'Global RedPyme',                                        // App Name
     appTitle    : 'Super monedas', // App Title
-    appLogoImage: 'assets/images/logo/logo.png',                  // App Logo
+    appLogoImage: 'assets/images/logo/red-y-san-jose.png',                  // App Logo
   },
   layout: {
     skin  : 'default',                        // default, dark, bordered, semi-dark

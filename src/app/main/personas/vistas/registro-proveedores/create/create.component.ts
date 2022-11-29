@@ -30,7 +30,7 @@ export class CreateComponent implements OnInit {
       _id: [''],
       tipoPersona: ['', [Validators.required]],
       identificacion: ['', [Validators.required]],
-      nombreRepresentante: ['', [Validators.required]],
+      nombreRepresentante: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
       nombreComercial: ['', [Validators.required]],
       cuentas: this._formBuilder.array([], Validators.required)
     });

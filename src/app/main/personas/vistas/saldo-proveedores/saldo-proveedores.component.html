@@ -1,1 +1,102 @@
-<p>saldo-proveedores works!</p>
+<div class="content-wrapper">
+    <div class="content-header row">
+    </div>
+    <div class="content-body">
+        <!-- Error page-->
+        <div class="misc-wrapper">
+
+            <div class="card">
+                <div *ngIf="inicio" class="card-body">
+                    <div class=" mb-2 text-center">
+                        <h2>
+                            SALDO DISPONIBLE DE CRÉDITO
+                        </h2>
+                        <span>
+                            Tu saldo disponible es de $$ MONTO DISPONIBLE ¿Desea continuar?
+                        </span>
+                    </div>
+                    <div class="content-body">
+                        <section class="app-user-list">
+
+                            <div class="mt-2 d-flex justify-content-center">
+                                <button class="btn btn-primary mr-1" (click)="continuarCick()">
+                                    Continuar
+                                </button>
+                            </div>
+                            <div class="mt-2 d-flex justify-content-center">
+                                <button (click)="logout()" class="btn btn-outline-secondary mr-1">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div *ngIf="continuar" class="card-body">
+                    <div class=" mb-2 text-center">
+                        <h2>
+                            SALDO DISPONIBLE DE CRÉDITO
+                        </h2>
+                        <span>
+                       Realizarás un pago a proveedores por $$VALOR DE LA FACTURA A PAGAR
+                            ¿Deseas continuar?
+
+                        </span>
+                    </div>
+                    <div class="content-body">
+                        <section class="app-user-list">
+
+                            <div class="mt-2 d-flex justify-content-center">
+                                <button class="btn btn-primary mr-1" (click)="continuarCickPago()">
+                                    Continuar
+                                </button>
+                            </div>
+                            <div class="mt-2 d-flex justify-content-center">
+                                <button (click)="logout()" class="btn btn-outline-secondary mr-1">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div *ngIf="continuarPago" class="card-body">
+                    <div class=" mb-2 text-center">
+                        <div class="misc-inner p-2 p-sm-5">
+                            <div class="text-center">
+                                <a href="javascript:void(0);">
+<!--                                    <img src="assets/images/logo/logo.png" alt="brand-logo" width="300"/>-->
+                                    <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="400" />
+
+                                    <!--                                    <h2 class="brand-text text-primary ml-1 mt-1">CréditoPagos</h2>-->
+                                </a>
+                            </div>
+                        </div>
+                        <h2>
+                            PAGO
+                            EXISTOSO
+                        </h2>
+                        <span>
+                            Ha realizado un pago a su proveedor $$NOMBRE DEL PROVEEDOR por $$VALOR DE LA FACTURA.
+                        </span>
+                    </div>
+                    <div class="content-body">
+                        <section class="app-user-list">
+                            <div class="text-center">
+                                <span>
+                                    Para revisar el estado de su microcrédito-línea de crédito,
+                                    <a href="https://coopsanjose-personas.crediventa.com/#/personas/saldoDisponible">     CLICK AQUÍ</a>
+                                </span>
+                            </div>
+                            <div class="mt-2 d-flex justify-content-center">
+
+                                <button (click)="logout()" class="btn btn-outline-secondary mr-1">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Error page-->
+    </div>
+</div>

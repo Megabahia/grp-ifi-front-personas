@@ -1,0 +1,74 @@
+<div class="content-wrapper">
+    <div class="content-header row">
+    </div>
+    <div class="content-body">
+        <!-- Error page-->
+        <div class="misc-wrapper">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class=" mb-2 text-center">
+                        <h2>
+                            REGISTRE SU FIRMA ELECTRÓNICA PARA PODER ACCEDER A SU MICROCRÉDITO-LÍNEA DE CRÉDITO
+                        </h2>
+                        <span>
+                            Recuerde que para poder firmar los documentos, debe tener a la mano la CLAVE de su firma electrónica, misma que es única e intransferible por su seguridad.
+                        </span>
+                    </div>
+                    <div class="content-body">
+                        <section class="app-user-list">
+                            <div class="card">
+                                <div class="card-body text-left">
+
+                                    <form class="auth-login-form mt-2" [formGroup]="formSolicitud">
+
+
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Firma Electrónica:
+                                                    </label>
+                                                    <input type="text" formControlName="reprsentante"
+                                                           class="form-control"
+                                                           value="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Cargar archivo:
+                                                    </label>
+                                                    <input type="file" formControlName="archivo"
+                                                           class="form-control"
+                                                           value="">
+                                                </div>
+<!--                                                <div *ngIf="submitted && controlsFrom.rucEmpresa.errors"-->
+<!--                                                     class="invalid-feedback"-->
+<!--                                                     style="display: block;">-->
+<!--                                                    <div *ngIf="controlsFrom.rucEmpresa.errors.required">Ruc es-->
+<!--                                                        requerido-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                            </div>
+
+                                        </div>
+                                        <div class="mt-2 d-flex justify-content-center">
+                                            <button class="btn btn-primary mr-1" >
+                                                Continuar
+                                            </button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Error page-->
+    </div>
+</div>

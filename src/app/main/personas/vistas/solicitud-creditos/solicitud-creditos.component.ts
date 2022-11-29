@@ -4,6 +4,9 @@ import {User} from '../../../../auth/models';
 import {CoreMenuService} from '../../../../../@core/components/core-menu/core-menu.service';
 import {SolicitudCreditosService} from './solicitud-creditos.service';
 import {Router} from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
+import {CoreConfigService} from '../../../../../@core/services/config.service';
+import {Subject} from 'rxjs';
 
 @Component({
     selector: 'app-solicitud-creditos',
@@ -18,16 +21,24 @@ export class SolicitudCreditosComponent implements OnInit {
     public casado = false;
     public submitted = false;
     public usuario: User;
-
+    public coreConfig: any;
+    private _unsubscribeAll: Subject<any>;
     constructor(
+        private _coreConfigService: CoreConfigService,
         private _formBuilder: FormBuilder,
         private _coreMenuService: CoreMenuService,
         private _serviceUpdateEmpresa: SolicitudCreditosService,
         private _router: Router
     ) {
+        this._unsubscribeAll = new Subject();
     }
 
     ngOnInit(): void {
+        this._coreConfigService.config
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((config) => {
+                this.coreConfig = config;
+            });
         this.usuario = this._coreMenuService.grpPersonasUser;
         this.declareFormConyuge();
         this.formSolicitud = this._formBuilder.group(

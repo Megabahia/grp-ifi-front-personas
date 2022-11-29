@@ -55,6 +55,7 @@ import { PagoProvedorsComponent } from './vistas/pago-provedors/pago-provedors.c
 import { SaldoProveedoresComponent } from './vistas/saldo-proveedores/saldo-proveedores.component';
 import { CreateComponent } from './vistas/registro-proveedores/create/create.component';
 import { ValidarResultadosComponent } from './vistas/validar-resultados/validar-resultados.component';
+import { RegistroFirmaElectronicaComponent } from './vistas/registro-firma-electronica/registro-firma-electronica.component';
 
 const routes = [
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
@@ -203,6 +204,14 @@ const routes = [
         // data: { animation: 'auth' }
     },
     {
+        path: 'registroFirmaElectronica',
+        component: RegistroFirmaElectronicaComponent,
+        // data: {activacion: [1]},
+        canActivate: [AuthGuard],
+
+        // data: { animation: 'auth' }
+    },
+    {
         path: 'validarResultados',
         component: ValidarResultadosComponent,
         // data: {activacion: [1]},
@@ -293,6 +302,7 @@ const routes = [
         SaldoProveedoresComponent,
         CreateComponent,
         ValidarResultadosComponent,
+        RegistroFirmaElectronicaComponent,
     ],
     imports: [
         CoreCommonModule,

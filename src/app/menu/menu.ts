@@ -30,8 +30,17 @@ export const menu: CoreMenu[] = [
         url: 'personas/solucitudCredito',
     },
     {
+        id: 'firmaElectronica',
+        title: 'Registro firma electrónica',
+        // translate: 'MENU.HOME',
+        role: [Role.SuperMonedas],
+        type: 'item',
+        icon: '',
+        url: 'personas/registroFirmaElectronica',
+    },
+    {
         id: 'registroProveedores',
-        title: 'Registro proveedores',
+        title: 'Creacíon de proveedores',
         // translate: 'MENU.HOME',
         role: [Role.SuperMonedas],
         type: 'item',
@@ -49,7 +58,7 @@ export const menu: CoreMenu[] = [
     },
     {
         id: 'saldoDisponible',
-        title: 'Saldo disponible proveedores',
+        title: 'Estado de línia de crédito',
         // translate: 'MENU.HOME',
         role: [Role.SuperMonedas],
         type: 'item',
