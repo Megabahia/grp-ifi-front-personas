@@ -56,6 +56,7 @@ import { SaldoProveedoresComponent } from './vistas/saldo-proveedores/saldo-prov
 import { CreateComponent } from './vistas/registro-proveedores/create/create.component';
 import { ValidarResultadosComponent } from './vistas/validar-resultados/validar-resultados.component';
 import { RegistroFirmaElectronicaComponent } from './vistas/registro-firma-electronica/registro-firma-electronica.component';
+import { OldUserComponent } from './vistas/old-user/old-user.component';
 
 const routes = [
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
@@ -69,6 +70,13 @@ const routes = [
     {
         path: 'inicio',
         component: listadoEstadoCreditos,
+        data: {roles: [Role.SuperMonedas]},
+        canActivate: [AuthGuard],
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'registrado',
+        component: OldUserComponent,
         data: {roles: [Role.SuperMonedas]},
         canActivate: [AuthGuard],
         // data: { animation: 'auth' }
@@ -310,6 +318,7 @@ const routes = [
         CreateComponent,
         ValidarResultadosComponent,
         RegistroFirmaElectronicaComponent,
+        OldUserComponent,
     ],
     imports: [
         CoreCommonModule,

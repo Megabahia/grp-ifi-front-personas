@@ -11,6 +11,7 @@ export const menu: CoreMenu[] = [
         icon: 'home',
         url: 'personas/inicio',
     },
+
     {
         id: 'microCreditosPreaprobados',
         title: 'Créditos pre-aprobados',
