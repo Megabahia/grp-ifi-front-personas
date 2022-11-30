@@ -68,6 +68,12 @@
                                                     <div *ngIf="controlsFrom.rucEmpresa.errors.required">Ruc es
                                                         requerido
                                                     </div>
+                                                    <div *ngIf="controlsFrom.rucEmpresa.errors.minlength">
+                                                        Ingrese minimo 13 caracteres
+                                                    </div>
+                                                    <div *ngIf="controlsFrom.rucEmpresa.errors.pattern">
+                                                        Ingrese solo numeros
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -309,10 +315,10 @@
                                                     <div *ngIf="controlsFrom.celular.errors.required">
                                                         Teléfono celular es requerido
                                                     </div>
-                                                    <div *ngIf="controlsFrom.telefono.errors.minlength">
+                                                    <div *ngIf="controlsFrom.celular.errors.minlength">
                                                         Ingrese minimo 10 caracteres
                                                     </div>
-                                                    <div *ngIf="controlsFrom.telefono.errors.pattern">
+                                                    <div *ngIf="controlsFrom.celular.errors.pattern">
                                                         Ingrese solo numeros
                                                     </div>
                                                 </div>
@@ -325,11 +331,11 @@
                                                            class="form-control"
                                                            value="">
                                                 </div>
-                                                <div *ngIf="submitted && controlsFrom.celular.errors"
+                                                <div *ngIf="submitted && controlsFrom.whatsapp.errors"
                                                      class="invalid-feedback"
                                                      style="display: block;">
                                                     <div *ngIf="controlsFrom.whatsapp.errors.required">
-                                                        Teléfono celular es requerido
+                                                        Teléfono whatsapp es requerido
                                                     </div>
                                                     <div *ngIf="controlsFrom.whatsapp.errors.minlength">
                                                         Ingrese minimo 10 caracteres
@@ -367,7 +373,7 @@
                                                     Datos cónyuge:
                                                 </h3>
                                                 <br>
-                                                <form class="auth-login-form mt-2" [formGroup]="controlsContuge">
+                                                <div formGroupName="conyuge">
 
                                                     <div class="row">
                                                         <div class="col-md-4">
@@ -379,13 +385,10 @@
                                                                        class="form-control"
                                                                        value="">
                                                             </div>
-                                                            <div *ngIf="submitted && controlsFromContuge.nombreConyuge.errors"
-                                                                 class="invalid-feedback"
-                                                                 style="display: block;">
-                                                                <div *ngIf="controlsFromContuge.nombreConyuge.errors.required">
-                                                                    Nombres y apellidos es requerido
-                                                                </div>
-                                                            </div>
+<!--                                                            <div *ngIf="submitted && controlsContuge.controls?.nombreConyuge.errors"-->
+<!--                                                                 class="invalid-feedback"-->
+<!--                                                                 style="display: block;">-->
+<!--                                                            </div>-->
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
@@ -395,11 +398,11 @@
                                                                        class="form-control"
                                                                        value="">
                                                             </div>
-                                                            <div *ngIf="submitted && controlsFromContuge.telefonoConyuge.errors"
+                                                            <div *ngIf="submitted && controlsContuge.telefonoConyuge.errors"
                                                                  class="invalid-feedback"
                                                                  style="display: block;">
-                                                                <div *ngIf="controlsFromContuge.telefonoConyuge.errors.required">
-                                                                    Teléfono es requerido
+                                                                <div *ngIf="controlsContuge.telefonoConyuge.errors.pattern">
+                                                                    Ingrese solo números
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -411,16 +414,16 @@
                                                                        class="form-control"
                                                                        value="">
                                                             </div>
-                                                            <div *ngIf="submitted && controlsFromContuge.cedulaConyuge.errors"
-                                                                 class="invalid-feedback"
-                                                                 style="display: block;">
-                                                                <div *ngIf="controlsFromContuge.cedulaConyuge.errors.required">
-                                                                    Cédula es requerido
-                                                                </div>
-                                                            </div>
+<!--                                                            <div *ngIf="submitted && controlsFromContuge.cedulaConyuge.errors"-->
+<!--                                                                 class="invalid-feedback"-->
+<!--                                                                 style="display: block;">-->
+<!--                                                                <div *ngIf="controlsFromContuge.cedulaConyuge.errors.required">-->
+<!--                                                                    Cédula es requerido-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
                                                         </div>
                                                     </div>
-                                                </form>
+                                                </div>
                                             </div>
                                         </div>
 

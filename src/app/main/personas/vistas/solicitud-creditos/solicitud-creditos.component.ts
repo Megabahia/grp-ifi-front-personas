@@ -39,7 +39,7 @@ export class SolicitudCreditosComponent implements OnInit {
         this.formSolicitud = this._formBuilder.group(
             {
                 reprsentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
-                rucEmpresa: ['', [Validators.required]], //
+                rucEmpresa: ['', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
                 comercial: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 actividadEconomica: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 pais: ['', Validators.required],
@@ -93,11 +93,15 @@ export class SolicitudCreditosComponent implements OnInit {
                 especificaIngresos: ['', [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
             });
         if (this.usuario.persona.empresaInfo) {
-            for (const atributo in this.formSolicitud.controls) {
-                if (this.usuario.persona.empresaInfo[atributo] === 'Casado') {
-                    this.casado = true;
-                }
-                this.formSolicitud.controls[atributo].setValue(this.usuario.persona.empresaInfo[atributo]);
+            // for (const atributo in this.formSolicitud.controls) {
+            //     if (this.usuario.persona.empresaInfo[atributo] === 'Casado') {
+            //         this.casado = true;
+            //     }
+            //     this.formSolicitud.controls[atributo].setValue(this.usuario.persona.empresaInfo[atributo]);
+            // }
+            this.formSolicitud.patchValue({...this.usuario.persona.empresaInfo});
+            if (this.usuario.persona.empresaInfo.estadoCivil === 'Casado') {
+                this.casado = true;
             }
         }
         this.obtenerPaisOpciones();
@@ -157,7 +161,7 @@ export class SolicitudCreditosComponent implements OnInit {
     }
 
     get controlsContuge() {
-        return this.formSolicitud.controls['conyuge'] as FormGroup;
+        return this.formSolicitud.get('conyuge')['controls'] ;
     }
 
     guardar() {

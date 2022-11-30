@@ -48,15 +48,15 @@ import {
 import {CreditosPreAprobadosEmpComponent} from './vistas/creditos-empleados/creditos-pre-aprobados/creditos-pre-aprobados-emp.component';
 import {ListadoComponent as listadoEstadoCreditos} from './vistas/mis-creditos/vistas/estado-creditos/listado/listado.component';
 import {ListadoComponent as listadoPagoCuotas} from './vistas/mis-creditos/vistas/registrar-pagos-cuotas/listado/listado.component';
-import { RegistroDatosPagosProvedoresComponent } from './vistas/requisito-solicitud-microcreditos/registro-datos-pagos-provedores.component';
-import { SolicitudCreditosComponent } from './vistas/solicitud-creditos/solicitud-creditos.component';
-import { RegistroProveedoresComponent } from './vistas/registro-proveedores/registro-proveedores.component';
-import { PagoProvedorsComponent } from './vistas/pago-provedors/pago-provedors.component';
-import { SaldoProveedoresComponent } from './vistas/saldo-proveedores/saldo-proveedores.component';
-import { CreateComponent } from './vistas/registro-proveedores/create/create.component';
-import { ValidarResultadosComponent } from './vistas/validar-resultados/validar-resultados.component';
-import { RegistroFirmaElectronicaComponent } from './vistas/registro-firma-electronica/registro-firma-electronica.component';
-import { OldUserComponent } from './vistas/old-user/old-user.component';
+import {RegistroDatosPagosProvedoresComponent} from './vistas/requisito-solicitud-microcreditos/registro-datos-pagos-provedores.component';
+import {SolicitudCreditosComponent} from './vistas/solicitud-creditos/solicitud-creditos.component';
+import {RegistroProveedoresComponent} from './vistas/registro-proveedores/registro-proveedores.component';
+import {PagoProvedorsComponent} from './vistas/pago-provedors/pago-provedors.component';
+import {SaldoProveedoresComponent} from './vistas/saldo-proveedores/saldo-proveedores.component';
+import {CreateComponent} from './vistas/registro-proveedores/create/create.component';
+import {ValidarResultadosComponent} from './vistas/validar-resultados/validar-resultados.component';
+import {RegistroFirmaElectronicaComponent} from './vistas/registro-firma-electronica/registro-firma-electronica.component';
+import {OldUserComponent} from './vistas/old-user/old-user.component';
 
 const routes = [
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
@@ -214,8 +214,8 @@ const routes = [
         path: 'registroDatosPagosProvedores',
         component: RegistroDatosPagosProvedoresComponent,
         // data: {activacion: [1]},
+        data: {activacion: [7], roles: [Role.SuperMonedas]},
         canActivate: [AuthGuard],
-
         // data: { animation: 'auth' }
     },
     {
@@ -237,7 +237,7 @@ const routes = [
     {
         path: 'solucitudCredito',
         component: SolicitudCreditosComponent,
-        // data: {activacion: [1]},
+        data: {activacion: [1, 2, 3, 4, 5, 6, 7]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
@@ -253,7 +253,7 @@ const routes = [
     {
         path: 'pagoProveedores',
         component: PagoProvedorsComponent,
-        // data: {activacion: [1]},
+        data: {activacion: [1, 2, 3, 4, 5, 6, 7]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
@@ -261,7 +261,7 @@ const routes = [
     {
         path: 'saldoDisponible',
         component: SaldoProveedoresComponent,
-        // data: {activacion: [1]},
+        data: {activacion: [1, 2, 3, 4, 5, 6, 7]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
