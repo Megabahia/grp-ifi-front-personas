@@ -1,0 +1,39 @@
+<div class="row">
+    <section class="head-LP text-LP">
+        <div class="container pb-5">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-12 text-center">
+                    <img src="../../../../assets/images/logo/credicompra.png" width="250" alt="">
+                </div>
+                <div class="col-md-12 text-center">
+                    <div class="row mx-2 justify-content-center align-items-center py-2">
+                        <div [innerHTML]="descripcion.valor "></div>
+                    </div>
+                    <div class="row mx-2 justify-content-center align-items-center py-2">
+                        <h3>{{requisitos.valor}}</h3>
+                    </div>
+                    <div class="row mx-2 justify-content-center align-items-center py-2">
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of requisitos.config">{{item}}</li>
+                        </ul>
+                    </div>
+                    <div class="row mx-2 justify-content-center align-items-center py-2">
+                        <div class="col-12">
+                            <button type="submit" rippleEffect class="btn btn-outline-dark mr-1" routerLink="/"
+                                    (click)="simulador()">Continuar
+                            </button>
+                            <a type="reset" rippleEffect class="btn btn-outline-dark text-black" href="https://credicompra.com/"
+                               (click)="cancelar()">Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!--<div class="footer-LP"></div>-->
+<div class="text-center">
+    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">
+</div>

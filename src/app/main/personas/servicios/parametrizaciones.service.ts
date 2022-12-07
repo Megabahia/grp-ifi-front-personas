@@ -24,6 +24,12 @@ export class ParametrizacionesService {
       { tipo }
     );
   }
+    obtenerListaPadresSinToken(tipo) {
+        return this._httpClient.post<any>(
+            `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+            {tipo}
+        );
+    }
   obtenerListaTipos() {
     return this._httpClient.get<any>(
       `${environment.apiUrl}/central/param/list/tipo/`
