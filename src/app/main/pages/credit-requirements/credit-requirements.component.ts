@@ -1,15 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import Decimal from 'decimal.js';
 import {ParametrizacionesService} from '../../personas/servicios/parametrizaciones.service';
 import {CoreConfigService} from '../../../../@core/services/config.service';
 import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-credit-requirements',
     templateUrl: './credit-requirements.component.html',
     styleUrls: ['./credit-requirements.component.scss']
 })
-export class CreditRequirementsComponent implements OnInit {
+export class CreditRequirementsComponent implements OnInit, OnDestroy {
 
     public coutaMensual;
     public montoCreditoFinal;
@@ -27,12 +29,16 @@ export class CreditRequirementsComponent implements OnInit {
     };
     public tipoPersona;
 
+    public coreConfig: any;
+    // Private
+    private _unsubscribeAll: Subject<any>;
 
     constructor(
         private _router: Router,
         private _coreConfigService: CoreConfigService,
         private paramService: ParametrizacionesService,
     ) {
+        this._unsubscribeAll = new Subject();
         if (localStorage.getItem('pagina') !== 'https://credicompra.com/') {
             this._router.navigate([
                 `/grp/login`,
@@ -76,6 +82,16 @@ export class CreditRequirementsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        // Subscribe to config changes
+        this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
+            this.coreConfig = config;
+        });
+    }
+
+    ngOnDestroy(): void {
+        // Unsubscribe from all subscriptions
+        this._unsubscribeAll.next();
+        this._unsubscribeAll.complete();
     }
 
     getInfo() {

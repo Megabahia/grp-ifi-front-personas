@@ -1,17 +1,19 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CoreConfigService} from '../../../../@core/services/config.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParametrizacionesService} from '../../personas/servicios/parametrizaciones.service';
 import Decimal from 'decimal.js';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-simulator-credi-compra',
     templateUrl: './simulator-credi-compra.component.html',
     styleUrls: ['./simulator-credi-compra.component.scss']
 })
-export class SimulatorCrediCompraComponent implements OnInit {
+export class SimulatorCrediCompraComponent implements OnInit, OnDestroy {
 
     @ViewChild('modalAviso') modalAviso;
     public mensaje;
@@ -29,6 +31,10 @@ export class SimulatorCrediCompraComponent implements OnInit {
     public submittedSimulador = false;
     public estadoCivil = false;
 
+    public coreConfig: any;
+    // Private
+    private _unsubscribeAll: Subject<any>;
+
 
     constructor(
         private _router: Router,
@@ -37,6 +43,7 @@ export class SimulatorCrediCompraComponent implements OnInit {
         private paramService: ParametrizacionesService,
         private modalService: NgbModal,
     ) {
+        this._unsubscribeAll = new Subject();
         if (localStorage.getItem('pagina') !== 'https://credicompra.com/') {
             this._router.navigate([
                 `/grp/login`,
@@ -64,6 +71,16 @@ export class SimulatorCrediCompraComponent implements OnInit {
     ngOnInit(): void {
         this.initInfoCreditForm();
         this.listCombosbox();
+        // Subscribe to config changes
+        this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
+            this.coreConfig = config;
+        });
+    }
+
+    ngOnDestroy(): void {
+        // Unsubscribe from all subscriptions
+        this._unsubscribeAll.next();
+        this._unsubscribeAll.complete();
     }
 
     get infoCredit() {

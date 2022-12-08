@@ -18,7 +18,7 @@ export const coreConfig: CoreConfig = {
   app: {
     appName     : 'Global RedPyme - Crédito Pagos',                                        // App Name
     appTitle    : 'Global RedPyme - Crédito Pagos', // App Title
-    appLogoImage: 'assets/images/logo/red-y-san-jose.png',                  // App Logo
+    appLogoImage: 'assets/images/logo/red-credito.png',                  // App Logo
   },
   layout: {
     skin  : 'default',                        // default, dark, bordered, semi-dark
