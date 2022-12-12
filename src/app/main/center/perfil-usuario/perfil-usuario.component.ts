@@ -159,10 +159,14 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
             youtube: [''],
         });
         this.datosTrabajoForm = this._formBuilder.group({
-            ruc: ['', [Validators.required]],
+            ruc: ['', [Validators.required, Validators.pattern('^[0-9]+001$'),
+                Validators.maxLength(13), Validators.minLength(13),
+            ]],
             nombreEmpresa: ['', [Validators.required]],
             direccionEmpresa: ['', [Validators.required]],
-            telefonoEmpresa: ['', [Validators.required]],
+            telefonoEmpresa: ['', [
+                Validators.required,
+                Validators.pattern('^[0-9]*$')]],
         });
         this.usuario = this._coreMenuService.grpPersonasUser;
         this._perfilUsuarioService

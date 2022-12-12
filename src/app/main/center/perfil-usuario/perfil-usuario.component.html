@@ -475,6 +475,14 @@
                             <div class="form-group">
                               <label for="username">RUC de la empresa o negocio </label>
                               <input type="text" class="form-control" formControlName="ruc">
+                              <div *ngIf="submitted && tForm.ruc.errors" class="invalid-feedback"
+                                   style="display: block;">
+                                <div *ngIf="submitted && tForm.ruc.errors.required">Es requerido</div>
+                                <div *ngIf="tForm.ruc.errors.minlength || tForm.ruc.errors.maxlength">
+                                  Ingrese 13 dígitos
+                                </div>
+                                <div *ngIf="tForm.ruc.errors.pattern">Ingrese solo numeros</div>
+                              </div>
                             </div>
                           </div>
 
@@ -482,6 +490,10 @@
                             <div class="form-group">
                               <label for="username">Nombre comercial de la empresa o negocio</label>
                               <input type="text" class="form-control" formControlName="nombreEmpresa">
+                              <div *ngIf="submitted && tForm.nombreEmpresa.errors" class="invalid-feedback"
+                                   style="display: block;">
+                                <div *ngIf="submitted && tForm.nombreEmpresa.errors.required">Es requerido</div>
+                              </div>
                             </div>
                           </div>
 
@@ -489,6 +501,10 @@
                             <div class="form-group">
                               <label for="username">Dirección de la empresa o negocio</label>
                               <input type="text" class="form-control" formControlName="direccionEmpresa">
+                              <div *ngIf="submitted && tForm.direccionEmpresa.errors" class="invalid-feedback"
+                                   style="display: block;">
+                                <div *ngIf="submitted && tForm.direccionEmpresa.errors.required">Es requerido</div>
+                              </div>
                             </div>
                           </div>
 
@@ -496,6 +512,11 @@
                             <div class="form-group">
                               <label for="username">Teléfono fijo de la empresa o negocio</label>
                               <input type="text" class="form-control" formControlName="telefonoEmpresa">
+                              <div *ngIf="submitted && tForm.telefonoEmpresa.errors" class="invalid-feedback"
+                                   style="display: block;">
+                                <div *ngIf="submitted && tForm.telefonoEmpresa.errors.required">Es requerido</div>
+                                <div *ngIf="tForm.telefonoEmpresa.errors.pattern">Ingrese solo numeros</div>
+                              </div>
                             </div>
                           </div>
 
