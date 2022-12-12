@@ -1,0 +1,52 @@
+<div class="content-wrapper">
+  <div class="content-header row">
+  </div>
+  <div class="content-body">
+    <!-- Error page-->
+    <div class="misc-wrapper">
+
+      <div class="card">
+        <div class="card-body">
+          <div class="misc-inner p-2 p-sm-5">
+            <div class="text-center">
+              <a href="javascript:void(0);">
+                <img src="assets/images/logo/logo.png" alt="brand-logo" width="300"/>
+                <h2 class="brand-text text-primary ml-1 mt-1">CréditoPagos</h2>
+              </a>
+            </div>
+          </div>
+          <div class=" mb-2 text-center">
+            <h4>
+              {{tiutlo}}
+            </h4>
+          </div>
+          <div class="content-body">
+            <section class="app-user-list">
+              <div class="card">
+                <div class="card-body text-center">
+
+                  <div class="mt-2">
+                    <ul class="list-group ">
+                      <li class="list-group-item" *ngFor="let item of requisitos">{{item}}</li>
+                    </ul>
+                  </div>
+                  <div *ngIf="requisitos.length>0" class="mt-2">
+                    <a [href]="'#/personas/finalizar-credito'" class="btn btn-primary">Enviar</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="swiper-responsive-breakpoints swiper-container px-4 py-2">
+            <div class="swiper-wrapper mb-2">
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / Error page-->
+  </div>
+</div>

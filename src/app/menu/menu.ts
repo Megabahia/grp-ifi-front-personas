@@ -38,6 +38,7 @@ export const menu: CoreMenu[] = [
         type: 'item',
         icon: '',
         url: 'personas/registroFirmaElectronica',
+        hidden: true
     },
     {
         id: 'registroProveedores',

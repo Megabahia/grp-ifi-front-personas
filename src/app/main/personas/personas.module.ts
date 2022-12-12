@@ -57,6 +57,9 @@ import {CreateComponent} from './vistas/registro-proveedores/create/create.compo
 import {ValidarResultadosComponent} from './vistas/validar-resultados/validar-resultados.component';
 import {RegistroFirmaElectronicaComponent} from './vistas/registro-firma-electronica/registro-firma-electronica.component';
 import {OldUserComponent} from './vistas/old-user/old-user.component';
+import { PerfilCompletarComponent } from './vistas/perfil-completar/perfil-completar.component';
+import { RequisitiosCreditoComponent } from './vistas/requisitios-credito/requisitios-credito.component';
+import { FinalizarSolicitudComponent } from './vistas/finalizar-solicitud/finalizar-solicitud.component';
 
 const routes = [
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
@@ -243,6 +246,20 @@ const routes = [
         // data: { animation: 'auth' }
     },
     {
+        path: 'requisitosCredito/:monto',
+        component: RequisitiosCreditoComponent,
+        data: {activacion: [1, 2, 3, 4, 5, 6, 7]},
+        canActivate: [AuthGuard],
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'finalizar-credito',
+        component: FinalizarSolicitudComponent,
+        data: {activacion: [1, 2, 3, 4, 5, 6, 7]},
+        canActivate: [AuthGuard],
+        // data: { animation: 'auth' }
+    },
+    {
         path: 'registroProveedores',
         component: RegistroProveedoresComponent,
         // data: {activacion: [1]},
@@ -269,6 +286,14 @@ const routes = [
     {
         path: 'completarPerfil',
         component: CompletarPerfilComponent,
+        data: {activacion: [2, 3], animation: 'flatpickr'},
+        canActivate: [AuthGuard],
+
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'perfil-completar',
+        component: PerfilCompletarComponent,
         data: {activacion: [2, 3], animation: 'flatpickr'},
         canActivate: [AuthGuard],
 
@@ -319,6 +344,9 @@ const routes = [
         ValidarResultadosComponent,
         RegistroFirmaElectronicaComponent,
         OldUserComponent,
+        PerfilCompletarComponent,
+        RequisitiosCreditoComponent,
+        FinalizarSolicitudComponent,
     ],
     imports: [
         CoreCommonModule,

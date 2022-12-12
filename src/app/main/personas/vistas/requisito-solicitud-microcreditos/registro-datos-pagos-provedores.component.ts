@@ -22,20 +22,15 @@ export class RegistroDatosPagosProvedoresComponent implements OnInit {
 
     ngOnInit(): void {
         this._registroDatosService.consultaRequisitos('REQUISITOS_MICROCREDIOS').subscribe(data => {
-            console.log('data', data);
             data.map(item => {
                 if (item.nombre === 'MONTO') {
                     this.montoBASEDATOS = item.valor;
                 }
                 if (item.nombre === 'INFERIOR_INGRESOS_MENSUALES') {
-                    this.requisitosINFEROR = item.config.slice(1, -1).toString().split(',').map(value => {
-                        return value.replace(/'/g, '');
-                    });
+                    this.requisitosINFEROR = item.config;
                 }
                 if (item.nombre === 'SUPERIOR_INGRESOS_MENSUALES') {
-                    this.requisitosSUPERIOR = item.config.slice(1, -1).toString().split(',').map(value => {
-                        return value.replace(/'/g, '');
-                    });
+                    this.requisitosSUPERIOR = item.config;
                 }
             });
         });

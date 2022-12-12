@@ -51,13 +51,15 @@ export class AuthGuard implements CanActivate {
                 }
                 case 2: {
                     if (!activacion) {
-                        this._router.navigate(['/personas/completarPerfil']);
+                        // this._router.navigate(['/personas/completarPerfil']);
+                        this._router.navigate(['/personas/perfil-completar']);
                     }
                     return true;
                 }
                 case 3: {
                     if (!activacion) {
-                        this._router.navigate(['/personas/completarPerfil']);
+                        // this._router.navigate(['/personas/completarPerfil']);
+                        this._router.navigate(['/personas/perfil-completar']);
                     }
                     return true;
                 }

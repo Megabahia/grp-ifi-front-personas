@@ -10,8 +10,8 @@
                     <div class="misc-inner p-2 p-sm-5">
                         <div class="text-center">
                             <a href="javascript:void(0);">
-                                <img src="assets/images/logo/logo.png" alt="brand-logo" width="300"/>
-                                <h2 class="brand-text text-primary ml-1 mt-1">CréditoPagos</h2>
+                              <img width="500" src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" />
+                                <h2 class="azul2 text-bold m-1">CréditoPagos</h2>
                             </a>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
 
                                     <form class="auth-login-form mt-2" [formGroup]="formSolicitud">
                                         <h3>
-                                            DATOS GENERALES DE TU EMPRESA:
+                                          DATOS GENERALES DE SU EMPRESA
                                         </h3>
                                         <div class="row">
 
@@ -262,9 +262,9 @@
                                                             class="form-control select2" formControlName="esatdo_civil"
                                                     >
                                                         <option value="">- Seleccione -</option>
-                                                        <option value="Soltero">- Soltero -</option>
-                                                        <option value="Casado">- Casado -</option>
-                                                        <option value="Divorciado">- Divorciado -</option>
+                                                        <option [value]="value.valor" *ngFor="let value of listadoEstadoCivil">
+                                                          {{value.nombre}}
+                                                        </option>
                                                     </select>
                                                 </div>
                                                 <div *ngIf="submitted && controlsFrom.esatdo_civil.errors"
@@ -295,6 +295,9 @@
                                                     </div>
                                                     <div *ngIf="controlsFrom.telefono.errors.minlength">
                                                         Ingrese minimo 7 caracteres
+                                                    </div>
+                                                    <div *ngIf="controlsFrom.telefono.errors.minlength">
+                                                        Ingrese maximo 10 caracteres
                                                     </div>
                                                     <div *ngIf="controlsFrom.telefono.errors.pattern">
                                                         Ingrese solo numeros
@@ -454,6 +457,9 @@
                                                                     <div *ngIf="familiar.controls?.tipoPariente?.errors.required">
                                                                         Referencia familiar es requerido
                                                                     </div>
+                                                                  <div *ngIf="familiar.controls?.tipoPariente.errors.validoPas5"
+                                                                  >Repetido
+                                                                  </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -515,6 +521,9 @@
                                                                 <div *ngIf="familiar.controls?.telefonoFamiliar?.errors.required">
                                                                     Teléfono referencia familiar es requerido
                                                                 </div>
+                                                              <div *ngIf=" familiar.controls?.telefonoFamiliar.errors.validoPas"
+                                                              >Teléfono repetido
+                                                              </div>
                                                                 <div *ngIf="familiar.controls?.telefonoFamiliar?.errors.pattern">
                                                                     Ingrese solo numeros
                                                                 </div>
@@ -572,7 +581,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-4" *ngIf="casado">
                                                 <div class="form-group">
                                                     <label>Sueldo cónyuge (de ser casado) (VALOR):
                                                     </label>
@@ -672,7 +681,7 @@
                                         </div>
                                         <div class="mt-2">
                                             <button class="btn btn-primary mr-1" (click)="guardar()">
-                                                Guardar
+                                              CONTINUAR
                                             </button>
                                         </div>
                                     </form>

@@ -5,6 +5,10 @@ import {CoreMenuService} from '../../../../../@core/components/core-menu/core-me
 import {SolicitudCreditosService} from './solicitud-creditos.service';
 import {Router} from '@angular/router';
 import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
+import {takeUntil} from 'rxjs/operators';
+import {CoreConfigService} from '../../../../../@core/services/config.service';
+import {Subject} from 'rxjs';
+import {ValidacionesPropias} from '../../../../../utils/customer.validators';
 
 @Component({
     selector: 'app-solicitud-creditos',
@@ -12,6 +16,10 @@ import {ParametrizacionesService} from '../../servicios/parametrizaciones.servic
     styleUrls: ['./solicitud-creditos.component.scss']
 })
 export class SolicitudCreditosComponent implements OnInit {
+    // configuracion
+    public coreConfig: any;
+    private _unsubscribeAll: Subject<any>;
+
     @ViewChild('teams') teams!: ElementRef;
     public formSolicitud: FormGroup;
     public formConyuge: FormGroup;
@@ -23,14 +31,21 @@ export class SolicitudCreditosComponent implements OnInit {
     public provinciaOpciones;
     public ciudadOpciones;
     public tipoParentesco = [];
+    public listadoEstadoCivil;
 
     constructor(
+        private _coreConfigService: CoreConfigService,
         private paramService: ParametrizacionesService,
         private _formBuilder: FormBuilder,
         private _coreMenuService: CoreMenuService,
         private _serviceUpdateEmpresa: SolicitudCreditosService,
         private _router: Router
     ) {
+        this._unsubscribeAll = new Subject();
+        // Subscribe to config changes
+        this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
+            this.coreConfig = config;
+        });
     }
 
     ngOnInit(): void {
@@ -51,7 +66,7 @@ export class SolicitudCreditosComponent implements OnInit {
                 direccionDomiciolRepresentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 esatdo_civil: ['', [Validators.required]], //
                 correo: [this.usuario.email, [Validators.required, Validators.email]], //
-                telefono: ['', [Validators.required, Validators.minLength(7), Validators.pattern('^[0-9]*$')]], //
+                telefono: ['', [Validators.required, Validators.minLength(7), Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
                 celular: ['', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
                 whatsapp: ['', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
                 conyuge: this._formBuilder.group({
@@ -84,21 +99,15 @@ export class SolicitudCreditosComponent implements OnInit {
                         direccionFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                         //
                     }),
-                ]),
+                ], [ValidacionesPropias.parientesTelefonos, ValidacionesPropias.padres]),
                 inresosMensualesVentas: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
-                sueldoConyuge: ['', [Validators.pattern('^[0-9]*$')]], //
-                otrosIngresos: ['', [Validators.pattern('^[0-9]*$')]], //
+                sueldoConyuge: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                otrosIngresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 gastosMensuales: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 gastosFamilaires: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
-                especificaIngresos: ['', [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                especificaIngresos: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
             });
         if (this.usuario.persona.empresaInfo) {
-            // for (const atributo in this.formSolicitud.controls) {
-            //     if (this.usuario.persona.empresaInfo[atributo] === 'Casado') {
-            //         this.casado = true;
-            //     }
-            //     this.formSolicitud.controls[atributo].setValue(this.usuario.persona.empresaInfo[atributo]);
-            // }
             this.formSolicitud.patchValue({...this.usuario.persona.empresaInfo});
             if (this.usuario.persona.empresaInfo.estadoCivil === 'Casado') {
                 this.casado = true;
@@ -107,6 +116,7 @@ export class SolicitudCreditosComponent implements OnInit {
         this.obtenerPaisOpciones();
         this.obtenerProvinciaOpciones();
         this.obtenerCiudadOpciones();
+        this.obtenerEstadosCiviles();
         this.paramService.obtenerListaPadres('TIPO_PARIENTE').subscribe((info) => {
             this.tipoParentesco = info;
         });
@@ -124,7 +134,7 @@ export class SolicitudCreditosComponent implements OnInit {
         this.casado = false;
         this.estadoCivil = this.teams.nativeElement.value;
         this.declareFormConyuge();
-        if (this.estadoCivil === 'Casado') {
+        if (this.formSolicitud.get('esatdo_civil').value === 'Casado' || this.formSolicitud.get('esatdo_civil').value === 'Unión libre') {
             this.formConyuge = this._formBuilder.group({
                 nombreConyuge: ['', [Validators.required]], //
                 telefonoConyuge: ['', [Validators.required]], //
@@ -149,6 +159,13 @@ export class SolicitudCreditosComponent implements OnInit {
     obtenerCiudadOpciones() {
         this.paramService.obtenerListaHijos(this.formSolicitud.get('provincia').value, 'PROVINCIA').subscribe((info) => {
             this.ciudadOpciones = info;
+        });
+    }
+
+    obtenerEstadosCiviles() {
+        this.paramService.obtenerListaPadresSinToken('ESTADO_CIVIL').subscribe((info) => {
+            console.log(info);
+            this.listadoEstadoCivil = info;
         });
     }
 
@@ -181,7 +198,7 @@ export class SolicitudCreditosComponent implements OnInit {
             const newJson = JSON.parse(localStorage.getItem('grpPersonasUser'));
             newJson.persona.empresaInfo = values.empresaInfo;
             localStorage.setItem('grpPersonasUser', JSON.stringify(newJson));
-            this._router.navigate(['/personas/pagoProveedores']);
+            this._router.navigate([`/personas/requisitosCredito/${777}`]);
         });
         console.log('values', this.formSolicitud.value, values);
         // this._perfilUsuarioService

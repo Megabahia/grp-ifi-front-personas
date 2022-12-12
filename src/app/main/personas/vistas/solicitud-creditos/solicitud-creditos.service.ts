@@ -11,7 +11,6 @@ export class SolicitudCreditosService {
     }
 
     actualiarEmpresa(data) {
-        console.log('llega----');
         return this._httpClient.post<any>(`${environment.apiUrl}/personas/personas/infoEmpresa/${data.user_id}`, data);
     }
 }

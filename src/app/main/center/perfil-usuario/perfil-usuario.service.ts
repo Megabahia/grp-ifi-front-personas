@@ -22,6 +22,6 @@ export class PerfilUsuarioService {
     return this._httpClient.get<any>(`${environment.apiUrl}/personas/historialLaboral/listOne/${user_id}`);
   }
   guardarHistorialLaboral(user_id,  datos) {
-    return this._httpClient.post<any>(`${environment.apiUrl}/personas/historialLaboral/update/${user_id}`, datos);
+    return this._httpClient.post<any>(`${environment.apiUrl}/personas/personas/update/${user_id}`, datos);
   }
 }
