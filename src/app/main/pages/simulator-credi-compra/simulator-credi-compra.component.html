@@ -4,18 +4,18 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-12 text-center">
                     <img class="appear" src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="250"/>
-                    <h2 class="azul2  text-bold">ESTÁS EN EL PASO 1 DE 3 </h2>
+                    <h2 class="mt-2 azul2  text-bold">ESTÁS EN EL PASO 1 DE 3 </h2>
                 </div>
                 <div class="col-md-12 text-center">
                     <div class="row mx-2 justify-content-center align-items-center">
                         <h4 class="font-weight-bolder">SIMULADOR DE CRÉDITO</h4>
                     </div>
                     <div class="row mx-2 justify-content-center align-items-center py-2">
-                        <p>Para tus compras en las mejores casas comerciales
-                            afiliadas a credicompra.com podrás acceder a un crédito
-                            <b>desde ${{montoMinimo}} hasta
-                                ${{montoMaximo}}</b>. Realiza esta
-                            simulación </p>
+                        <p>
+                          Para realizar pagos a tus proveedores de manera fácil y rápida podrás acceder a una Línea
+                          de Crédito <b>desde ${{montoMinimo}} hasta ${{montoMaximo}} </b>
+                          otorgado por Entidades Financieras reguladas
+                          </p>
                     </div>
                     <div class="row mx-2">
                         <form [formGroup]="infoCreditForm" (ngSubmit)="calcular()">
@@ -23,27 +23,7 @@
                                 <div class="col-md-6 col-12">
                                     <div class="form-group row">
                                         <div class="col-sm-3 col-form-label">
-                                            <label>Tipo de persona:</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <select class="form-control select2" formControlName="tipoPersona">
-                                                <option value="">- Seleccione -</option>
-                                                <option [value]="item.valor"
-                                                        *ngFor="let item of  listTipoPersona">{{item.nombre}}</option>
-                                            </select>
-                                            <div *ngIf="submittedSimulador && infoCredit.tipoPersona.errors"
-                                                 class="invalid-feedback" style="display: block;">
-                                                <div *ngIf="infoCredit.tipoPersona.errors.required">Tipo persona es
-                                                    requerido
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group row">
-                                        <div class="col-sm-3 col-form-label">
-                                            <label>Ingresos mensuales:</label>
+                                            <label>Ingresos mensuales del negocio:</label>
                                         </div>
                                         <div class="col-sm-9">
                                             <input type="number" formControlName="ingresosMensuales"
@@ -63,7 +43,7 @@
                                 <div class="col-md-6 col-12">
                                     <div class="form-group row">
                                         <div class="col-sm-3 col-form-label">
-                                            <label>Estado civil:</label>
+                                            <label>Estado civil del representante legal:</label>
                                         </div>
                                         <div class="col-sm-9">
                                             <select class="form-control select2" formControlName="estadoCivil"
@@ -102,7 +82,7 @@
                                 <div class="col-md-6 col-12">
                                     <div class="form-group row">
                                         <div class="col-sm-3 col-form-label">
-                                            <label>Gastos mensuales: </label>
+                                            <label>Gastos mensuales del negocio:</label>
                                         </div>
                                         <div class="col-sm-9">
                                             <input type="number" formControlName="gastosMensuales"
@@ -137,7 +117,7 @@
 
 <!--<div class="footer-LP"></div>-->
 <div class="text-center">
-    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">
+    <img src="../../../../assets/images/pages/creditopagos.png" height="100px">
 </div>
 <ng-template #modalAviso let-modal>
     <div class="modal-header">

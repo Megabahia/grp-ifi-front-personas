@@ -18,7 +18,6 @@ export class SimulatorCrediCompraComponent implements OnInit, OnDestroy {
     @ViewChild('modalAviso') modalAviso;
     public mensaje;
     public infoCreditForm: FormGroup;
-    public listTipoPersona = [];
     public listEstadoCivil = [];
     public porcentajeConyuge = 2;
     public porcentajeCapacidaPago = 0.80;
@@ -89,7 +88,6 @@ export class SimulatorCrediCompraComponent implements OnInit, OnDestroy {
 
     initInfoCreditForm() {
         this.infoCreditForm = this._formBuilder.group({
-            tipoPersona: ['', Validators.required],
             ingresosMensuales: ['', Validators.required],
             estadoCivil: ['', Validators.required],
             ingresosConyuge: [0],
@@ -98,9 +96,6 @@ export class SimulatorCrediCompraComponent implements OnInit, OnDestroy {
     }
 
     listCombosbox() {
-        this.paramService.obtenerListaPadresSinToken('TIPO_PERSONA').subscribe((info) => {
-            this.listTipoPersona = info;
-        });
         this.paramService.obtenerListaPadresSinToken('ESTADO_CIVIL').subscribe((info) => {
             this.listEstadoCivil = info;
         });
@@ -190,7 +185,6 @@ export class SimulatorCrediCompraComponent implements OnInit, OnDestroy {
         localStorage.setItem('coutaMensual', cuotaMensual.toString());
         localStorage.setItem('montoCreditoFinal', montoCreditoFinal.toString());
         localStorage.setItem('estadoCivil', this.infoCreditForm.value['estadoCivil']);
-        localStorage.setItem('tipoPersona', this.infoCreditForm.value['tipoPersona']);
         this._router.navigate(['/pages/requisitos-de-credito']);
     }
 

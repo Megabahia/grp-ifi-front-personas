@@ -95,17 +95,39 @@ export class CreditRequirementsComponent implements OnInit, OnDestroy {
     }
 
     getInfo() {
-        this.paramService.obtenerListaPadresSinToken(this.tipoPersona).subscribe((info) => {
-            console.log(info);
-            this.requisitos = info[0];
-            // this.requisitos.config = this.requisitos.config.slice(1, -1).toString().split(',').map(item => {
-            //     return item.replace(/'/g, '');
-            // });
+        this.paramService.obtenerListaPadresSinToken('REQUISITOS_MICROCREDIOS').subscribe((info) => {
+            info.find((item) => {
+                if (item.nombre === 'MONTO') {
+                    if (item.valor > this.montoCreditoFinal) {
+                        this.requisitos = info.find((item2) => {
+                            if (item2.valor === 'INFERIOR') {
+                                return item2;
+                            }
+                        });
+                        console.log(this.requisitos);
+                    } else {
+                        this.requisitos = info.find((item2) => {
+                            if (item2.valor === 'SUPERIROR') {
+                                return item2;
+                            }
+                        });
+                        console.log(this.requisitos);
+                    }
+                    return item;
+                }
+            });
         });
         this.paramService.obtenerListaPadresSinToken('DESCRIPCION_REQUISITOS_CREDICOMPRA').subscribe((info) => {
             this.descripcion = info[0];
             this.descripcion.valor = this.descripcion.valor.replace('${{montoCreditoFinal}}', this.montoCreditoFinal);
             this.descripcion.valor = this.descripcion.valor.replace('${{coutaMensual}}', this.coutaMensual);
+            this.paramService.obtenerListaPadresSinToken('VALORES_CALCULAR_CREDITO_CREDICOMPRA').subscribe((info2) => {
+                info2.map(item => {
+                    if (item.nombre === 'TIEMPO_PLAZO') {
+                        this.descripcion.valor = this.descripcion.valor.replace('${{tiempoPlazo}}', item.valor);
+                    }
+                });
+            });
         });
     }
 
