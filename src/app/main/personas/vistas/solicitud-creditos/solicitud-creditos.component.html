@@ -10,15 +10,16 @@
                     <div class="misc-inner p-2 p-sm-5">
                         <div class="text-center">
                             <a href="javascript:void(0);">
-                              <img width="500" src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" />
-                                <h2 class="azul2 text-bold m-1">CréditoPagos</h2>
+                              <img width="300" src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" />
+                                <h2 class="azul2 text-bold m-1">ESTÁ EN EL PASO 2 DE 3
+                                  Complete sus datos
+                                </h2>
                             </a>
                         </div>
                     </div>
                     <div class=" mb-2 text-center">
                         <h4>
-                            Para acceder a un microcrédito-línea de crédito para pago a proveedores, por favor registre
-                            los siguientes datos
+                          Para acceder a una línea de crédito para pago a sus proveedores, por favor registre los siguientes datos:
                         </h4>
                     </div>
                     <div class="content-body">
@@ -71,6 +72,9 @@
                                                     <div *ngIf="controlsFrom.rucEmpresa.errors.minlength">
                                                         Ingrese minimo 13 caracteres
                                                     </div>
+                                                    <div *ngIf="controlsFrom.rucEmpresa.errors.maxlength">
+                                                        Ingrese maximo 13 caracteres
+                                                    </div>
                                                     <div *ngIf="controlsFrom.rucEmpresa.errors.pattern">
                                                         Ingrese solo numeros
                                                     </div>
@@ -91,7 +95,7 @@
                                                         Nombre comercial es requerido
                                                     </div>
                                                     <div *ngIf="controlsFrom.comercial.errors.minlength">
-                                                        Ingrese minimo 8 caracteres
+                                                        Ingrese minimo 4 caracteres
                                                     </div>
                                                     <div *ngIf="controlsFrom.comercial.errors.pattern">
                                                         Ingrese solo letras
@@ -548,6 +552,9 @@
                                                                 <div *ngIf="familiar.controls?.direccionFamiliar?.errors.pattern">
                                                                     Ingrese solo letras
                                                                 </div>
+                                                              <div *ngIf="familiar.controls?.direccionFamiliar?.errors.minlength">
+                                                                    Ingrese minimo 8 caracteres
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -565,9 +572,8 @@
                                                     <label>
                                                         Ingresos mensuales en ventas (valor):
                                                     </label>
-                                                    <input type="text" formControlName="inresosMensualesVentas"
-                                                           class="form-control"
-                                                           value="">
+                                                    <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="inresosMensualesVentas"
+                                                           class="form-control">
                                                 </div>
                                                 <div *ngIf="submitted && controlsFrom.inresosMensualesVentas.errors"
                                                      class="invalid-feedback"
@@ -585,9 +591,8 @@
                                                 <div class="form-group">
                                                     <label>Sueldo cónyuge (de ser casado) (VALOR):
                                                     </label>
-                                                    <input type="text" formControlName="sueldoConyuge"
-                                                           class="form-control"
-                                                           value="">
+                                                    <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="sueldoConyuge"
+                                                           class="form-control">
                                                 </div>
                                                 <div *ngIf="submitted && controlsFrom.sueldoConyuge.errors"
                                                      class="invalid-feedback"
@@ -604,7 +609,7 @@
                                                 <div class="form-group">
                                                     <label>Otros ingresos (valor) :
                                                     </label>
-                                                    <input type="text" formControlName="otrosIngresos"
+                                                    <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="otrosIngresos"
                                                            class="form-control"
                                                            value="">
                                                 </div>
@@ -619,15 +624,55 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                          <div class="col-md-4">
+                                            <div class="form-group">
+                                              <label>
+                                                Especifique otros ingresos (ejemplo: vendo artículos de revista
+                                                en mi tiempo libre, etc.)
+                                              </label>
+                                              <input type="text" formControlName="especificaIngresos"
+                                                     class="form-control"
+                                                     value="">
+                                            </div>
+                                            <div *ngIf="submitted && controlsFrom.especificaIngresos.errors"
+                                                 class="invalid-feedback"
+                                                 style="display: block;">
+                                              <div *ngIf="controlsFrom.especificaIngresos.errors.re">
+                                                Ingrese solo letras requerido
+                                              </div>
+                                              <div *ngIf="controlsFrom.especificaIngresos.errors.pattern">
+                                                Ingrese solo letras requerido
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <div class="form-group">
+                                              <label>
+                                                Total ingresos
+                                              </label>
+                                              <input type="text" formControlName="totalIngresos"
+                                                     class="form-control"
+                                                     disabled>
+                                            </div>
+                                            <div *ngIf="submitted && controlsFrom.totalIngresos.errors"
+                                                 class="invalid-feedback"
+                                                 style="display: block;">
+                                              <div *ngIf="controlsFrom.totalIngresos.errors.re">
+                                                Ingrese solo letras requerido
+                                              </div>
+                                              <div *ngIf="controlsFrom.totalIngresos.errors.pattern">
+                                                Ingrese solo letras requerido
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Gastos mensuales en compras para el negocio (valor) :
                                                     </label>
-                                                    <input type="text" formControlName="gastosMensuales"
-                                                           class="form-control"
-                                                           value="">
+                                                    <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalEgresos()" type="text" formControlName="gastosMensuales"
+                                                           class="form-control">
                                                 </div>
                                                 <div *ngIf="submitted && controlsFrom.gastosMensuales.errors"
                                                      class="invalid-feedback"
@@ -645,7 +690,7 @@
                                                 <div class="form-group">
                                                     <label>Gastos familiares (valor)
                                                     </label>
-                                                    <input type="text" formControlName="gastosFamilaires"
+                                                    <input (change)="totalEgresos()" type="text" formControlName="gastosFamilaires"
                                                            class="form-control"
                                                            value="">
                                                 </div>
@@ -662,25 +707,67 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>
-                                                        Especifique otros ingresos (ejemplo: vendo artículos de revista
-                                                        en mi tiempo libre, etc.)
+                                                    <label>Otros gastos (valor)
                                                     </label>
-                                                    <input type="text" formControlName="especificaIngresos"
+                                                    <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalEgresos()" type="text" formControlName="otrosGastos"
                                                            class="form-control"
                                                            value="">
                                                 </div>
-                                                <div *ngIf="submitted && controlsFrom.especificaIngresos.errors"
+                                                <div *ngIf="submitted && controlsFrom.otrosGastos.errors"
                                                      class="invalid-feedback"
                                                      style="display: block;">
-                                                    <div *ngIf="controlsFrom.especificaIngresos.errors.pattern">
-                                                        Ingrese solo letras requerido
+                                                    <div *ngIf="controlsFrom.otrosGastos.errors.required">
+                                                        Gastos familiares es requerido
+                                                    </div>
+                                                    <div *ngIf="controlsFrom.otrosGastos.errors.pattern">
+                                                        Ingrese solo numeros
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-4">
+                                              <div class="form-group">
+                                                <label>
+                                                  Especifique otros gastos (ejemplo: estoy pagando un préstamo
+                                                  por la compra de maquinaria para el negocio)
+                                                </label>
+                                                <input type="text" formControlName="especificaGastos"
+                                                       class="form-control">
+                                              </div>
+                                              <div *ngIf="submitted && controlsFrom.especificaGastos.errors"
+                                                   class="invalid-feedback"
+                                                   style="display: block;">
+                                                <div *ngIf="controlsFrom.especificaGastos.errors.required">
+                                                  Gastos familiares es requerido
+                                                </div>
+                                                <div *ngIf="controlsFrom.especificaGastos.errors.pattern">
+                                                  Ingrese solo letras requerido
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <div class="form-group">
+                                                <label>
+                                                  Total egresos
+                                                </label>
+                                                <input type="text" formControlName="totalEgresos"
+                                                       class="form-control"
+                                                       disabled>
+                                              </div>
+                                              <div *ngIf="submitted && controlsFrom.totalEgresos.errors"
+                                                   class="invalid-feedback"
+                                                   style="display: block;">
+                                                <div *ngIf="controlsFrom.totalEgresos.errors.re">
+                                                  Ingrese solo letras requerido
+                                                </div>
+                                                <div *ngIf="controlsFrom.totalEgresos.errors.pattern">
+                                                  Ingrese solo letras requerido
+                                                </div>
+                                              </div>
+                                            </div>
+
                                         </div>
                                         <div class="mt-2">
-                                            <button class="btn btn-primary mr-1" (click)="guardar()">
+                                            <button class="btn btn-outline-dark mr-1" (click)="guardar()">
                                               CONTINUAR
                                             </button>
                                         </div>

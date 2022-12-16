@@ -60,6 +60,11 @@ import {OldUserComponent} from './vistas/old-user/old-user.component';
 import { PerfilCompletarComponent } from './vistas/perfil-completar/perfil-completar.component';
 import { RequisitiosCreditoComponent } from './vistas/requisitios-credito/requisitios-credito.component';
 import { FinalizarSolicitudComponent } from './vistas/finalizar-solicitud/finalizar-solicitud.component';
+import {IConfig, NgxMaskModule} from 'ngx-mask';
+
+const maskConfig: Partial<IConfig> = {
+    validation: false,
+};
 
 const routes = [
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
@@ -365,6 +370,7 @@ const routes = [
         NgxBarcodeModule,
         QRCodeModule,
         NgxPrintModule,
+        NgxMaskModule.forRoot(maskConfig),
     ],
     exports: [
         BienvenidoComponent,

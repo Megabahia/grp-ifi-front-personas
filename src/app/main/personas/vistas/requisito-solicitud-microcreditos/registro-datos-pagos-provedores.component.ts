@@ -9,7 +9,7 @@ import {RegistroDatosPagoProvedoresService} from './registro-datos-pago-provedor
 })
 export class RegistroDatosPagosProvedoresComponent implements OnInit {
     checks: any;
-    public monto;
+    public monto = null;
     public datos;
     requisitos = [];
     montoBASEDATOS;

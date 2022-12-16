@@ -17,7 +17,7 @@
                     </div>
                     <div class=" mb-2 text-center">
                         <h4>
-                            PARA ACCEDER A UN CRÉDITO PARA PAGO A PROVEEDORES, POR FAVOR REGISTRA LOS SIGUIENTES DATOS:
+                            PARA ACCEDER A UN CRÉDITO PARA PAGO A PROVEEDORES, POR FAVOR REGISTRE LOS SIGUIENTES DATOS:
                         </h4>
                     </div>
                     <div class="content-body">
@@ -35,6 +35,9 @@
                                                    (change)="caculate_value()"
                                                    [(ngModel)]="monto" aria-describedby="emailHelp">
                                         </div>
+                                        <div class="col col-12 text-center mt-2">
+                                          <button [disabled]="monto === null ? true : false" [routerLink]="'/personas/solucitudCredito'" class="btn btn-primary">Continuar</button>
+                                        </div>
                                     </div>
 
                                     <div class="mt-2">
@@ -42,9 +45,7 @@
                                             <li class="list-group-item" *ngFor="let item of requisitos">{{item}}</li>
                                         </ul>
                                     </div>
-                                    <div *ngIf="requisitos.length>0" class="mt-2">
-                                        <a  [href]="'#/personas/solucitudCredito'" class="btn btn-primary">Continuar</a>
-                                    </div>
+
                                 </div>
                             </div>
                         </section>

@@ -9,6 +9,7 @@ import {takeUntil} from 'rxjs/operators';
 import {CoreConfigService} from '../../../../../@core/services/config.service';
 import {Subject} from 'rxjs';
 import {ValidacionesPropias} from '../../../../../utils/customer.validators';
+import Decimal from 'decimal.js';
 
 @Component({
     selector: 'app-solicitud-creditos',
@@ -54,16 +55,17 @@ export class SolicitudCreditosComponent implements OnInit {
         this.formSolicitud = this._formBuilder.group(
             {
                 reprsentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
-                rucEmpresa: ['', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
-                comercial: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                rucEmpresa: ['', [Validators.required, Validators.minLength(13),
+                    Validators.maxLength(13), Validators.pattern('^[0-9]+001$')]], //
+                comercial: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 actividadEconomica: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 pais: ['', Validators.required],
                 provincia: ['', Validators.required],
                 ciudad: ['', Validators.required],
-                callePrincipal: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                callePrincipal: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 calleSecundaria: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 refenciaNegocio: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
-                direccionDomiciolRepresentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                direccionDomiciolRepresentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 esatdo_civil: ['', [Validators.required]], //
                 correo: [this.usuario.email, [Validators.required, Validators.email]], //
                 telefono: ['', [Validators.required, Validators.minLength(7), Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
@@ -80,7 +82,7 @@ export class SolicitudCreditosComponent implements OnInit {
                         nombreFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                         apellidoFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                         telefonoFamiliar: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
-                        direccionFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                        direccionFamiliar: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
                         //
                     }),
                     this._formBuilder.group({
@@ -88,7 +90,7 @@ export class SolicitudCreditosComponent implements OnInit {
                         nombreFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                         apellidoFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                         telefonoFamiliar: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
-                        direccionFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                        direccionFamiliar: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
                         //
                     }),
                     this._formBuilder.group({
@@ -96,7 +98,7 @@ export class SolicitudCreditosComponent implements OnInit {
                         nombreFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                         apellidoFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                         telefonoFamiliar: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
-                        direccionFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                        direccionFamiliar: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
                         //
                     }),
                 ], [ValidacionesPropias.parientesTelefonos, ValidacionesPropias.padres]),
@@ -106,6 +108,10 @@ export class SolicitudCreditosComponent implements OnInit {
                 gastosMensuales: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 gastosFamilaires: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 especificaIngresos: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                otrosGastos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                especificaGastos: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                totalIngresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                totalEgresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
             });
         if (this.usuario.persona.empresaInfo) {
             this.formSolicitud.patchValue({...this.usuario.persona.empresaInfo});
@@ -212,6 +218,23 @@ export class SolicitudCreditosComponent implements OnInit {
         //             // newJson.empresaInfo = values.empresaInfo;
         //             // localStorage.setItem('grpPersonasUser', JSON.stringify(newJson));
         //         });
+    }
+
+    totalIngresos() {
+        const inresosMensualesVentas = new Decimal(this.formSolicitud.get('inresosMensualesVentas').value || 0);
+        const sueldoConyuge = new Decimal(this.formSolicitud.get('sueldoConyuge').value || 0);
+        const otrosIngresos = new Decimal(this.formSolicitud.get('otrosIngresos').value || 0);
+        this.formSolicitud.controls['totalIngresos'].setValue(inresosMensualesVentas.add(sueldoConyuge).add(otrosIngresos));
+    }
+
+    totalEgresos() {
+        const gastosMensuales = new Decimal(this.formSolicitud.get('gastosMensuales').value || 0);
+        const gastosFamilaires = new Decimal(this.formSolicitud.get('gastosFamilaires').value || 0);
+        const otrosGastos = new Decimal(this.formSolicitud.get('otrosGastos').value || 0);
+        console.log(gastosMensuales);
+        console.log(gastosFamilaires);
+        console.log(otrosGastos);
+        this.formSolicitud.controls['totalEgresos'].setValue(gastosMensuales.add(gastosFamilaires).add(otrosGastos));
     }
 
     get conyuges() {
