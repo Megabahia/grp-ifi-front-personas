@@ -33,6 +33,13 @@ export class SolicitudCreditosComponent implements OnInit {
     public ciudadOpciones;
     public tipoParentesco = [];
     public listadoEstadoCivil;
+    public porcentajeConyuge = 2;
+    public porcentajeCapacidaPago = 0.80;
+    public tasaInteres = 17;
+    public tasaInteresMensual = 0.0;
+    public plazo = 12;
+    public montoMaximo = 2500;
+    public montoMinimo = 500;
 
     constructor(
         private _coreConfigService: CoreConfigService,
@@ -50,6 +57,30 @@ export class SolicitudCreditosComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.paramService.obtenerListaPadresSinToken('VALORES_CALCULAR_CREDITO_CREDICOMPRA').subscribe((info) => {
+            console.log("valores", info);
+            info.map(item => {
+                if (item.nombre === 'PORCENTAJE_CONYUGE') {
+                    this.porcentajeConyuge = new Decimal(item.valor).toNumber();
+                }
+                if (item.nombre === 'PORCENTAJE_CAPACIDAD_PAGO') {
+                    this.porcentajeCapacidaPago = new Decimal(item.valor).div(100).toNumber();
+                }
+                if (item.nombre === 'TIEMPO_PLAZO') {
+                    this.plazo = item.valor;
+                }
+                if (item.nombre === 'TASA_INTERES') {
+                    this.tasaInteres = new Decimal(item.valor).toDecimalPlaces(2).toNumber();
+                    this.tasaInteresMensual = new Decimal(item.valor).div(this.plazo).toDecimalPlaces(2).toNumber();
+                }
+                if (item.nombre === 'MONTO_MAXIMO') {
+                    this.montoMaximo = item.valor;
+                }
+                if (item.nombre === 'MONTO_MINIMO') {
+                    this.montoMinimo = item.valor;
+                }
+            });
+        });
         this.usuario = this._coreMenuService.grpPersonasUser;
         this.declareFormConyuge();
         this.formSolicitud = this._formBuilder.group(
@@ -187,6 +218,54 @@ export class SolicitudCreditosComponent implements OnInit {
         return this.formSolicitud.get('conyuge')['controls'] ;
     }
 
+    calcularCredito() {
+        const ingresosTotal = new Decimal(this.formSolicitud.get('totalIngresos').value).toNumber()
+            || 0;
+        const gastosTotal =  new Decimal(this.formSolicitud.get('totalEgresos').value).toNumber() || 0;
+        // Formula para el calculo interes
+        const ingresosConyuge = new Decimal((new Decimal(this.formSolicitud.get('sueldoConyuge').value).toNumber() || 0) / 2);
+        const ingresosMensuales = new Decimal(ingresosTotal).sub(ingresosConyuge);
+        const gastosMensuales = new Decimal(gastosTotal);
+        const ingresoDisponible = ingresosMensuales.add(ingresosConyuge).sub(gastosMensuales).toDecimalPlaces(2).toNumber();
+        // if (ingresoDisponible === 0) {
+        //     this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
+        //     this.abrirModalLg(this.modalAviso);
+        //     return;
+        // }
+        const capacidadPago = new Decimal(ingresoDisponible).mul(this.porcentajeCapacidaPago).floor().toNumber();
+
+        const montoInteresMensual = new Decimal(capacidadPago).mul((this.tasaInteres / 100)).toDecimalPlaces(2).toNumber();
+
+        let cuotaMensual = new Decimal(capacidadPago).add(montoInteresMensual).toDecimalPlaces(2).toNumber();
+
+        const montoCredito = new Decimal(cuotaMensual).mul(12).toNumber();
+
+        // if (montoCredito === 0) {
+        //     this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
+        //     this.abrirModalLg(this.modalAviso);
+        //     return false;
+        // }
+        const resto = new Decimal(montoCredito.toString().substr(2, 4));
+        const montoCreditoRedondeado = new Decimal(montoCredito).sub(resto).toNumber();
+        let montoCreditoFinal = 0;
+        // if (montoCreditoRedondeado < this.montoMinimo) {
+        //     this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
+        //     this.abrirModalLg(this.modalAviso);
+        //     return false;
+        // } else
+            if (montoCreditoRedondeado >= this.montoMaximo) {
+            montoCreditoFinal = this.montoMaximo;
+            cuotaMensual = new Decimal(this.montoMaximo / 12).toDecimalPlaces(2).toNumber();
+        } else {
+            montoCreditoFinal = montoCreditoRedondeado;
+        }
+
+        localStorage.setItem('montoInteres', this.tasaInteres.toString());
+        localStorage.setItem('coutaMensual', cuotaMensual.toString());
+        localStorage.setItem('montoCreditoFinal', montoCreditoFinal.toString());
+        return true;
+    }
+
     guardar() {
         this.submitted = true;
         if (this.formSolicitud.invalid) {
@@ -198,13 +277,14 @@ export class SolicitudCreditosComponent implements OnInit {
             empresaInfo: this.formSolicitud.value,
             user_id: this.usuario.id,
         };
+        this.calcularCredito();
 
         this._serviceUpdateEmpresa.actualiarEmpresa(values).subscribe((valor) => {
             console.log('guardado', valor);
             const newJson = JSON.parse(localStorage.getItem('grpPersonasUser'));
             newJson.persona.empresaInfo = values.empresaInfo;
             localStorage.setItem('grpPersonasUser', JSON.stringify(newJson));
-            this._router.navigate([`/personas/requisitosCredito/${777}`]);
+            this._router.navigate([`/personas/requisitosCredito/${localStorage.getItem('montoCreditoFinal')}`]);
         });
         console.log('values', this.formSolicitud.value, values);
         // this._perfilUsuarioService
