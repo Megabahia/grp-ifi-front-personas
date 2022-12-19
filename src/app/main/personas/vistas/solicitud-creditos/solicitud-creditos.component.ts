@@ -93,10 +93,10 @@ export class SolicitudCreditosComponent implements OnInit {
                 pais: ['', Validators.required],
                 provincia: ['', Validators.required],
                 ciudad: ['', Validators.required],
-                callePrincipal: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]], //
-                calleSecundaria: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
-                refenciaNegocio: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
-                direccionDomiciolRepresentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                callePrincipal: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
+                calleSecundaria: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
+                refenciaNegocio: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
+                direccionDomiciolRepresentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
                 esatdo_civil: ['', [Validators.required]], //
                 correo: [this.usuario.email, [Validators.required, Validators.email]], //
                 telefono: ['', [Validators.required, Validators.minLength(7), Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //

@@ -11,7 +11,6 @@ export class RegistroDatosPagosProvedoresComponent implements OnInit {
     checks: any;
     public monto = null;
     public datos;
-    requisitos = [];
     montoBASEDATOS;
     requisitosINFEROR;
     requisitosSUPERIOR;
@@ -35,14 +34,4 @@ export class RegistroDatosPagosProvedoresComponent implements OnInit {
             });
         });
     }
-
-    caculate_value() {
-        this.monto > this.montoBASEDATOS ? console.log('mas de 8000') : console.log('menor de 8000');
-        if (this.monto > this.montoBASEDATOS) {
-            this.requisitos = this.requisitosSUPERIOR;
-        } else {
-            this.requisitos = this.requisitosINFEROR;
-        }
-    }
-
 }
