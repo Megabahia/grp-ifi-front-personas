@@ -7,14 +7,16 @@
 
             <div class="card">
                 <div class="card-body">
-                    <div class="misc-inner p-2 p-sm-5">
+                    <div class="misc-inner">
+                      <div class="misc-inner">
                         <div class="text-center">
-                            <a href="javascript:void(0);">
-                              <img width="300" src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" />
-                                <h2 class="azul2 text-bold m-1">ESTÁ EN EL PASO 2 DE 3</h2>
-                                <h2 class="azul2 text-bold m-1">Complete sus datos</h2>
-                            </a>
+                          <a href="javascript:void(0);">
+                            <img src="assets/images/logo/red-credito.png" alt="brand-logo" width="300"/>
+                            <h2 class="azul2 text-bold m-1">ESTÁ EN EL PASO 2 DE 3</h2>
+                            <h2 class="azul2 text-bold m-1">Complete sus datos</h2>
+                          </a>
                         </div>
+                      </div>
                     </div>
                     <div class=" mb-2 text-center">
                         <h4>
@@ -287,14 +289,17 @@
                                                     <label>Teléfono convencional:
                                                     </label>
                                                     <input type="text" formControlName="telefono"
-                                                           class="form-control"
-                                                           value="">
+                                                           mask="(00) 00 00 00 00"
+                                                           class="form-control">
                                                 </div>
                                                 <div *ngIf="submitted && controlsFrom.telefono.errors"
                                                      class="invalid-feedback"
                                                      style="display: block;">
                                                     <div *ngIf="controlsFrom.telefono.errors.required">
                                                         Teléfono es requerido
+                                                    </div>
+                                                    <div *ngIf="controlsFrom.telefono.errors">
+                                                      Ingrese con el Código de la Provincia
                                                     </div>
                                                     <div *ngIf="controlsFrom.telefono.errors.minlength">
                                                         Ingrese minimo 7 caracteres
@@ -391,10 +396,13 @@
                                                                        class="form-control"
                                                                        value="">
                                                             </div>
-<!--                                                            <div *ngIf="submitted && controlsContuge.controls?.nombreConyuge.errors"-->
-<!--                                                                 class="invalid-feedback"-->
-<!--                                                                 style="display: block;">-->
-<!--                                                            </div>-->
+                                                            <div *ngIf="submitted && formSolicitud.get('conyuge')['controls'].nombreConyuge.errors"
+                                                                 class="invalid-feedback"
+                                                                 style="display: block;">
+                                                              <div *ngIf="formSolicitud.get('conyuge')['controls'].nombreConyuge.errors.required">
+                                                                Nombre es requerido
+                                                              </div>
+                                                            </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
@@ -404,10 +412,13 @@
                                                                        class="form-control"
                                                                        value="">
                                                             </div>
-                                                            <div *ngIf="submitted && controlsContuge.telefonoConyuge.errors"
+                                                            <div *ngIf="submitted && formSolicitud.get('conyuge')['controls'].telefonoConyuge.errors"
                                                                  class="invalid-feedback"
                                                                  style="display: block;">
-                                                                <div *ngIf="controlsContuge.telefonoConyuge.errors.pattern">
+                                                                <div *ngIf="formSolicitud.get('conyuge')['controls'].telefonoConyuge.errors?.required">
+                                                                    Telefono es requerido
+                                                                </div>
+                                                              <div *ngIf="formSolicitud.get('conyuge')['controls'].telefonoConyuge.errors?.pattern">
                                                                     Ingrese solo números
                                                                 </div>
                                                             </div>
@@ -420,13 +431,13 @@
                                                                        class="form-control"
                                                                        value="">
                                                             </div>
-<!--                                                            <div *ngIf="submitted && controlsFromContuge.cedulaConyuge.errors"-->
-<!--                                                                 class="invalid-feedback"-->
-<!--                                                                 style="display: block;">-->
-<!--                                                                <div *ngIf="controlsFromContuge.cedulaConyuge.errors.required">-->
-<!--                                                                    Cédula es requerido-->
-<!--                                                                </div>-->
-<!--                                                            </div>-->
+                                                            <div *ngIf="submitted && formSolicitud.get('conyuge')['controls'].cedulaConyuge.errors"
+                                                                 class="invalid-feedback"
+                                                                 style="display: block;">
+                                                                <div *ngIf="formSolicitud.get('conyuge')['controls'].cedulaConyuge.errors?.required">
+                                                                    Cédula es requerido
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -588,7 +599,7 @@
                                             </div>
                                             <div class="col-md-4" *ngIf="casado">
                                                 <div class="form-group">
-                                                    <label>Sueldo cónyuge (de ser casado) (VALOR):
+                                                    <label>Sueldo cónyuge (VALOR):
                                                     </label>
                                                     <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="sueldoConyuge"
                                                            class="form-control">
@@ -596,9 +607,9 @@
                                                 <div *ngIf="submitted && controlsFrom.sueldoConyuge.errors"
                                                      class="invalid-feedback"
                                                      style="display: block;">
-                                                    <!--                                                    <div *ngIf="controlsFrom.sueldoConyuge.errors.required">-->
-                                                    <!--                                                        Sueldo cónyuge es requerido-->
-                                                    <!--                                                    </div>-->
+                                                    <div *ngIf="controlsFrom.sueldoConyuge.errors.required">
+                                                        Sueldo de cónyuge es requerido
+                                                    </div>
                                                     <div *ngIf="controlsFrom.sueldoConyuge.errors.pattern">
                                                         Ingresos solo numeros
                                                     </div>
@@ -766,7 +777,7 @@
 
                                         </div>
                                         <div class="mt-2">
-                                            <button class="btn btn-outline-dark mr-1" (click)="guardar()">
+                                            <button class="btn btn-primary mr-1" (click)="guardar()" style="color: black !important;">
                                               CONTINUAR
                                             </button>
                                         </div>
@@ -782,4 +793,10 @@
         </div>
         <!-- / Error page-->
     </div>
+</div>
+
+<!--<div class="footer-LP justify-content-center"></div>-->
+<div class="text-center mt-3">
+  <!--    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">-->
+  <img src="../assets/images/pages/creditopagos.png" height="100px">
 </div>

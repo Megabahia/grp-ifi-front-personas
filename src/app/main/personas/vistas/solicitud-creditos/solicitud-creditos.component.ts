@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../auth/models';
 import {CoreMenuService} from '../../../../../@core/components/core-menu/core-menu.service';
 import {SolicitudCreditosService} from './solicitud-creditos.service';
@@ -40,6 +40,11 @@ export class SolicitudCreditosComponent implements OnInit {
     public plazo = 12;
     public montoMaximo = 2500;
     public montoMinimo = 500;
+    private estadoCivilStorage;
+    private tipoPersonaStorage;
+    private montoCreditoFinalStorage: string;
+    private coutaMensualStorage;
+    private montoInteresStorage;
 
     constructor(
         private _coreConfigService: CoreConfigService,
@@ -57,8 +62,8 @@ export class SolicitudCreditosComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.valoresLocalStorage();
         this.paramService.obtenerListaPadresSinToken('VALORES_CALCULAR_CREDITO_CREDICOMPRA').subscribe((info) => {
-            console.log("valores", info);
             info.map(item => {
                 if (item.nombre === 'PORCENTAJE_CONYUGE') {
                     this.porcentajeConyuge = new Decimal(item.valor).toNumber();
@@ -99,7 +104,7 @@ export class SolicitudCreditosComponent implements OnInit {
                 direccionDomiciolRepresentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
                 esatdo_civil: ['', [Validators.required]], //
                 correo: [this.usuario.email, [Validators.required, Validators.email]], //
-                telefono: ['', [Validators.required, Validators.minLength(7), Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
+                telefono: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]], //
                 celular: ['', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
                 whatsapp: ['', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
                 conyuge: this._formBuilder.group({
@@ -144,9 +149,10 @@ export class SolicitudCreditosComponent implements OnInit {
                 totalIngresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 totalEgresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
             });
+        console.log('estado civil', this.usuario.persona.empresaInfo.esatdo_civil);
         if (this.usuario.persona.empresaInfo) {
             this.formSolicitud.patchValue({...this.usuario.persona.empresaInfo});
-            if (this.usuario.persona.empresaInfo.estadoCivil === 'Casado') {
+            if (this.usuario.persona.empresaInfo.esatdo_civil === 'Casado' || this.usuario.persona.empresaInfo.esatdo_civil === 'Unión libre') {
                 this.casado = true;
             }
         }
@@ -171,14 +177,41 @@ export class SolicitudCreditosComponent implements OnInit {
         this.casado = false;
         this.estadoCivil = this.teams.nativeElement.value;
         this.declareFormConyuge();
+        console.log(this.formSolicitud.get('esatdo_civil').value);
         if (this.formSolicitud.get('esatdo_civil').value === 'Casado' || this.formSolicitud.get('esatdo_civil').value === 'Unión libre') {
-            this.formConyuge = this._formBuilder.group({
-                nombreConyuge: ['', [Validators.required]], //
-                telefonoConyuge: ['', [Validators.required]], //
-                correoConyuge: ['', [Validators.required]],
-            });
+            // (this.formSolicitud.get('conyuge') as FormGroup)
+            //     .addControl('nombreConyuge', new FormControl('', Validators.required));
+                // .setControl('nombreConyuge', new FormControl('', Validators.required));
+            (this.formSolicitud as FormGroup).setControl('conyuge', this._formBuilder.group({
+                nombreConyuge: ['', [Validators.required]],
+                telefonoConyuge: ['', [Validators.pattern('^[0-9]*$'), Validators.required]], //
+                cedulaConyuge: ['', [Validators.required]],
+            }));
+            console.log('control conyuge', this.formSolicitud.get('conyuge')['controls']);
             this.casado = true;
+        } else {
+            (this.formSolicitud as FormGroup).setControl('conyuge', this._formBuilder.group({
+                nombreConyuge: ['', ],
+                telefonoConyuge: ['', ],
+                cedulaConyuge: ['', ]
+            }));
         }
+    }
+
+    valoresLocalStorage() {
+        this.estadoCivilStorage = localStorage.getItem('estadoCivil');
+        console.log(this.estadoCivilStorage);
+        if (this.estadoCivilStorage === 'Casado' || this.estadoCivilStorage === 'Unión libre') {
+            this.casado = true;
+
+        } else {
+            console.log('else');
+            this.casado = false;
+        }
+        this.tipoPersonaStorage = localStorage.getItem('tipoPersona');
+        this.montoCreditoFinalStorage = localStorage.getItem('montoCreditoFinal');
+        this.coutaMensualStorage = localStorage.getItem('coutaMensual');
+        this.montoInteresStorage = localStorage.getItem('montoInteres');
     }
 
     obtenerPaisOpciones() {
@@ -201,7 +234,6 @@ export class SolicitudCreditosComponent implements OnInit {
 
     obtenerEstadosCiviles() {
         this.paramService.obtenerListaPadresSinToken('ESTADO_CIVIL').subscribe((info) => {
-            console.log(info);
             this.listadoEstadoCivil = info;
         });
     }
@@ -311,9 +343,6 @@ export class SolicitudCreditosComponent implements OnInit {
         const gastosMensuales = new Decimal(this.formSolicitud.get('gastosMensuales').value || 0);
         const gastosFamilaires = new Decimal(this.formSolicitud.get('gastosFamilaires').value || 0);
         const otrosGastos = new Decimal(this.formSolicitud.get('otrosGastos').value || 0);
-        console.log(gastosMensuales);
-        console.log(gastosFamilaires);
-        console.log(otrosGastos);
         this.formSolicitud.controls['totalEgresos'].setValue(gastosMensuales.add(gastosFamilaires).add(otrosGastos));
     }
 
