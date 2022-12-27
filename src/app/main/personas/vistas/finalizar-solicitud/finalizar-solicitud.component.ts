@@ -4,6 +4,7 @@ import {takeUntil} from 'rxjs/operators';
 import {CoreConfigService} from '../../../../../@core/services/config.service';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../../../auth/service';
+import {CoreMenuService} from '../../../../../@core/components/core-menu/core-menu.service';
 
 @Component({
   selector: 'app-finalizar-solicitud',
@@ -13,11 +14,15 @@ import {AuthenticationService} from '../../../../auth/service';
 export class FinalizarSolicitudComponent implements OnInit {
     public coreConfig: any;
     private _unsubscribeAll: Subject<any>;
+    public usuario;
 
   constructor(
       private _coreConfigService: CoreConfigService,
       private _authenticationService: AuthenticationService,
-  ) { }
+      private _coreMenuService: CoreMenuService,
+  ) {
+      this.usuario = this._coreMenuService.grpPersonasUser;
+  }
 
   ngOnInit(): void {
       this._unsubscribeAll = new Subject();
