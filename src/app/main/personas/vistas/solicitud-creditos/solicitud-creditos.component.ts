@@ -189,14 +189,16 @@ export class SolicitudCreditosComponent implements OnInit {
             }));
             console.log('control conyuge', this.formSolicitud.get('conyuge')['controls']);
             this.casado = true;
+            (this.formSolicitud as FormGroup).setControl('sueldoConyuge',
+                new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]));
         } else {
             (this.formSolicitud as FormGroup).setControl('conyuge', this._formBuilder.group({
                 nombreConyuge: ['', ],
                 telefonoConyuge: ['', ],
                 cedulaConyuge: ['', ]
             }));
+            this.formSolicitud.controls['sueldoConyuge'].setValue(0);
         }
-        this.formSolicitud.get('sueldoConyuge')['controls'].value = 0;
     }
 
     valoresLocalStorage() {
