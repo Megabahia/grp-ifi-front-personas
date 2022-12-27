@@ -104,12 +104,12 @@ export class SolicitudCreditosComponent implements OnInit {
                 direccionDomiciolRepresentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
                 esatdo_civil: ['', [Validators.required]], //
                 correo: [this.usuario.email, [Validators.required, Validators.email]], //
-                telefono: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]], //
-                celular: ['', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
-                whatsapp: ['', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]], //
+                telefono: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
+                celular: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
+                whatsapp: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
                 conyuge: this._formBuilder.group({
                     nombreConyuge: [''], //
-                    telefonoConyuge: ['', [Validators.pattern('^[0-9]*$')]], //
+                    telefonoConyuge: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]], //
                     cedulaConyuge: [''],
                 }),
                 familiares: this._formBuilder.array([
@@ -117,7 +117,7 @@ export class SolicitudCreditosComponent implements OnInit {
                         tipoPariente: ['', [Validators.required]],
                         nombreFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                         apellidoFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
-                        telefonoFamiliar: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                        telefonoFamiliar: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
                         direccionFamiliar: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
                         //
                     }),
@@ -125,7 +125,7 @@ export class SolicitudCreditosComponent implements OnInit {
                         tipoPariente: ['', [Validators.required]],
                         nombreFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                         apellidoFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
-                        telefonoFamiliar: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                        telefonoFamiliar: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
                         direccionFamiliar: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
                         //
                     }),
@@ -133,7 +133,7 @@ export class SolicitudCreditosComponent implements OnInit {
                         tipoPariente: ['', [Validators.required]],
                         nombreFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                         apellidoFamiliar: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
-                        telefonoFamiliar: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                        telefonoFamiliar: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
                         direccionFamiliar: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
                         //
                     }),
@@ -184,7 +184,7 @@ export class SolicitudCreditosComponent implements OnInit {
                 // .setControl('nombreConyuge', new FormControl('', Validators.required));
             (this.formSolicitud as FormGroup).setControl('conyuge', this._formBuilder.group({
                 nombreConyuge: ['', [Validators.required]],
-                telefonoConyuge: ['', [Validators.pattern('^[0-9]*$'), Validators.required]], //
+                telefonoConyuge: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]], //
                 cedulaConyuge: ['', [Validators.required]],
             }));
             console.log('control conyuge', this.formSolicitud.get('conyuge')['controls']);
@@ -196,6 +196,7 @@ export class SolicitudCreditosComponent implements OnInit {
                 cedulaConyuge: ['', ]
             }));
         }
+        this.formSolicitud.get('sueldoConyuge')['controls'].value = 0;
     }
 
     valoresLocalStorage() {

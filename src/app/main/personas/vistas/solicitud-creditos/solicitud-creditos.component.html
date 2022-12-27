@@ -289,7 +289,7 @@
                                                     <label>Teléfono convencional:
                                                     </label>
                                                     <input type="text" formControlName="telefono"
-                                                           mask="(00) 00 00 00 00"
+                                                           mask="0000000000"
                                                            class="form-control">
                                                 </div>
                                                 <div *ngIf="submitted && controlsFrom.telefono.errors"
@@ -302,9 +302,9 @@
                                                       Ingrese con el Código de la Provincia
                                                     </div>
                                                     <div *ngIf="controlsFrom.telefono.errors.minlength">
-                                                        Ingrese minimo 7 caracteres
+                                                        Ingrese minimo 10 caracteres
                                                     </div>
-                                                    <div *ngIf="controlsFrom.telefono.errors.minlength">
+                                                    <div *ngIf="controlsFrom.telefono.errors.maxlength">
                                                         Ingrese maximo 10 caracteres
                                                     </div>
                                                     <div *ngIf="controlsFrom.telefono.errors.pattern">
@@ -329,6 +329,9 @@
                                                     <div *ngIf="controlsFrom.celular.errors.minlength">
                                                         Ingrese minimo 10 caracteres
                                                     </div>
+                                                    <div *ngIf="controlsFrom.celular.errors.maxlength">
+                                                        Ingrese maximo 10 caracteres
+                                                    </div>
                                                     <div *ngIf="controlsFrom.celular.errors.pattern">
                                                         Ingrese solo numeros
                                                     </div>
@@ -350,6 +353,9 @@
                                                     </div>
                                                     <div *ngIf="controlsFrom.whatsapp.errors.minlength">
                                                         Ingrese minimo 10 caracteres
+                                                    </div>
+                                                    <div *ngIf="controlsFrom.whatsapp.errors.maxlength">
+                                                        Ingrese maximo 10 caracteres
                                                     </div>
                                                     <div *ngIf="controlsFrom.whatsapp.errors.pattern">
                                                         Ingrese solo numeros
@@ -417,6 +423,12 @@
                                                                  style="display: block;">
                                                                 <div *ngIf="formSolicitud.get('conyuge')['controls'].telefonoConyuge.errors?.required">
                                                                     Telefono es requerido
+                                                                </div>
+                                                                <div *ngIf="formSolicitud.get('conyuge')['controls'].telefonoConyuge.errors?.minlength">
+                                                                  Ingrese minimo 10 caracteres
+                                                                </div>
+                                                                <div *ngIf="formSolicitud.get('conyuge')['controls'].telefonoConyuge.errors?.maxlength">
+                                                                  Ingrese maximo 10 caracteres
                                                                 </div>
                                                               <div *ngIf="formSolicitud.get('conyuge')['controls'].telefonoConyuge.errors?.pattern">
                                                                     Ingrese solo números
@@ -535,6 +547,12 @@
                                                                 <div *ngIf="familiar.controls?.telefonoFamiliar?.errors.required">
                                                                     Teléfono referencia familiar es requerido
                                                                 </div>
+                                                                <div *ngIf="familiar.controls?.telefonoFamiliar?.errors.minlength">
+                                                                    Teléfono minimo 10 numeros
+                                                                </div>
+                                                                <div *ngIf="familiar.controls?.telefonoFamiliar?.errors.maxlength">
+                                                                    Teléfono maximo 10 numeros
+                                                                </div>
                                                               <div *ngIf=" familiar.controls?.telefonoFamiliar.errors.validoPas"
                                                               >Teléfono repetido
                                                               </div>
@@ -647,7 +665,7 @@
                                             <div *ngIf="submitted && controlsFrom.especificaIngresos.errors"
                                                  class="invalid-feedback"
                                                  style="display: block;">
-                                              <div *ngIf="controlsFrom.especificaIngresos.errors.re">
+                                              <div *ngIf="controlsFrom.especificaIngresos.errors.required">
                                                 Ingrese solo letras requerido
                                               </div>
                                               <div *ngIf="controlsFrom.especificaIngresos.errors.pattern">
@@ -776,7 +794,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="mt-2">
+                                        <div class="mt-2 text-center">
                                             <button class="btn btn-primary mr-1" (click)="guardar()" style="color: black !important;">
                                               CONTINUAR
                                             </button>
