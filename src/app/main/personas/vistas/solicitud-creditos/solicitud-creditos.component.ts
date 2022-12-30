@@ -92,7 +92,7 @@ export class SolicitudCreditosComponent implements OnInit {
             {
                 reprsentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 rucEmpresa: ['', [Validators.required, Validators.minLength(13),
-                    Validators.maxLength(13), Validators.pattern('^[0-9]+001$')]], //
+                    Validators.maxLength(13), Validators.pattern('^[0-9]+001$'), ValidacionesPropias.rucValido]], //
                 comercial: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 actividadEconomica: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 pais: ['', Validators.required],

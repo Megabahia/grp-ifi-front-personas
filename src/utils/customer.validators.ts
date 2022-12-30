@@ -1,4 +1,5 @@
 import {AbstractControl, FormControl, ValidationErrors} from '@angular/forms';
+const validateDocument = require('validate-document-ecuador');
 
 export class ValidacionesPropias {
     static parientesTelefonos(control: AbstractControl) {
@@ -71,6 +72,15 @@ export class ValidacionesPropias {
             return {multiplo5: true};
         } else {
             return null;
+        }
+    }
+
+    static rucValido(control: AbstractControl) {
+        const valido = validateDocument.getValidateDocument('ruc', control.value);
+        if (valido.status === 'SUCCESS') {
+            return null;
+        } else {
+            return {rucInvalid: true};
         }
     }
 
