@@ -17,6 +17,7 @@ export class PagoProvedorsComponent implements OnInit {
     public submitted = false;
     public proveedores = [];
     public pagoProveedor = new FormData();
+    private proveedor;
 
     constructor(
         private _router: Router,
@@ -52,10 +53,17 @@ export class PagoProvedorsComponent implements OnInit {
     subirImagen(event: any) {
         if (event.target.files && event.target.files[0]) {
             const nuevaImagen = event.target.files[0];
-            this.pagoProveedor.delete('numeroFacturaproveedor');
-            this.pagoProveedor.append('numeroFacturaproveedor', nuevaImagen, nuevaImagen.name);
+            this.pagoProveedor.delete('factura');
+            this.pagoProveedor.append('factura', nuevaImagen, nuevaImagen.name);
         }
         console.log('this.pagoProveedor', this.pagoProveedor);
+    }
+
+    getOneProveedor() {
+        this._proveedorService.getOne(this.pagoFacturaForm.get('proveedor').value).subscribe((info) => {
+            this.proveedor = info;
+            console.log('proveedor', this.proveedor);
+        });
     }
 
     pagar() {
@@ -66,31 +74,32 @@ export class PagoProvedorsComponent implements OnInit {
         const infoEmpresa = JSON.parse(localStorage.getItem('grpPersonasUser')).persona.empresaInfo;
         console.log('info ruc', infoEmpresa.rucEmpresa);
         console.log('this.pagoFacturaForm.get(\'valorPagar\').value', this.pagoFacturaForm.get('valorPagar').value);
-        this.pagoProveedor.delete('razonSocial');
-        this.pagoProveedor.append('razonSocial', infoEmpresa.comercial);
-        this.pagoProveedor.delete('rucEmpresa');
-        this.pagoProveedor.append('rucEmpresa', infoEmpresa.rucEmpresa);
-        this.pagoProveedor.delete('monto');
-        this.pagoProveedor.append('monto', this.pagoFacturaForm.get('valorPagar').value);
-        this.pagoProveedor.delete('proveedor');
-        this.pagoProveedor.append('proveedor', this.pagoFacturaForm.get('proveedor').value);
-        this.pagoProveedor.delete('empresaInfo');
-        this.pagoProveedor.append('empresaInfo', JSON.stringify(infoEmpresa));
         this.pagoProveedor.delete('estado');
-        this.pagoProveedor.append('estado', 'Nuevo');
-        this.pagoProveedor.delete('tipoCredito');
-        this.pagoProveedor.append('tipoCredito', localStorage.getItem('credito') ? 'Pymes-PreAprobado' : 'Pymes-Normales');
-        this.pagoProveedor.delete('_id');
-        this.pagoProveedor.append('_id', localStorage.getItem('credito') ? JSON.parse(localStorage.getItem('credito'))._id : null);
+        this.pagoProveedor.append('estado', 'Pendiente');
+        this.pagoProveedor.delete('usuario');
+        this.pagoProveedor.append('usuario', JSON.stringify(localStorage.getItem('grpPersonasUser')));
+        this.pagoProveedor.delete('nombrePyme');
+        this.pagoProveedor.append('nombrePyme', infoEmpresa.comercial);
+        this.pagoProveedor.delete('numeroCuenta');
+        this.pagoProveedor.append('numeroCuenta', this.proveedor.cuentas[0].cuenta);
+        this.pagoProveedor.delete('banco');
+        this.pagoProveedor.append('banco', this.proveedor.cuentas[0].banco);
+        this.pagoProveedor.delete('rucProveedor');
+        this.pagoProveedor.append('rucProveedor', this.proveedor.identificacion);
+        this.pagoProveedor.delete('nombreProveedor');
+        this.pagoProveedor.append('nombreProveedor', this.proveedor.nombreComercial);
+        this.pagoProveedor.delete('valorPagar');
+        this.pagoProveedor.append('valorPagar', this.pagoFacturaForm.get('valorPagar').value);
 
-        this._pagoProvedorsService[localStorage.getItem('credito') ? 'actualizarCredito' : 'crearCredito'](this.pagoProveedor)
-          .subscribe((info) => {
-                console.log('guardado', info);
-                localStorage.removeItem('credito');
-            }
-        );
-        this._router.navigate(['/personas/validarResultados']);
-        console.log('se guardo');
+        this._pagoProvedorsService.crearSolicitudPagoProveedor(this.pagoProveedor)
+            .subscribe((info) => {
+                    console.log('guardado', info);
+                    localStorage.removeItem('valorPagar');
+                    localStorage.setItem('valorPagar', this.pagoFacturaForm.get('valorPagar').value);
+                    localStorage.removeItem('credito');
+                    this._router.navigate([`/personas/saldoDisponible/${this.proveedor.identificacion}`]);
+                }
+            );
     }
 
     cancelar() {

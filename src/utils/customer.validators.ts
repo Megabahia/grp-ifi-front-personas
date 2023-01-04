@@ -1,4 +1,5 @@
 import {AbstractControl, FormControl, ValidationErrors} from '@angular/forms';
+
 const validateDocument = require('validate-document-ecuador');
 
 export class ValidacionesPropias {
@@ -84,6 +85,18 @@ export class ValidacionesPropias {
         } else {
             control.setErrors({...errors, rucInvalid: true});
             return {rucInvalid: true};
+        }
+    }
+
+    static firmaElectronicaValido(control: AbstractControl) {
+        const archivo = control.value.split('.');
+        let errors = control['errors'] || {};
+        if (archivo[1] === 'p12') {
+            delete errors?.['extensionInvalida'];
+            return null;
+        } else {
+            control.setErrors({...errors, extensionInvalida: true});
+            return {extensionInvalida: true};
         }
     }
 

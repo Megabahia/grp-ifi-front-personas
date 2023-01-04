@@ -281,7 +281,7 @@ const routes = [
         // data: { animation: 'auth' }
     },
     {
-        path: 'saldoDisponible',
+        path: 'saldoDisponible/:proveedor',
         component: SaldoProveedoresComponent,
         data: {activacion: [1, 2, 3, 4, 5, 6, 7]},
         canActivate: [AuthGuard],

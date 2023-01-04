@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="proveedor">Seleccione el proveedor</label>
-                            <select class="form-control select2" id="proveedor" formControlName="proveedor">
+                            <select class="form-control select2" id="proveedor" formControlName="proveedor" (change)="getOneProveedor()">
                                 <option value="">- Seleccione -</option>
                                 <option *ngFor="let proveedor of proveedores"
                                         value="{{proveedor.identificacion}}">{{proveedor.nombreComercial}}</option>
@@ -100,7 +100,7 @@
                             </div>
                         </div>
                         <div class="col-sm-9 offset-sm-3">
-                            <button type="submit" routerLink="/personas/saldoDisponible" rippleEffect class="btn btn-primary mr-1">Continuar</button>
+                            <button type="submit" rippleEffect class="btn btn-primary mr-1">Continuar</button>
 <!--                            <button type="reset" rippleEffect class="btn btn-outline-secondary">Cancelar</button>-->
                         </div>
                     </form>
