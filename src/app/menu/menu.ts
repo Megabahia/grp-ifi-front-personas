@@ -37,6 +37,7 @@ export const menu: CoreMenu[] = [
         role: [Role.SuperMonedas],
         type: 'item',
         icon: '',
+        hidden: true,
         url: 'personas/registroFirmaElectronica'
     },
     {
