@@ -72,12 +72,13 @@ export class PagoProvedorsComponent implements OnInit {
             return;
         }
         const infoEmpresa = JSON.parse(localStorage.getItem('grpPersonasUser')).persona.empresaInfo;
+        const persona = JSON.parse(localStorage.getItem('grpPersonasUser')).persona;
         console.log('info ruc', infoEmpresa.rucEmpresa);
         console.log('this.pagoFacturaForm.get(\'valorPagar\').value', this.pagoFacturaForm.get('valorPagar').value);
         this.pagoProveedor.delete('estado');
         this.pagoProveedor.append('estado', 'Pendiente');
         this.pagoProveedor.delete('usuario');
-        this.pagoProveedor.append('usuario', JSON.stringify(localStorage.getItem('grpPersonasUser')));
+        this.pagoProveedor.append('usuario', JSON.stringify(persona));
         this.pagoProveedor.delete('nombrePyme');
         this.pagoProveedor.append('nombrePyme', infoEmpresa.comercial);
         this.pagoProveedor.delete('numeroCuenta');
