@@ -64,20 +64,20 @@ export class AppComponent implements OnInit, OnDestroy {
     // Get the application main menu
     this.menu = menu;
     if (this._coreMenuService.grpPersonasUser) {
-        // this._creditosPreAprobadosService.obtenerListaCreditos({
-        //     page: 0,
-        //     page_size: 10,
-        //     tipoCredito: 'Aprobado',
-        //     user_id: this._coreMenuService.grpPersonasUser.id
-        // }).subscribe((info) => {
-        //     console.log('creditos', info);
-        //     this.menu.map(item => {
-        //         if (item.id === 'firmaElectronica' || item.id === 'registroProveedores' || item.id === 'pagoProveedores' || item.id === 'saldoDisponible') {
-        //             item.hidden = false;
-        //         }
-        //         return item;
-        //     });
-        // });
+        this._creditosPreAprobadosService.obtenerListaCreditos({
+            page: 0,
+            page_size: 10,
+            tipoCredito: 'Aprobado',
+            user_id: this._coreMenuService.grpPersonasUser.id
+        }).subscribe((info) => {
+            console.log('creditos', info);
+            this.menu.map(item => {
+                if (item.id === 'firmaElectronica' || item.id === 'registroProveedores' || item.id === 'pagoProveedores' || item.id === 'saldoDisponible') {
+                    item.hidden = false;
+                }
+                return item;
+            });
+        });
     }
 
 
