@@ -132,6 +132,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="customFile1">Firma electronica</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile1" required
+                                               formControlName="certificado"
+                                               (change)="subirImagen($event)" accept=".p12"/>
+                                        <label class="custom-file-label"
+                                               for="customFile1">{{documentoFirmaForm.get('certificado').value}}</label>
+                                        <div *ngIf="submitted && documentoFirmar.certificado.errors"
+                                             class="invalid-feedback"
+                                             style="display: block;">
+                                            <div *ngIf="documentoFirmar.certificado.errors.required">Firma electronica
+                                                requerido
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="mt-2 d-flex justify-content-center">
                                     <button class="btn btn-primary mr-1">
                                         Continuar

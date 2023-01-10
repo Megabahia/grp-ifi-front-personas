@@ -6,6 +6,11 @@ import {CoreConfigService} from '../../../../../@core/services/config.service';
 import {Subject} from 'rxjs';
 import {RegistroProveedorService} from '../registro-proveedores/registro-proveedor.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {PagoProvedorsService} from '../pago-provedors/pago-provedors.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
     selector: 'app-saldo-proveedores',
@@ -22,6 +27,9 @@ export class SaldoProveedoresComponent implements OnInit {
     public continuarPago = false;
     public resumen = false;
     public documentoFirmaForm: FormGroup;
+    public firmaElectronica = new FormData();
+
+    public pdf;
 
     constructor(
         private _coreConfigService: CoreConfigService,
@@ -30,6 +38,7 @@ export class SaldoProveedoresComponent implements OnInit {
         private _proveedorService: RegistroProveedorService,
         private activatedRoute: ActivatedRoute,
         private _formBuilder: FormBuilder,
+        private _pagoProvedorsService: PagoProvedorsService,
     ) {
         this.activatedRoute.params.subscribe(paramsId => {
             this.getOneProveedor(paramsId.proveedor);
@@ -55,7 +64,17 @@ export class SaldoProveedoresComponent implements OnInit {
             numeroCuenta: ['', []],
             valorPagar: ['', []],
             claveFirma: ['', [Validators.required]],
+            certificado: ['', [Validators.required]],
         });
+    }
+
+    subirImagen(event: any) {
+        if (event.target.files && event.target.files[0]) {
+            const nuevaImagen = event.target.files[0];
+            this.firmaElectronica.delete('certificado');
+            this.firmaElectronica.append('certificado', nuevaImagen, nuevaImagen.name);
+        }
+        console.log('this.pagoProveedor', this.firmaElectronica);
     }
 
     getOneProveedor(proveedor) {
@@ -63,6 +82,7 @@ export class SaldoProveedoresComponent implements OnInit {
             this.proveedor = info;
             this.proveedor.valorPagar = localStorage.getItem('valorPagar');
             this.documentoFirmaForm.patchValue({...info, valorPagar: localStorage.getItem('valorPagar')});
+            this.createPDF();
         });
     }
 
@@ -77,9 +97,19 @@ export class SaldoProveedoresComponent implements OnInit {
             console.log('form', this.documentoFirmaForm);
             return;
         }
-        this.continuar = false;
-
-        this.continuarPago = true;
+        this.firmaElectronica.delete('_id');
+        this.firmaElectronica.append('_id', localStorage.getItem('idPagoProveedor'));
+        this.firmaElectronica.delete('claveFirma');
+        this.firmaElectronica.append('claveFirma', this.documentoFirmaForm.get('claveFirma').value);
+        this.firmaElectronica.delete('pdf');
+        this.firmaElectronica.append('pdf', this.pdf);
+        this._pagoProvedorsService.actualizarCredito(this.firmaElectronica)
+            .subscribe((info) => {
+                    console.log('guardado', info);
+                    this.continuar = false;
+                    this.continuarPago = true;
+                }
+            );
     }
 
     continuarClickResumen() {
@@ -90,6 +120,33 @@ export class SaldoProveedoresComponent implements OnInit {
     logout() {
         this._authenticationService.logout();
         this._router.navigate(['/grp/login']);
+    }
+
+    createPDF() {
+        const pdfDefinition: any = {
+            content: [
+                {
+                    text: `Nombre proveedor: ${this.documentoFirmaForm.get('nombreProveedor').value}`,
+                },
+                {
+                    text: `Ruc proveedor: ${this.documentoFirmaForm.get('identificacion').value}`,
+                },
+                {
+                    text: `Banco: ${this.proveedor?.cuentas[0].banco}`,
+                },
+                {
+                    text: `Numero cuenta: ${this.proveedor?.cuentas[0].cuenta}`,
+                },
+                {
+                    text: `Valor pagar: ${this.documentoFirmaForm.get('valorPagar').value}`,
+                }
+            ]
+        };
+
+        const pdf = pdfMake.createPdf(pdfDefinition);
+        pdf.getBlob((data: any) => {
+            this.pdf = data;
+        });
     }
 
 }

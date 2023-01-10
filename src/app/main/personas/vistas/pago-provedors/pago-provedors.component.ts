@@ -97,6 +97,8 @@ export class PagoProvedorsComponent implements OnInit {
                     console.log('guardado', info);
                     localStorage.removeItem('valorPagar');
                     localStorage.setItem('valorPagar', this.pagoFacturaForm.get('valorPagar').value);
+                    localStorage.removeItem('idPagoProveedor');
+                    localStorage.setItem('idPagoProveedor', info._id);
                     localStorage.removeItem('credito');
                     this._router.navigate([`/personas/saldoDisponible/${this.proveedor.identificacion}`]);
                 }
