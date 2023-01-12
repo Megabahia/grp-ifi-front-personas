@@ -55,10 +55,21 @@ export class SolicitudCreditosComponent implements OnInit {
         private _router: Router
     ) {
         this._unsubscribeAll = new Subject();
-        // Subscribe to config changes
-        this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-            this.coreConfig = config;
-        });
+        this._coreConfigService.config = {
+            layout: {
+                navbar: {
+                    hidden: true,
+                },
+                footer: {
+                    hidden: true,
+                },
+                menu: {
+                    hidden: true,
+                },
+                customizer: false,
+                enableLocalStorage: false,
+            },
+        };
     }
 
     ngOnInit(): void {

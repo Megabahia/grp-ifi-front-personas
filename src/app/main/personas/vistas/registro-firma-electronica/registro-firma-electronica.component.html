@@ -10,10 +10,10 @@
 
                     <div class=" mb-2 text-center">
                         <h2>
-                            RESGISTRE LA FIRMA ELECTRÓNICA PARA PODER ACCEDER A SU LÍNEA DE CRÉDITO
+                            Confirme la firma electrónica para poder acceder a su línea de crédito
                         </h2>
                         <span>
-                            Recuerde que para poder firmar los documentos, debe tener a la mano la CLAVE de su firma electrónica, misma que es única e intransferible por su seguridad.
+                            Recuerde que para poder firmar los documentos debe tener a la mano su firma y la clave de su firma electrónica, misma que es única e intransferible por su seguridad.
                         </span>
                     </div>
                     <div class="content-body">
@@ -128,36 +128,57 @@
                                                 <div class="form-group">
                                                     <label>Cédula o Ruc del representante legal
                                                     </label>
-                                                    <input class="form-control" name="cedulaRepresentante"
-                                                           formControlName="cedulaRepresentante"
+                                                    <input class="form-control" name="identificacionRepresentante"
+                                                           formControlName="identificacionRepresentante"
                                                            type="text">
-                                                    <div *ngIf="submitted && firmaElectronica.cedulaRepresentante.errors"
+                                                    <div *ngIf="submitted && firmaElectronica.identificacionRepresentante.errors"
                                                          class="invalid-feedback"
                                                          style="display: block;">
-                                                        <div *ngIf="firmaElectronica.cedulaRepresentante.errors.required">
-                                                            Cédula o Ruc del representante de la empresa es requerido
+                                                        <div *ngIf="firmaElectronica.identificacionRepresentante.errors.required">
+                                                            Ingrese el número de cédula o RUC del representante legal
                                                         </div>
-                                                        <div *ngIf="firmaElectronica.cedulaRepresentante.errors.rucValido">
-                                                            Ruc del representante de la empresa es invalido
+                                                        <div *ngIf="firmaElectronica.identificacionRepresentante.errors.cedulaInvalid">
+                                                            Cédula del representante legal es invalido
+                                                        </div>
+                                                        <div *ngIf="firmaElectronica.identificacionRepresentante.errors.rucInvalid">
+                                                            RUC del representante legal es invalido
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>CARGAR FIRMA ELECTRÓNICA:
+                                                    <label>Tipo de Identificación
                                                     </label>
-                                                    <input type="file" formControlName="archivo"
-                                                           class="form-control">
+                                                    <select class="form-control select2" formControlName="tipoIdentificacionRepresentante" (change)="obtenerTipoIdentificacion()">
+                                                        <option value="">- Seleccione -</option>
+                                                        <option value="cedula">Cédula</option>
+                                                        <option value="ruc">Ruc</option>
+<!--                                                        <option *ngFor="let paisOp of paisOpciones" value="{{paisOp.nombre}}">{{paisOp.nombre}}</option>-->
+                                                    </select>
+                                                    <div *ngIf="submitted && firmaElectronica.tipoIdentificacionRepresentante.errors"
+                                                         class="invalid-feedback"
+                                                         style="display: block;">
+                                                        <div *ngIf="firmaElectronica.tipoIdentificacionRepresentante.errors.required">
+                                                            Tipo identificacion de representante de la empresa es requerido
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div *ngIf="submitted && firmaElectronica.archivo.errors"
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="customCheck1" formControlName="aceptarTerminos"/>
+                                                        <label class="custom-control-label" for="customCheck1">
+                                                            Acepto que mi firma es única e intransferible y autorizo a la Entidad Financiera y Entidades competentes a hacer uso de ella de la forma debida
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="submitted && firmaElectronica.aceptarTerminos.errors"
                                                      class="invalid-feedback"
                                                      style="display: block;">
-                                                    <div *ngIf="firmaElectronica.archivo.errors.required">
-                                                        Firma electronica del representante de la empresa es requerido
-                                                    </div>
-                                                    <div *ngIf="firmaElectronica.archivo.errors.extensionInvalida">
-                                                        La extension de la Firma electronica es incorrecta
+                                                    <div *ngIf="firmaElectronica.aceptarTerminos.errors.required">
+                                                        Es requerido que acepte terminos.
                                                     </div>
                                                 </div>
                                             </div>

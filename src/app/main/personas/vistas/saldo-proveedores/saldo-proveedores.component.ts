@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../../../../auth/service';
 import {takeUntil} from 'rxjs/operators';
@@ -9,6 +9,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PagoProvedorsService} from '../pago-provedors/pago-provedors.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import {ValidacionesPropias} from '../../../../../utils/customer.validators';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -18,6 +20,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
     styleUrls: ['./saldo-proveedores.component.scss']
 })
 export class SaldoProveedoresComponent implements OnInit {
+    @ViewChild('mensajeModal') mensajeModal;
+
     public coreConfig: any;
     private _unsubscribeAll: Subject<any>;
     public proveedor = null;
@@ -30,6 +34,7 @@ export class SaldoProveedoresComponent implements OnInit {
     public firmaElectronica = new FormData();
 
     public pdf;
+    public mensaje = 'Cargue una firma electrónica válida';
 
     constructor(
         private _coreConfigService: CoreConfigService,
@@ -39,6 +44,7 @@ export class SaldoProveedoresComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private _formBuilder: FormBuilder,
         private _pagoProvedorsService: PagoProvedorsService,
+        private modalService: NgbModal,
     ) {
         this.activatedRoute.params.subscribe(paramsId => {
             this.getOneProveedor(paramsId.proveedor);
@@ -47,6 +53,10 @@ export class SaldoProveedoresComponent implements OnInit {
 
     get documentoFirmar() {
         return this.documentoFirmaForm.controls;
+    }
+
+    abrirModal(modal) {
+        this.modalService.open(modal);
     }
 
     ngOnInit(): void {
@@ -64,7 +74,7 @@ export class SaldoProveedoresComponent implements OnInit {
             numeroCuenta: ['', []],
             valorPagar: ['', []],
             claveFirma: ['', [Validators.required]],
-            certificado: ['', [Validators.required]],
+            certificado: ['', [Validators.required, ValidacionesPropias.firmaElectronicaValido]],
         });
     }
 
@@ -108,6 +118,9 @@ export class SaldoProveedoresComponent implements OnInit {
                     console.log('guardado', info);
                     this.continuar = false;
                     this.continuarPago = true;
+                },
+                error => {
+                    this.abrirModal(this.mensajeModal);
                 }
             );
     }

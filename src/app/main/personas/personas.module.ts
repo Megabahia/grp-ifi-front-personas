@@ -61,6 +61,7 @@ import { PerfilCompletarComponent } from './vistas/perfil-completar/perfil-compl
 import { RequisitiosCreditoComponent } from './vistas/requisitios-credito/requisitios-credito.component';
 import { FinalizarSolicitudComponent } from './vistas/finalizar-solicitud/finalizar-solicitud.component';
 import {IConfig, NgxMaskModule} from 'ngx-mask';
+import { EstadoSolicitudComponent } from './vistas/estado-solicitud/estado-solicitud.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -312,6 +313,14 @@ const routes = [
 
         // data: { animation: 'auth' }
     },
+    {
+        path: 'estado-solicitud-credito',
+        component: EstadoSolicitudComponent,
+        // data: {activacion: [4]},
+        canActivate: [AuthGuard],
+
+        // data: { animation: 'auth' }
+    },
 ];
 
 @NgModule({
@@ -352,6 +361,7 @@ const routes = [
         PerfilCompletarComponent,
         RequisitiosCreditoComponent,
         FinalizarSolicitudComponent,
+        EstadoSolicitudComponent,
     ],
     imports: [
         CoreCommonModule,

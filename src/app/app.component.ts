@@ -19,6 +19,7 @@ import { locale as menuFrench } from 'app/menu/i18n/fr';
 import { locale as menuGerman } from 'app/menu/i18n/de';
 import { locale as menuPortuguese } from 'app/menu/i18n/pt';
 import {CreditosPreAprobadosService} from './main/personas/vistas/creditos-pre-aprobados/creditos-pre-aprobados.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -60,18 +61,19 @@ export class AppComponent implements OnInit, OnDestroy {
     private _coreTranslationService: CoreTranslationService,
     private _translateService: TranslateService,
     private _creditosPreAprobadosService: CreditosPreAprobadosService,
+    private _router: Router,
   ) {
     // Get the application main menu
-    this.menu = menu;
     if (this._coreMenuService.grpPersonasUser) {
         this._creditosPreAprobadosService.obtenerListaCreditos({
             page: 0,
             page_size: 10,
-            tipoCredito: 'Aprobado',
+            estado: 'Aprobado',
             user_id: this._coreMenuService.grpPersonasUser.id
         }).subscribe((info) => {
+            localStorage.setItem('motivoSolicitudCredito', info.info[0].observacion);
             console.log('creditos', info);
-            this.menu.map(item => {
+            menu.map(item => {
                 if (item.id === 'firmaElectronica' || item.id === 'registroProveedores' || item.id === 'pagoProveedores' || item.id === 'saldoDisponible') {
                     item.hidden = false;
                 }
@@ -79,6 +81,7 @@ export class AppComponent implements OnInit, OnDestroy {
             });
         });
     }
+    this.menu = menu;
 
 
 

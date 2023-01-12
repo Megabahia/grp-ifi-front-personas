@@ -1,0 +1,33 @@
+<div *ngIf="negado" class="card-body">
+    <div class=" my-1 text-center">
+        <div class="misc-inner">
+            <div class="text-center">
+                <a href="javascript:void(0);">
+                    <img src="assets/images/logo/red-credito.png" alt="brand-logo" width="300"/>
+                </a>
+            </div>
+        </div>
+        <span>
+        Su crédito fue negado por los siguientes motivos: {{motivo}}
+        </span>
+        <p>Actualice la información de su solicitud de crédito y vuelva a intentar</p>
+        <button class="btn btn-primary" [routerLink]="'/personas/solucitudCredito'">Actualizar la solicitud</button>
+    </div>
+</div>
+
+
+<div *ngIf="aprobado" class="card-body">
+    <div class=" my-1 text-center">
+        <div class="misc-inner">
+            <div class="text-center">
+                <a href="javascript:void(0);">
+                    <img src="assets/images/logo/red-credito.png" alt="brand-logo" width="300"/>
+                </a>
+            </div>
+        </div>
+        <h1>Felicidades!!</h1>
+        <span>
+        Su línea de crédito ha sido aprobado
+        </span>
+    </div>
+</div>

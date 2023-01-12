@@ -88,6 +88,18 @@ export class ValidacionesPropias {
         }
     }
 
+    static cedulaValido(control: AbstractControl) {
+        const valido = validateDocument.getValidateDocument('cedula', control.value);
+        let errors = control['errors'] || {};
+        if (valido.status === 'SUCCESS') {
+            delete errors?.['cedulaInvalid'];
+            return null;
+        } else {
+            control.setErrors({...errors, cedulaInvalid: true});
+            return {cedulaInvalid: true};
+        }
+    }
+
     static firmaElectronicaValido(control: AbstractControl) {
         const archivo = control.value.split('.');
         let errors = control['errors'] || {};

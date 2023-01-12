@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RegistroProveedorService} from '../registro-proveedor.service';
 import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
+import {ValidacionesPropias} from '../../../../../../utils/customer.validators';
 
 @Component({
   selector: 'app-create',
@@ -17,6 +18,7 @@ export class CreateComponent implements OnInit {
   public cuentaForm: FormGroup;
   public submitted = false;
   public bancos = [];
+  public tipoCuentas = [];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -29,9 +31,9 @@ export class CreateComponent implements OnInit {
     this.proveedorForm = this._formBuilder.group({
       _id: [''],
       tipoPersona: ['', [Validators.required]],
-      identificacion: ['', [Validators.required]],
-      nombreRepresentante: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
-      nombreComercial: ['', [Validators.required]],
+      identificacion: ['', [Validators.required, ValidacionesPropias.rucValido]],
+      nombreRepresentante: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+')]],
+      nombreComercial: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]],
       cuentas: this._formBuilder.array([], Validators.required)
     });
     this.proveedorPadre?.cuentas.forEach(item => this.agregarCuenta());
@@ -50,6 +52,9 @@ export class CreateComponent implements OnInit {
   obtenerBancos() {
     this.paramService.obtenerListaPadres('BANCOS').subscribe((info) => {
       this.bancos = info;
+    });
+    this.paramService.obtenerListaPadres('TIPO_CUENTA').subscribe((info) => {
+      this.tipoCuentas = info;
     });
   }
 
@@ -70,6 +75,7 @@ export class CreateComponent implements OnInit {
   guardar() {
     this.submitted = true;
     if (this.proveedorForm.invalid) {
+        console.log('form', this.proveedorForm);
       return;
     }
     if (this.proveedorForm.get('_id').value === '') {

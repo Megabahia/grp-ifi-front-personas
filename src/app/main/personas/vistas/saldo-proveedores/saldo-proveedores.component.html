@@ -146,6 +146,9 @@
                                             <div *ngIf="documentoFirmar.certificado.errors.required">Firma electronica
                                                 requerido
                                             </div>
+                                            <div *ngIf="documentoFirmar.certificado.errors.extensionInvalida">
+                                                La extension de la firma electronica es incorrecta, suba un archivo (.p12)
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -171,8 +174,11 @@
                             </div>
                         </div>
                         <h2>
-                            Su Firma electrónica ha sido cargada con éxito y está respaldada en la bóveda.
-                            A continuación mostraremos un resumen del Pago a Proveedores realizado
+                            Su Firma ha sido cargada correctamente. Recuerde que el sistema no guardará ninguno de los datos registrados por su seguridad.
+                        </h2>
+                        <br>
+                        <h2>
+                            A continuación mostraremos un resumen del Pago a Proveedores realizado.
                         </h2>
                     </div>
                     <div class="content-body">
@@ -278,3 +284,19 @@
         <!-- / Error page-->
     </div>
 </div>
+
+
+<ng-template #mensajeModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Mensaje</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <div [innerHTML]="mensaje"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">Cerrar</button>
+    </div>
+</ng-template>

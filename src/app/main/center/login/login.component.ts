@@ -14,6 +14,7 @@ import {
 import {RegistroService} from '../registro/registro.service';
 import {Role} from 'app/auth/models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {CreditosPreAprobadosService} from '../../personas/vistas/creditos-pre-aprobados/creditos-pre-aprobados.service';
 
 @Component({
     selector: 'app-login',
@@ -64,6 +65,7 @@ export class LoginComponent implements OnInit {
         private _authenticationService: AuthenticationService,
         private socialAuthService: SocialAuthService,
         private _registroService: RegistroService,
+        private _creditosPreAprobadosService: CreditosPreAprobadosService,
         private _modalService: NgbModal
     ) {
         this.siteKey = '6Lewc_MgAAAAADbbRC1OjtcpEreTMKro2GqRsl_L';
@@ -124,7 +126,21 @@ export class LoginComponent implements OnInit {
                         this.loading = false;
                     }
                     // this._router.navigate([this.returnUrl]);
-                    this._router.navigate(['/']);
+                    const semilla = JSON.parse(localStorage.getItem('semillaPago'));
+                    const simulador = localStorage.getItem('simulador');
+                    this._creditosPreAprobadosService.obtenerListaCreditos({
+                        page: 0,
+                        page_size: 10,
+                        estado: 'Aprobado',
+                        user_id: data.id
+                    }).subscribe((info) => {
+                        console.log('creditos', info);
+                        if (info.cont === 0) {
+                                this._router.navigate(['/personas/solucitudCredito']);
+                        } else {
+                            this._router.navigate(['/']);
+                        }
+                    });
                 },
                 (error) => {
                     this.error = 'Fallo en la autenticación, vuelva a intentarlo';

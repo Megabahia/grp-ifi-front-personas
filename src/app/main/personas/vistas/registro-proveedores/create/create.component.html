@@ -74,6 +74,9 @@
                                                         la
                                                         empresa es requerido
                                                     </div>
+                                                    <div *ngIf="proveedor.nombreRepresentante.errors.pattern">
+                                                        Ingreso solo letras
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -90,6 +93,9 @@
                                                     <div *ngIf="proveedor.nombreComercial.errors.required">Tipo de
                                                         empresa es
                                                         requerido
+                                                    </div>
+                                                    <div *ngIf="proveedor.nombreComercial.errors.pattern">
+                                                        Ingreso solo letras
                                                     </div>
                                                 </div>
                                             </div>
@@ -123,8 +129,7 @@
                                                             <select class="form-control" name="tipoCuenta"
                                                                     formControlName="tipoCuenta">
                                                                 <option value="">- Seleccione -</option>
-                                                                <option value="Natural">Natural</option>
-                                                                <option value="Juridico">Jurídico</option>
+                                                                <option *ngFor="let tipoCuenta of tipoCuentas" value="{{tipoCuenta.nombre}}">{{tipoCuenta.nombre}}</option>
                                                             </select>
                                                             <div *ngIf="submitted && cuenta.controls?.tipoCuenta.errors?.required"
                                                                  class="invalid-feedback" style="display: block;">

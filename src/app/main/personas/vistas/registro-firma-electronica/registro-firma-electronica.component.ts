@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ValidacionesPropias} from '../../../../../utils/customer.validators';
 import {FirmaElectronicaService} from './firma-electronica.service';
 
@@ -24,19 +24,36 @@ export class RegistroFirmaElectronicaComponent implements OnInit {
     ngOnInit(): void {
         this.firmaForm = this._formBuilder.group(
             {
-                archivo: ['', [Validators.required, ValidacionesPropias.firmaElectronicaValido]],
+                aceptarTerminos: ['', [Validators.required, Validators.requiredTrue]],
                 nombreRepresentante: ['', [Validators.required]],
                 apellidoRepresentante: ['', [Validators.required]],
                 correoRepresentante: ['', [Validators.required, Validators.email]],
                 telefonoRepresentante: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
                 whatsappRepresentante: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
-                cedulaRepresentante: ['', [Validators.required, ValidacionesPropias.rucValido]],
+                tipoIdentificacionRepresentante: ['', [Validators.required]],
+                identificacionRepresentante: ['', [Validators.required]],
             });
 
     }
 
     get firmaElectronica() {
         return this.firmaForm.controls;
+    }
+
+    obtenerTipoIdentificacion() {
+        if (this.firmaForm.get('tipoIdentificacionRepresentante').value === 'cedula') {
+            (this.firmaForm as FormGroup)
+                .setControl('identificacionRepresentante',
+                    new FormControl(this.firmaForm.value.identificacionRepresentante,
+                        [Validators.required, ValidacionesPropias.cedulaValido])
+                );
+        } else {
+            (this.firmaForm as FormGroup)
+                .setControl('identificacionRepresentante',
+                    new FormControl(this.firmaForm.value.identificacionRepresentante,
+                        [Validators.required, ValidacionesPropias.rucValido])
+                );
+        }
     }
 
     guardar() {

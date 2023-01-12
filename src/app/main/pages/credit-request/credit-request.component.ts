@@ -49,6 +49,7 @@ export class CreditRequestComponent implements OnInit, OnDestroy {
     // }
     // localStorage.setItem('pagina', ref);
     localStorage.setItem('pagina', 'https://credicompra.com/');
+    localStorage.setItem('simulador', 'ok');
   }
 
   ngOnInit(): void {
