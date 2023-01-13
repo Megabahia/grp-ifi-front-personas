@@ -132,7 +132,11 @@ export class CreditRequirementsComponent implements OnInit, OnDestroy {
     }
 
     simulador() {
+        console.log('entro');
         localStorage.setItem('simulador', 'ok');
+        this._router.navigate([
+            `/personas/solucitudCredito`,
+        ]);
     }
 
     cancelar() {

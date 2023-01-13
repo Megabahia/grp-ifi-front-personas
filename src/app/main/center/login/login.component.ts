@@ -128,19 +128,26 @@ export class LoginComponent implements OnInit {
                     // this._router.navigate([this.returnUrl]);
                     const semilla = JSON.parse(localStorage.getItem('semillaPago'));
                     const simulador = localStorage.getItem('simulador');
-                    this._creditosPreAprobadosService.obtenerListaCreditos({
-                        page: 0,
-                        page_size: 10,
-                        estado: 'Aprobado',
-                        user_id: data.id
-                    }).subscribe((info) => {
-                        console.log('creditos', info);
-                        if (info.cont === 0) {
+                    // Verificar dominio pagina
+                    const ref = document.referrer;
+                    const host = document.location.host;
+                    if (simulador !== 'ok') {
+                        this._router.navigate(['/pages/solicitud-credito']);
+                    } else {
+                        this._creditosPreAprobadosService.obtenerListaCreditos({
+                            page: 0,
+                            page_size: 10,
+                            estado: 'Aprobado',
+                            user_id: data.id
+                        }).subscribe((info) => {
+                            console.log('creditos', info);
+                            if (info.cont === 0) {
                                 this._router.navigate(['/personas/solucitudCredito']);
-                        } else {
-                            this._router.navigate(['/']);
-                        }
-                    });
+                            } else {
+                                this._router.navigate(['/pages/solicitud-credito']);
+                            }
+                        });
+                    }
                 },
                 (error) => {
                     this.error = 'Fallo en la autenticación, vuelva a intentarlo';
