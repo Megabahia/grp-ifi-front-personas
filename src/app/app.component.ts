@@ -20,6 +20,7 @@ import { locale as menuGerman } from 'app/menu/i18n/de';
 import { locale as menuPortuguese } from 'app/menu/i18n/pt';
 import {CreditosPreAprobadosService} from './main/personas/vistas/creditos-pre-aprobados/creditos-pre-aprobados.service';
 import {Router} from '@angular/router';
+import {Debugger} from 'inspector';
 
 @Component({
   selector: 'app-root',
@@ -64,23 +65,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private _router: Router,
   ) {
     // Get the application main menu
-    if (this._coreMenuService.grpPersonasUser) {
-        this._creditosPreAprobadosService.obtenerListaCreditos({
-            page: 0,
-            page_size: 10,
-            estado: 'Aprobado',
-            user_id: this._coreMenuService.grpPersonasUser.id
-        }).subscribe((info) => {
-            localStorage.setItem('motivoSolicitudCredito', info.info[0].observacion);
-            console.log('creditos', info);
-            menu.map(item => {
-                if (item.id === 'firmaElectronica' || item.id === 'registroProveedores' || item.id === 'pagoProveedores' || item.id === 'saldoDisponible') {
-                    item.hidden = false;
-                }
-                return item;
-            });
-        });
-    }
     this.menu = menu;
 
 

@@ -16,6 +16,7 @@ import {Role} from 'app/auth/models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CreditosPreAprobadosService} from '../../personas/vistas/creditos-pre-aprobados/creditos-pre-aprobados.service';
 import {CoreMenuService} from '../../../../@core/components/core-menu/core-menu.service';
+import {menu} from '../../../menu/menu';
 
 @Component({
     selector: 'app-login',
@@ -130,16 +131,13 @@ export class LoginComponent implements OnInit {
                     // this._router.navigate([this.returnUrl]);
                     const semilla = JSON.parse(localStorage.getItem('semillaPago'));
                     const simulador = localStorage.getItem('simulador');
-                    // Verificar dominio pagina
-                    const ref = document.referrer;
-                    const host = document.location.host;
                     if (simulador !== 'ok') {
                         const usuario = this._coreMenuService.grpPersonasUser;
                         console.log(usuario.empresa);
                         if (Object.keys(usuario.empresa).length === 0) {
-                            this._router.navigate(['/']);
-                        } else {
                             this._router.navigate(['/pages/solicitud-credito']);
+                        } else {
+                            this._router.navigate(['/']);
                         }
                         console.log(usuario);
                     } else {
