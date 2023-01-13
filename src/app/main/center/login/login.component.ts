@@ -15,6 +15,7 @@ import {RegistroService} from '../registro/registro.service';
 import {Role} from 'app/auth/models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CreditosPreAprobadosService} from '../../personas/vistas/creditos-pre-aprobados/creditos-pre-aprobados.service';
+import {CoreMenuService} from '../../../../@core/components/core-menu/core-menu.service';
 
 @Component({
     selector: 'app-login',
@@ -66,6 +67,7 @@ export class LoginComponent implements OnInit {
         private socialAuthService: SocialAuthService,
         private _registroService: RegistroService,
         private _creditosPreAprobadosService: CreditosPreAprobadosService,
+        private _coreMenuService: CoreMenuService,
         private _modalService: NgbModal
     ) {
         this.siteKey = '6Lewc_MgAAAAADbbRC1OjtcpEreTMKro2GqRsl_L';
@@ -132,7 +134,14 @@ export class LoginComponent implements OnInit {
                     const ref = document.referrer;
                     const host = document.location.host;
                     if (simulador !== 'ok') {
-                        this._router.navigate(['/pages/solicitud-credito']);
+                        const usuario = this._coreMenuService.grpPersonasUser;
+                        console.log(usuario.empresa);
+                        if (usuario.empresa !== '{}') {
+                            this._router.navigate(['/']);
+                        } else {
+                            this._router.navigate(['/pages/solicitud-credito']);
+                        }
+                        console.log(usuario);
                     } else {
                         this._creditosPreAprobadosService.obtenerListaCreditos({
                             page: 0,
