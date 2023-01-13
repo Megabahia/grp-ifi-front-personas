@@ -136,7 +136,7 @@ export class LoginComponent implements OnInit {
                     if (simulador !== 'ok') {
                         const usuario = this._coreMenuService.grpPersonasUser;
                         console.log(usuario.empresa);
-                        if (usuario.empresa !== '{}') {
+                        if (Object.keys(usuario.empresa).length === 0) {
                             this._router.navigate(['/']);
                         } else {
                             this._router.navigate(['/pages/solicitud-credito']);
