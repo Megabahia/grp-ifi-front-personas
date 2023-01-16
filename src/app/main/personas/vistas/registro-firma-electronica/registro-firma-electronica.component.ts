@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ValidacionesPropias} from '../../../../../utils/customer.validators';
 import {FirmaElectronicaService} from './firma-electronica.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-registro-firma-electronica',
@@ -9,15 +10,17 @@ import {FirmaElectronicaService} from './firma-electronica.service';
     styleUrls: ['./registro-firma-electronica.component.scss']
 })
 export class RegistroFirmaElectronicaComponent implements OnInit {
-
+    @ViewChild('mensajeModal') mensajeModal;
 
     public firmaForm: FormGroup;
     public firmaFormData: FormData;
     public submitted = false;
+    public mensaje = 'Su información ha sido almacenada con éxito.';
 
     constructor(
         private _formBuilder: FormBuilder,
         private _firmaElectronica: FirmaElectronicaService,
+        private modalService: NgbModal,
     ) {
     }
 
@@ -64,7 +67,12 @@ export class RegistroFirmaElectronicaComponent implements OnInit {
         }
         this._firmaElectronica.crear(this.firmaForm.value).subscribe((info) => {
             console.log(info);
+            this.abrirModal(this.mensajeModal);
         });
         console.log('paso');
+    }
+
+    abrirModal(modal) {
+        this.modalService.open(modal);
     }
 }

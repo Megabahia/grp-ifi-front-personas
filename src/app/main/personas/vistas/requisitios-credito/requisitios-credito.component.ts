@@ -6,6 +6,8 @@ import {User} from '../../../../auth/models';
 import {CoreMenuService} from '../../../../../@core/components/core-menu/core-menu.service';
 import {CreditosAutonomosService} from '../creditos-autonomos/creditos-autonomos.service';
 import Decimal from 'decimal.js';
+import {Subject} from 'rxjs';
+import {CoreConfigService} from '../../../../../@core/services/config.service';
 
 @Component({
     selector: 'app-requisitios-credito',
@@ -14,6 +16,7 @@ import Decimal from 'decimal.js';
 })
 export class RequisitiosCreditoComponent implements OnInit {
 
+    private _unsubscribeAll: Subject<any>;
     tiutlo;
     requisitos = [];
     montoBASEDATOS;
@@ -24,12 +27,29 @@ export class RequisitiosCreditoComponent implements OnInit {
 
 
     constructor(
+        private _coreConfigService: CoreConfigService,
         private _registroDatosService: RegistroDatosPagoProvedoresService,
         private _router: Router,
         private _coreMenuService: CoreMenuService,
         private _creditosAutonomosService: CreditosAutonomosService,
         private rutaActiva: ActivatedRoute,
     ) {
+        this._unsubscribeAll = new Subject();
+        this._coreConfigService.config = {
+            layout: {
+                navbar: {
+                    hidden: true,
+                },
+                footer: {
+                    hidden: true,
+                },
+                menu: {
+                    hidden: true,
+                },
+                customizer: false,
+                enableLocalStorage: false,
+            },
+        };
         this.solicitarCredito = this.inicialidarSolicitudCredito();
     }
 

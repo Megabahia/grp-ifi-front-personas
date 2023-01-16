@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {first, takeUntil} from 'rxjs/operators';
 import {CoreConfigService} from '../../../../@core/services/config.service';
@@ -23,7 +23,7 @@ import {menu} from '../../../menu/menu';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
     //  Public
     @ViewChild('captchaElem') captchaElem;
 
@@ -138,6 +138,19 @@ export class LoginComponent implements OnInit {
                             this._router.navigate(['/pages/solicitud-credito']);
                         } else {
                             this._router.navigate(['/']);
+                            this._creditosPreAprobadosService.obtenerListaCreditos({
+                                page: 0,
+                                page_size: 10,
+                                estado: 'Aprobado',
+                                user_id: data.id
+                            }).subscribe((info) => {
+                                console.log('creditos', info);
+                                if (info.cont === 0) {
+                                    this._router.navigate(['/personas/solucitudCredito']);
+                                } else {
+                                    this._router.navigate(['/personas/estado-solicitud-credito']);
+                                }
+                            });
                         }
                         console.log(usuario);
                     } else {

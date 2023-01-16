@@ -642,7 +642,7 @@
                                                     </label>
                                                     <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="otrosIngresos"
                                                            class="form-control"
-                                                           value="">
+                                                           (change)="comprobarOtrosIngresos($event)">
                                                 </div>
                                                 <div *ngIf="submitted && controlsFrom.otrosIngresos.errors"
                                                      class="invalid-feedback"

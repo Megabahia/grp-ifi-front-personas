@@ -22,6 +22,22 @@ export class FinalizarSolicitudComponent implements OnInit {
       private _coreMenuService: CoreMenuService,
   ) {
       this.usuario = this._coreMenuService.grpPersonasUser;
+      this._unsubscribeAll = new Subject();
+      this._coreConfigService.config = {
+          layout: {
+              navbar: {
+                  hidden: true,
+              },
+              footer: {
+                  hidden: true,
+              },
+              menu: {
+                  hidden: true,
+              },
+              customizer: false,
+              enableLocalStorage: false,
+          },
+      };
   }
 
   ngOnInit(): void {

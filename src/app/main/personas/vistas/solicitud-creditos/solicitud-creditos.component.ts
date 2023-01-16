@@ -151,10 +151,10 @@ export class SolicitudCreditosComponent implements OnInit {
                 ], [ValidacionesPropias.parientesTelefonos, ValidacionesPropias.padres]),
                 inresosMensualesVentas: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 sueldoConyuge: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
-                otrosIngresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                otrosIngresos: ['', [Validators.pattern('^[0-9]*$')]], //
                 gastosMensuales: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 gastosFamilaires: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
-                especificaIngresos: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                especificaIngresos: ['',], //
                 otrosGastos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 especificaGastos: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
                 totalIngresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
@@ -192,7 +192,7 @@ export class SolicitudCreditosComponent implements OnInit {
         if (this.formSolicitud.get('esatdo_civil').value === 'Casado' || this.formSolicitud.get('esatdo_civil').value === 'Unión libre') {
             // (this.formSolicitud.get('conyuge') as FormGroup)
             //     .addControl('nombreConyuge', new FormControl('', Validators.required));
-                // .setControl('nombreConyuge', new FormControl('', Validators.required));
+            // .setControl('nombreConyuge', new FormControl('', Validators.required));
             (this.formSolicitud as FormGroup).setControl('conyuge', this._formBuilder.group({
                 nombreConyuge: ['', [Validators.required]],
                 telefonoConyuge: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]], //
@@ -204,9 +204,9 @@ export class SolicitudCreditosComponent implements OnInit {
                 new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]));
         } else {
             (this.formSolicitud as FormGroup).setControl('conyuge', this._formBuilder.group({
-                nombreConyuge: ['', ],
-                telefonoConyuge: ['', ],
-                cedulaConyuge: ['', ]
+                nombreConyuge: ['',],
+                telefonoConyuge: ['',],
+                cedulaConyuge: ['',]
             }));
             this.formSolicitud.controls['sueldoConyuge'].setValue(0);
         }
@@ -261,13 +261,13 @@ export class SolicitudCreditosComponent implements OnInit {
     }
 
     get controlsContuge() {
-        return this.formSolicitud.get('conyuge')['controls'] ;
+        return this.formSolicitud.get('conyuge')['controls'];
     }
 
     calcularCredito() {
         const ingresosTotal = new Decimal(this.formSolicitud.get('totalIngresos').value).toNumber()
             || 0;
-        const gastosTotal =  new Decimal(this.formSolicitud.get('totalEgresos').value).toNumber() || 0;
+        const gastosTotal = new Decimal(this.formSolicitud.get('totalEgresos').value).toNumber() || 0;
         // Formula para el calculo interes
         const ingresosConyuge = new Decimal((new Decimal(this.formSolicitud.get('sueldoConyuge').value).toNumber() || 0) / 2);
         const ingresosMensuales = new Decimal(ingresosTotal).sub(ingresosConyuge);
@@ -291,7 +291,7 @@ export class SolicitudCreditosComponent implements OnInit {
         //     this.abrirModalLg(this.modalAviso);
         //     return false;
         // }
-        const resto = new Decimal(montoCredito.toString().substr(2, 4));
+        const resto = new Decimal(montoCredito.toString().substr(2, 4) || 0);
         const montoCreditoRedondeado = new Decimal(montoCredito).sub(resto).toNumber();
         let montoCreditoFinal = 0;
         // if (montoCreditoRedondeado < this.montoMinimo) {
@@ -299,7 +299,7 @@ export class SolicitudCreditosComponent implements OnInit {
         //     this.abrirModalLg(this.modalAviso);
         //     return false;
         // } else
-            if (montoCreditoRedondeado >= this.montoMaximo) {
+        if (montoCreditoRedondeado >= this.montoMaximo) {
             montoCreditoFinal = this.montoMaximo;
             cuotaMensual = new Decimal(this.montoMaximo / 12).toDecimalPlaces(2).toNumber();
         } else {
@@ -376,6 +376,28 @@ export class SolicitudCreditosComponent implements OnInit {
             direccionFamiliar: [''],
         });
         this.familiares.push(cuentaForm);
+    }
+
+    comprobarOtrosIngresos(event) {
+        if (event.target.value > 0) {
+            console.log('validar');
+            (this.formSolicitud as FormGroup).setControl('especificaIngresos',
+                new FormControl(event.target.value, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]));
+        } else {
+            (this.formSolicitud as FormGroup).setControl('especificaIngresos',
+                new FormControl(this.formSolicitud.value?.especificaIngresos));
+        }
+    }
+
+    comprobarOtrosGastos(event) {
+        if (event.target.value > 0) {
+            console.log('validar');
+            (this.formSolicitud as FormGroup).setControl('especificaGastos',
+                new FormControl(event.target.value, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]));
+        } else {
+            (this.formSolicitud as FormGroup).setControl('especificaGastos',
+                new FormControl(this.formSolicitud.value?.especificaGastos));
+        }
     }
 
 }

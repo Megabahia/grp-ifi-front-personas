@@ -54,8 +54,11 @@
                                                 <div *ngIf="submitted && proveedor.identificacion.errors"
                                                      class="invalid-feedback"
                                                      style="display: block;">
-                                                    <div *ngIf="proveedor.identificacion.errors.required">Nombre de la
-                                                        empresa es requerido
+                                                    <div *ngIf="proveedor.identificacion.errors.required">
+                                                        Ruc es requerido
+                                                    </div>
+                                                    <div *ngIf="!proveedor.identificacion.errors.rucValido">
+                                                        Ruc invalido
                                                     </div>
                                                 </div>
                                             </div>
