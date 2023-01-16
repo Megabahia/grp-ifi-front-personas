@@ -155,7 +155,7 @@ export class SolicitudCreditosComponent implements OnInit {
                 gastosMensuales: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 gastosFamilaires: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 especificaIngresos: [''], //
-                otrosGastos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
+                otrosGastos: ['', [Validators.pattern('^[0-9]*$')]], //
                 especificaGastos: [''], //
                 totalIngresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 totalEgresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
