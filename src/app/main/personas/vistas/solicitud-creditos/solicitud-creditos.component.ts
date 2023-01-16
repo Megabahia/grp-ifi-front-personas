@@ -382,7 +382,7 @@ export class SolicitudCreditosComponent implements OnInit {
         if (event.target.value > 0) {
             console.log('validar');
             (this.formSolicitud as FormGroup).setControl('especificaIngresos',
-                new FormControl(event.target.value, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]));
+                new FormControl(this.formSolicitud.value?.especificaIngresos, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]));
         } else {
             (this.formSolicitud as FormGroup).setControl('especificaIngresos',
                 new FormControl(this.formSolicitud.value?.especificaIngresos));

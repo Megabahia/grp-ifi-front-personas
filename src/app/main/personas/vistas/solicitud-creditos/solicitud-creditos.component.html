@@ -742,7 +742,7 @@
                                                     </label>
                                                     <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalEgresos()" type="text" formControlName="otrosGastos"
                                                            class="form-control"
-                                                           value="">
+                                                           (change)="comprobarOtrosGastos($event)">
                                                 </div>
                                                 <div *ngIf="submitted && controlsFrom.otrosGastos.errors"
                                                      class="invalid-feedback"
