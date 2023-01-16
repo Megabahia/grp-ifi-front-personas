@@ -154,9 +154,9 @@ export class SolicitudCreditosComponent implements OnInit {
                 otrosIngresos: ['', [Validators.pattern('^[0-9]*$')]], //
                 gastosMensuales: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 gastosFamilaires: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
-                especificaIngresos: ['',], //
+                especificaIngresos: [''], //
                 otrosGastos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
-                especificaGastos: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]], //
+                especificaGastos: [''], //
                 totalIngresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 totalEgresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
             });
@@ -393,7 +393,7 @@ export class SolicitudCreditosComponent implements OnInit {
         if (event.target.value > 0) {
             console.log('validar');
             (this.formSolicitud as FormGroup).setControl('especificaGastos',
-                new FormControl(event.target.value, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]));
+                new FormControl(this.formSolicitud.value?.especificaGastos, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]));
         } else {
             (this.formSolicitud as FormGroup).setControl('especificaGastos',
                 new FormControl(this.formSolicitud.value?.especificaGastos));
