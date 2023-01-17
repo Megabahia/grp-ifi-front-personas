@@ -165,15 +165,23 @@ export class LoginComponent implements OnInit, OnDestroy {
                         this._creditosPreAprobadosService.obtenerListaCreditos({
                             page: 0,
                             page_size: 10,
-                            estado: 'Aprobado',
                             user_id: data.id
                         }).subscribe((info) => {
                             console.log('creditos', info);
-                            if (info.cont === 0) {
-                                this._router.navigate(['/personas/solucitudCredito']);
+                            if (info.info[0].estado === 'Aprobado') {
+                                localStorage.setItem('estadoCredito', 'aprobado');
+                            } else if (info.info[0].estado === 'Negado') {
+                                localStorage.setItem('estadoCredito', 'negado');
+                            } else if (info.info[0].estado === 'Por completar') {
+                                localStorage.setItem('estadoCredito', 'pendiente');
+                                localStorage.setItem('motivo', info.info[0].motivo);
+                            } else if (info.info[0].estado === 'Nuevo') {
+                                localStorage.setItem('estadoCredito', 'pendiente');
+                                localStorage.setItem('motivo', info.info[0].motivo);
                             } else {
-                                this._router.navigate(['/pages/solicitud-credito']);
+                                this._router.navigate(['/personas/solucitudCredito']);
                             }
+                            this._router.navigate(['/personas/estado-solicitud-credito']);
                         });
                     }
                 },
