@@ -133,33 +133,27 @@ export class LoginComponent implements OnInit, OnDestroy {
                     const simulador = localStorage.getItem('simulador');
                     if (simulador !== 'ok') {
                         const usuario = this._coreMenuService.grpPersonasUser;
-                        console.log(usuario.empresa);
-                        if (Object.keys(usuario.empresa).length === 0) {
-                            this._router.navigate(['/pages/solicitud-credito']);
-                        } else {
-                            // this._router.navigate(['/']);
-                            this._creditosPreAprobadosService.obtenerListaCreditos({
-                                page: 0,
-                                page_size: 10,
-                                user_id: data.id
-                            }).subscribe((info) => {
-                                console.log('creditos', info.info[0].estado);
-                                if (info.info[0].estado === 'Aprobado') {
-                                    localStorage.setItem('estadoCredito', 'aprobado');
-                                } else if (info.info[0].estado === 'Negado') {
-                                    localStorage.setItem('estadoCredito', 'negado');
-                                } else if (info.info[0].estado === 'Por completar') {
-                                    localStorage.setItem('estadoCredito', 'pendiente');
-                                    localStorage.setItem('motivo', info.info[0].motivo);
-                                } else if (info.info[0].estado === 'Nuevo') {
-                                    localStorage.setItem('estadoCredito', 'pendiente');
-                                    localStorage.setItem('motivo', info.info[0].motivo);
-                                } else {
-                                    this._router.navigate(['/personas/solucitudCredito']);
-                                }
-                                this._router.navigate(['/personas/estado-solicitud-credito']);
-                            });
-                        }
+                        this._creditosPreAprobadosService.obtenerListaCreditos({
+                            page: 0,
+                            page_size: 10,
+                            user_id: data.id
+                        }).subscribe((info) => {
+                            console.log('creditos', info.info[0].estado);
+                            if (info.info[0].estado === 'Aprobado') {
+                                localStorage.setItem('estadoCredito', 'aprobado');
+                            } else if (info.info[0].estado === 'Negado') {
+                                localStorage.setItem('estadoCredito', 'negado');
+                            } else if (info.info[0].estado === 'Por completar') {
+                                localStorage.setItem('estadoCredito', 'pendiente');
+                                localStorage.setItem('motivo', info.info[0].motivo);
+                            } else if (info.info[0].estado === 'Nuevo') {
+                                localStorage.setItem('estadoCredito', 'pendiente');
+                                localStorage.setItem('motivo', info.info[0].motivo);
+                            } else {
+                                this._router.navigate(['/personas/solucitudCredito']);
+                            }
+                            this._router.navigate(['/personas/estado-solicitud-credito']);
+                        });
                         console.log(usuario);
                     } else {
                         this._creditosPreAprobadosService.obtenerListaCreditos({
