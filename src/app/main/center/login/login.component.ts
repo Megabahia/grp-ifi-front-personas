@@ -148,7 +148,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                                     localStorage.setItem('estadoCredito', 'aprobado');
                                 } else if (info.info[0].estado === 'Negado') {
                                     localStorage.setItem('estadoCredito', 'negado');
-                                } else if (info.info[0].estado === 'Por completar') {
+                                } else if (info.info[0].estado === 'Por completar' || info.info[0].estado === 'Nuevo') {
                                     localStorage.setItem('estadoCredito', 'pendiente');
                                     localStorage.setItem('motivo', info.info[0].motivo);
                                 } else {
