@@ -14,6 +14,7 @@ export class EstadoSolicitudComponent implements OnInit {
 
     public negado = false;
     public aprobado = false;
+    public pentiente = false;
     public motivo = '';
     private _unsubscribeAll: Subject<any>;
     private coreConfig: any;
@@ -34,7 +35,7 @@ export class EstadoSolicitudComponent implements OnInit {
                     this.coreConfig = config;
                 });
             this.aprobado = true;
-        } else {
+        } else if (localStorage.getItem('estadoCredito') === 'negado') {
             this._coreConfigService.config = {
                 layout: {
                     navbar: {
@@ -51,6 +52,24 @@ export class EstadoSolicitudComponent implements OnInit {
                 },
             };
             this.negado = true;
+        } else {
+            this._coreConfigService.config = {
+                layout: {
+                    navbar: {
+                        hidden: true,
+                    },
+                    footer: {
+                        hidden: true,
+                    },
+                    menu: {
+                        hidden: true,
+                    },
+                    customizer: false,
+                    enableLocalStorage: false,
+                },
+            };
+            this.pentiente = true;
+            this.motivo = localStorage.getItem('motivo');
         }
     }
 
