@@ -23,32 +23,32 @@ const routes: Routes = [
     {
         path: 'pages-views',
         component: PagesViewsComponent,
-        data: {roles: 'SuperMonedas'},
+        data: {roles: 'SuperMonedas', activacion: [8]},
     },
     {
         path: 'mensajes-productos/:_id',
         component: MensajeProductosComponent,
-        data: {animation: 'misc'},
+        data: {animation: 'misc', activacion: [8]},
     },
     {
         path: 'mensajes-productos-free',
         component: MensajeProductosFreeComponent,
-        data: {animation: 'misc'},
+        data: {animation: 'misc', activacion: [8]},
     },
     {
         path: 'solicitud-credito',
         component: CreditRequestComponent,
-        data: {animation: 'misc'},
+        data: {animation: 'misc', activacion: [8]},
     },
     {
         path: 'simulador-de-credito',
         component: SimulatorCrediCompraComponent,
-        data: {animation: 'misc'},
+        data: {animation: 'misc', activacion: [8]},
     },
     {
         path: 'requisitos-de-credito',
         component: CreditRequirementsComponent,
-        data: {animation: 'misc'},
+        data: {animation: 'misc', activacion: [8]},
     },
 ];
 

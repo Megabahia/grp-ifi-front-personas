@@ -27,27 +27,27 @@ const routes = [
   {
     path: 'login',
     component: LoginComponent,
-    data: { animation: 'auth' }
+    data: { animation: 'auth', activacion: [8] }
   },
   {
     path: 'registro',
     component: RegistroComponent,
-    data: { animation: 'auth' }
+    data: { animation: 'auth', activacion: [8] }
   },
   {
     path: 'recuperarPass',
     component: RecuperarPassComponent,
-    data: { animation: 'auth' }
+    data: { animation: 'auth', activacion: [8] }
   },
   {
     path: 'reseteoPassword',
     component: ReseteoPasswordComponent,
-    data: { animation: 'auth' }
+    data: { animation: 'auth', activacion: [8] }
   },
   {
     path: 'perfil',
     component: PerfilUsuarioComponent,
-    data: { roles: [Role.SuperMonedas, Role.Autonomo, Role.Empleado] },
+    data: { roles: [Role.SuperMonedas, Role.Autonomo, Role.Empleado], activacion: [8] },
     canActivate: [AuthGuard]
   }
 ];

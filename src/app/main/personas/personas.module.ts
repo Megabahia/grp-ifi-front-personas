@@ -246,7 +246,7 @@ const routes = [
     {
         path: 'solucitudCredito',
         component: SolicitudCreditosComponent,
-        // data: {activacion: [1, 2, 3, 4, 5, 6, 7]},
+        data: {activacion: [1, 2, 3, 4, 5, 6, 7]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
