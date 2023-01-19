@@ -11,7 +11,7 @@ const routes = [
   {
     path: 'preaprobados',
     component: CreditosPreaprobadosComponent,
-    data: {roles: [Role.SuperMonedas]},
+    data: {roles: [Role.SuperMonedas], activacion: [8]},
     canActivate: [AuthGuard],
     // data: { animation: 'auth' }
   },

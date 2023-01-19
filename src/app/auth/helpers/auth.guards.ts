@@ -42,6 +42,16 @@ export class AuthGuard implements CanActivate {
                     activacion = true;
                 }
             }
+
+            console.log(route.data?.activacion[0], 'state');
+            console.log(grpPersonasUser.creditoAprobado);
+            // if (route.data?.activacion[0] === 8) {
+            if (grpPersonasUser.creditoAprobado === route.data?.activacion[0]) {
+                this._router.navigate(['/personas/estado-solicitud-credito']);
+                return true;
+            }
+
+
             switch (Number(grpPersonasUser.estado)) {
                 case 1: {
                     if (!activacion) {

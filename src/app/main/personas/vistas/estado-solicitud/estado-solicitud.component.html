@@ -11,7 +11,7 @@
         Su solicitud de crédito ha sido negada, contáctese con su asesor a través de WhatsApp
         </span>
         <br>
-        <a class="mt-3 btn btn-primary" href="https://walink.co/9ba631">Whatsapp</a>
+        <a class="mt-3 btn btn-primary" href="https://walink.co/9ba631" (click)="cerrarSesion()">Whatsapp</a>
     </div>
 </div>
 
@@ -41,13 +41,13 @@
                 </a>
             </div>
         </div>
-        <h1>Su crédito esta en proceso. </h1>
-
-        <span>
-        </span>
+        <h1>SU SOLICITUD ESTÁ SIENDO PROCESADA,
+            NOS COMUNICAREMOS LO ANTES POSIBLE A TRAVÉS DEL CORREO REGISTRADO {{usuario.email}}</h1>
         <br>
-        <button class="mt-2 btn btn-primary" [routerLink]="'/personas/solucitudCredito'">Actualizar la solicitud</button>
+        <h4>
+            Crédito Pagos es la mejor opción para el crecimiento de su negocio
+        </h4>
         <br>
-        <a class="mt-3 btn btn-primary" href="https://walink.co/9ba631">Whatsapp</a>
+        <a class="btn btn-primary" href="/">Salir</a>
     </div>
 </div>

@@ -112,7 +112,7 @@ export class RequisitiosCreditoComponent implements OnInit {
         this.solicitarCredito.email = this.usuario.email;
         this._creditosAutonomosService.crearCredito(this.solicitarCredito).subscribe((info) => {
         });
-        this._router.navigate(['/personas/finalizar-creditor']);
+        this._router.navigate(['/personas/finalizar-credito']);
     }
 
 }

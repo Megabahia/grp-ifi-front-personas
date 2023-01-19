@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ValidacionesPropias} from '../../../../../utils/customer.validators';
 import {FirmaElectronicaService} from './firma-electronica.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-registro-firma-electronica',
@@ -21,6 +22,7 @@ export class RegistroFirmaElectronicaComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _firmaElectronica: FirmaElectronicaService,
         private modalService: NgbModal,
+        private _router: Router,
     ) {
     }
 
@@ -74,5 +76,10 @@ export class RegistroFirmaElectronicaComponent implements OnInit {
 
     abrirModal(modal) {
         this.modalService.open(modal);
+    }
+
+    cerrarModal() {
+        this.modalService.dismissAll();
+        this._router.navigate(['/']);
     }
 }

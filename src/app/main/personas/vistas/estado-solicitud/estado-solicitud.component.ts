@@ -16,6 +16,7 @@ export class EstadoSolicitudComponent implements OnInit {
     public aprobado = false;
     public pentiente = false;
     public motivo = '';
+    public usuario;
     private _unsubscribeAll: Subject<any>;
     private coreConfig: any;
 
@@ -24,6 +25,7 @@ export class EstadoSolicitudComponent implements OnInit {
         private _authenticationService: AuthenticationService,
         private _coreMenuService: CoreMenuService,
     ) {
+        this.usuario = this._coreMenuService.grpPersonasUser;
     }
 
     ngOnInit(): void {
@@ -73,4 +75,7 @@ export class EstadoSolicitudComponent implements OnInit {
         }
     }
 
+    cerrarSesion() {
+        localStorage.clear();
+    }
 }

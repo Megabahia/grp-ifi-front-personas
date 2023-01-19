@@ -90,7 +90,7 @@
                                                         <div *ngIf="firmaElectronica.telefonoRepresentante.errors.minlength">
                                                             Ingrese minimo 10 numeros
                                                         </div>
-                                                        <div *ngIf="firmaElectronica.telefonoRepresentante.errors.minlength">
+                                                        <div *ngIf="firmaElectronica.telefonoRepresentante.errors.maxlength">
                                                             Ingrese maximo 10 numeros
                                                         </div>
                                                         <div *ngIf="firmaElectronica.telefonoRepresentante.errors.pattern">
@@ -115,7 +115,7 @@
                                                         <div *ngIf="firmaElectronica.whatsappRepresentante.errors.minlength">
                                                             Ingrese minimo 10 numeros
                                                         </div>
-                                                        <div *ngIf="firmaElectronica.whatsappRepresentante.errors.minlength">
+                                                        <div *ngIf="firmaElectronica.whatsappRepresentante.errors.maxlength">
                                                             Ingrese maximo 10 numeros
                                                         </div>
                                                         <div *ngIf="firmaElectronica.whatsappRepresentante.errors.pattern">
@@ -214,6 +214,6 @@
         <div [innerHTML]="mensaje"></div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">Cerrar</button>
+        <button type="button" class="btn btn-light" (click)="cerrarModal()">Cerrar</button>
     </div>
 </ng-template>

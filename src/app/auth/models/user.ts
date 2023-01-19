@@ -14,4 +14,5 @@ export class User {
   empresa: any;
   identificacion: any;
   empresaInfo: any;
+  creditoAprobado?: any;
 }

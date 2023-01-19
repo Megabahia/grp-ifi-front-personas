@@ -38,6 +38,7 @@ export class FinalizarSolicitudComponent implements OnInit {
               enableLocalStorage: false,
           },
       };
+      localStorage.clear();
   }
 
   ngOnInit(): void {
