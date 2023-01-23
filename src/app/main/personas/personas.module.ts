@@ -62,6 +62,7 @@ import { RequisitiosCreditoComponent } from './vistas/requisitios-credito/requis
 import { FinalizarSolicitudComponent } from './vistas/finalizar-solicitud/finalizar-solicitud.component';
 import {IConfig, NgxMaskModule} from 'ngx-mask';
 import { EstadoSolicitudComponent } from './vistas/estado-solicitud/estado-solicitud.component';
+import { FirmarDocumentosHabilitantesComponent } from './vistas/firmar-documentos-habilitantes/firmar-documentos-habilitantes.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -232,6 +233,13 @@ const routes = [
         component: RegistroFirmaElectronicaComponent,
         data: {activacion: [8]},
         canActivate: [AuthGuard],
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'firmar-documentos',
+        component: FirmarDocumentosHabilitantesComponent,
+        data: {activacion: [8]},
+        canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
     },
@@ -362,6 +370,7 @@ const routes = [
         RequisitiosCreditoComponent,
         FinalizarSolicitudComponent,
         EstadoSolicitudComponent,
+        FirmarDocumentosHabilitantesComponent,
     ],
     imports: [
         CoreCommonModule,

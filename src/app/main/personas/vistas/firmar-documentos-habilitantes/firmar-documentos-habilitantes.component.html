@@ -1,0 +1,59 @@
+<div class="content-wrapper">
+    <div class="content-header row">
+    </div>
+    <div class="content-body">
+        <!-- Error page-->
+        <div class="misc-wrapper">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class=" mb-2 text-center">
+                        <h2>
+                            Firmar documentos firmantes
+                        </h2>
+                    </div>
+                    <div class="content-body">
+                        <!-- users list start -->
+                        <section class="app-user-list">
+                            <div class="card-datatable table-responsive pt-0">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Fecha del Documento</th>
+                                        <th>Solicitud credito</th>
+                                        <th>Pagaré</th>
+                                        <th>Contratos cuenta</th>
+                                        <th>Tabla amortización</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{transformarFecha(credito?.created_at)}}</td>
+                                        <td>
+                                            <a href="{{credito?.solicitudCreditoFirmado}}" target="_blank">Ver</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{credito?.pagareFirmado}}" target="_blank">Ver</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{credito?.contratosCuentaFirmado}}" target="_blank">Ver</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{credito?.tablaAmortizacionFirmado}}" target="_blank">Ver</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+<!--                            <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page"-->
+<!--                                            [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>-->
+                        </section>
+                        <!-- users list ends -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Error page-->
+    </div>
+</div>

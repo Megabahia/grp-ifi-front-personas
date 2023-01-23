@@ -40,6 +40,15 @@ export const menu: CoreMenu[] = [
         url: 'personas/registroFirmaElectronica'
     },
     {
+        id: 'firmaDocumentosHabilitantes',
+        title: 'Firma de Documentos Habilitantes',
+        // translate: 'MENU.HOME',
+        role: [Role.SuperMonedas],
+        type: 'item',
+        icon: '',
+        url: 'personas/firmar-documentos'
+    },
+    {
         id: 'registroProveedores',
         title: 'Creacíon de proveedores',
         // translate: 'MENU.HOME',
