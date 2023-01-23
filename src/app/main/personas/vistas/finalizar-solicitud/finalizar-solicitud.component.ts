@@ -20,6 +20,7 @@ export class FinalizarSolicitudComponent implements OnInit {
       private _coreConfigService: CoreConfigService,
       private _authenticationService: AuthenticationService,
       private _coreMenuService: CoreMenuService,
+      private _router: Router,
   ) {
       this.usuario = this._coreMenuService.grpPersonasUser;
       this._unsubscribeAll = new Subject();
@@ -38,7 +39,7 @@ export class FinalizarSolicitudComponent implements OnInit {
               enableLocalStorage: false,
           },
       };
-      localStorage.clear();
+      // localStorage.clear();
   }
 
   ngOnInit(): void {
@@ -49,6 +50,11 @@ export class FinalizarSolicitudComponent implements OnInit {
           .subscribe((config) => {
               this.coreConfig = config;
           });
+  }
+
+  cerrarSesion() {
+      localStorage.clear();
+      this._router.navigate(['/grp/login']);
   }
 
 }
