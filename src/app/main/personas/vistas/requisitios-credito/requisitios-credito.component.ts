@@ -99,7 +99,8 @@ export class RequisitiosCreditoComponent implements OnInit {
             nombres: '',
             apellidos: '',
             numeroIdentificacion: '',
-            empresaInfo: JSON.parse(localStorage.getItem('grpPersonasUser')).persona.empresaInfo
+            empresaInfo: JSON.parse(localStorage.getItem('grpPersonasUser')).persona.empresaInfo,
+            estadoCivil: JSON.parse(localStorage.getItem('grpPersonasUser')).persona.estadoCivil,
         };
     }
 

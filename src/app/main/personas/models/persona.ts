@@ -65,6 +65,7 @@ export class SolicitarCredito {
     empresaInfo?: string;
     email?: string;
     cuota?: number;
+    estadoCivil?: string;
 }
 export class RucPersona {
     actividadComercial: string;
