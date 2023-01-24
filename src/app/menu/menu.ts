@@ -41,7 +41,7 @@ export const menu: CoreMenu[] = [
     },
     {
         id: 'firmaDocumentosHabilitantes',
-        title: 'Firma de Documentos Habilitantes',
+        title: 'Firma de Documentos Habilitantes ',
         // translate: 'MENU.HOME',
         role: [Role.SuperMonedas],
         type: 'item',
