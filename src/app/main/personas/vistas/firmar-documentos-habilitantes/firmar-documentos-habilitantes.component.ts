@@ -97,6 +97,12 @@ export class FirmarDocumentosHabilitantesComponent implements OnInit {
     }
 
     modalOpenSM(modalSM, credito, docFirmado) {
+        this.documentoFirmaForm = this._formBuilder.group({
+            solicitudCreditoFirmado: [''],
+            claveFirma: ['', [Validators.required]],
+            certificado: ['', [Validators.required, ValidacionesPropias.firmaElectronicaValido]],
+        });
+        this.firmaElectronica = new FormData();
         this.documentoAFimar = docFirmado;
         console.log('pagareFirmado', docFirmado);
         this.creditSelected = credito;

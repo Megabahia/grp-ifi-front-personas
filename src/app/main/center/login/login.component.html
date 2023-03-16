@@ -31,6 +31,11 @@
     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
       <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
         <h2 class="card-title font-weight-bold mb-1">Bienvenido</h2>
+          <p class="text-center ">
+              <span style="font-size: 16px;">¿Aun no tienes cuenta?</span><a class="text-primary"
+                                                                             style="font-size: 16px;"
+                                                                             routerLink="/grp/registro"><span>&nbsp;Regístrate</span></a>
+          </p>
         <p class="card-text mb-2">Por favor ingresa con tus datos de cuenta</p>
 
         <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
@@ -94,10 +99,6 @@
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Iniciar
           </button>
         </form>
-        <p class="text-center mt-2">
-          <span>¿Aun no tienes cuenta?</span><a class="text-primary"
-            routerLink="/grp/registro"><span>&nbsp;Regístrate</span></a>
-        </p>
 <!--        <div class="divider my-2">-->
 <!--          <div class="divider-text">o</div>-->
 <!--        </div>-->

@@ -77,7 +77,8 @@ export class CreditRequirementsComponent implements OnInit, OnDestroy {
         } else {
             estadoCivil = 'SOLTERO';
         }
-        this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
+        // this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
+        this.tipoPersona = `REQUISITOS_MICROCREDIOS_${estadoCivil}`;
         this.getInfo();
     }
 
@@ -95,10 +96,10 @@ export class CreditRequirementsComponent implements OnInit, OnDestroy {
     }
 
     getInfo() {
-        this.paramService.obtenerListaPadresSinToken('REQUISITOS_MICROCREDIOS').subscribe((info) => {
-            info.find((item) => {
-                if (item.nombre === 'MONTO') {
-                    if (item.valor > this.montoCreditoFinal) {
+        this.paramService.obtenerListaHijos('MONTO', 'REQUISITOS_MICROCREDIOS').subscribe((data) => {
+            this.paramService.obtenerListaPadresSinToken(this.tipoPersona).subscribe((info) => {
+                info.find((item) => {
+                    if (data.valor > this.montoCreditoFinal) {
                         this.requisitos = info.find((item2) => {
                             if (item2.valor === 'INFERIOR') {
                                 return item2;
@@ -114,7 +115,7 @@ export class CreditRequirementsComponent implements OnInit, OnDestroy {
                         console.log(this.requisitos);
                     }
                     return item;
-                }
+                });
             });
         });
         this.paramService.obtenerListaPadresSinToken('DESCRIPCION_REQUISITOS_CREDICOMPRA').subscribe((info) => {

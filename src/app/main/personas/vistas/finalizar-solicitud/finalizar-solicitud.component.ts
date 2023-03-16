@@ -54,7 +54,7 @@ export class FinalizarSolicitudComponent implements OnInit {
 
   cerrarSesion() {
       localStorage.clear();
-      this._router.navigate(['/grp/login']);
+      this._router.navigate(['/']);
   }
 
 }

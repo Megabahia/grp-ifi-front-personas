@@ -149,6 +149,26 @@ export class SolicitudCreditosComponent implements OnInit {
                         //
                     }),
                 ], [ValidacionesPropias.parientesTelefonos, ValidacionesPropias.padres]),
+                comerciales: this._formBuilder.array([
+                    this._formBuilder.group({
+                        nombresDuenoComercial: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                        negocioDuenoComercial: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                        telefonoDuenoComercial: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
+                        direccionDuenoComercial: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]],
+                    }),
+                    this._formBuilder.group({
+                        nombresDuenoComercial: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                        negocioDuenoComercial: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                        telefonoDuenoComercial: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
+                        direccionDuenoComercial: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]],
+                    }),
+                    this._formBuilder.group({
+                        nombresDuenoComercial: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                        negocioDuenoComercial: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                        telefonoDuenoComercial: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
+                        direccionDuenoComercial: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]],
+                    }),
+                ]),
                 inresosMensualesVentas: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 sueldoConyuge: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 otrosIngresos: ['', [Validators.pattern('^[0-9]*$')]], //

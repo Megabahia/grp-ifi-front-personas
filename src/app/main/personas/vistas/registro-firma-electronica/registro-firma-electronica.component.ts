@@ -80,6 +80,6 @@ export class RegistroFirmaElectronicaComponent implements OnInit {
 
     cerrarModal() {
         this.modalService.dismissAll();
-        this._router.navigate(['/']);
+        this._router.navigate(['/personas/firmar-documentos']);
     }
 }

@@ -26,10 +26,10 @@
 
                   <div class="mt-2">
                     <ul class="list-group ">
-                      <li class="list-group-item" *ngFor="let item of requisitos">{{item}}</li>
+                      <li class="list-group-item" *ngFor="let item of requisitos.config">{{item}}</li>
                     </ul>
                   </div>
-                  <div *ngIf="requisitos.length>0" class="mt-2">
+                  <div *ngIf="requisitos.config.length>0" class="mt-2">
                     <a (click)="crearCredito()" [href]="'#/personas/finalizar-credito'" class="btn btn-primary" style="color: black !important;">Enviar</a>
                   </div>
                 </div>

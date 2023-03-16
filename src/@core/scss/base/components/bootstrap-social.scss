@@ -314,3 +314,7 @@ $bs-height-xs: (floor($font-size-sm * 0.2) + $input-btn-padding-y-lg) !default;
 .bg-yahoo {
   background-color: #720e9e;
 }
+.bg-whatsapp {
+  background-color: #25D366;
+  color: $white !important;
+}
