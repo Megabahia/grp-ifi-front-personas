@@ -17,6 +17,8 @@ import {MensajeProductosFreeComponent} from './mensaje-productos-free/mensaje-pr
 import {CreditRequestComponent} from './credit-request/credit-request.component';
 import {SimulatorCrediCompraComponent} from './simulator-credi-compra/simulator-credi-compra.component';
 import {CreditRequirementsComponent} from './credit-requirements/credit-requirements.component';
+import {PreApprovedCreditLineComponent} from './pre-approved-credit-consumer/pre-approved-credit-line.component';
+import {ApprovedEndConsumerComponent} from './approved-end-consumer/approved-end-consumer.component';
 
 // routing
 const routes: Routes = [
@@ -50,6 +52,16 @@ const routes: Routes = [
         component: CreditRequirementsComponent,
         data: {animation: 'misc', activacion: [8]},
     },
+    {
+        path: 'preApprovedCreditLine',
+        component: PreApprovedCreditLineComponent,
+        data: {animation: 'misc'},
+    },
+    {
+        path: 'preApprovedEndConsumer',
+        component: ApprovedEndConsumerComponent,
+        data: {animation: 'misc'},
+    },
 ];
 
 @NgModule({
@@ -60,6 +72,8 @@ const routes: Routes = [
         CreditRequestComponent,
         SimulatorCrediCompraComponent,
         CreditRequirementsComponent,
+        PreApprovedCreditLineComponent,
+        ApprovedEndConsumerComponent,
     ],
 
     imports: [
