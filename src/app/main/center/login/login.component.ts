@@ -180,6 +180,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                             } else if (info.info[0]?.estado === 'Nuevo') {
                                 localStorage.setItem('estadoCredito', 'pendiente');
                                 localStorage.setItem('motivo', info.info[0].motivo);
+                                this._router.navigate(['/personas/solucitudCredito']);
                             } else {
                                 this._router.navigate(['/personas/solucitudCredito']);
                             }
