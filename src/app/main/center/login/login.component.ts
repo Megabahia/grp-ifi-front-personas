@@ -154,6 +154,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                                 localStorage.setItem('estadoCredito', 'pendiente');
                                 localStorage.setItem('motivo', info.info[0].motivo);
                                 this._router.navigate(['/personas/solucitudCredito']);
+                                return;
                             } else {
                                 this._router.navigate(['/personas/solucitudCredito']);
                             }
@@ -182,6 +183,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                                 localStorage.setItem('estadoCredito', 'pendiente');
                                 localStorage.setItem('motivo', info.info[0].motivo);
                                 this._router.navigate(['/personas/solucitudCredito']);
+                                return;
                             } else {
                                 this._router.navigate(['/personas/solucitudCredito']);
                             }
