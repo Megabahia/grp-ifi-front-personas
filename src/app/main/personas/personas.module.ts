@@ -73,28 +73,28 @@ const routes = [
     {
         path: 'principal',
         component: PrincipalComponent,
-        data: {roles: [Role.SuperMonedas], activacion: [8]},
+        data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
         canActivate: [AuthGuard],
         // data: { animation: 'auth' }
     },
     {
         path: 'inicio',
         component: listadoEstadoCreditos,
-        data: {roles: [Role.SuperMonedas], activacion: [8]},
+        data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
         canActivate: [AuthGuard],
         // data: { animation: 'auth' }
     },
     {
         path: 'registrado',
         component: OldUserComponent,
-        data: {roles: [Role.SuperMonedas], activacion: [8]},
+        data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
         canActivate: [AuthGuard],
         // data: { animation: 'auth' }
     },
     {
         path: 'que-es',
         component: QueEsComponent,
-        data: {roles: [Role.SuperMonedas], activacion: [8]},
+        data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
         canActivate: [AuthGuard],
         // data: { animation: 'auth' }
     },
@@ -105,49 +105,49 @@ const routes = [
             {
                 path: 'mis-monedas',
                 component: MisMonedasComponent,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
             {
                 path: 'mis-facturas',
                 component: MisFacturasComponent,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
             {
                 path: 'mis-calificaciones',
                 component: MisCalificacionesComponent,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
             {
                 path: 'mis-calificaciones',
                 component: MisCalificacionesComponent,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
             {
                 path: 'compartir-publicaciones',
                 component: CompartirPublicacionesComponent,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
             {
                 path: 'monedas-otorgadas',
                 component: MonedasOtorgadasComponent,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
             {
                 path: 'pagar-con-supermonedas',
                 component: PagarConSuperMonedasComponent,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
@@ -160,7 +160,7 @@ const routes = [
             {
                 path: 'solicitar-credito',
                 component: CreditosAutonomosComponent,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
@@ -173,7 +173,7 @@ const routes = [
             {
                 path: 'creditos-pre-aprobados',
                 component: CreditosPreAprobadosEmpComponent,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
@@ -186,7 +186,7 @@ const routes = [
             {
                 path: 'listado',
                 component: ListadoCreditosPreAprobadosComponent,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
@@ -199,14 +199,14 @@ const routes = [
             {
                 path: 'estado-creditos',
                 component: listadoEstadoCreditos,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
             {
                 path: 'registrar-pagos-cuotas',
                 component: listadoPagoCuotas,
-                data: {roles: [Role.SuperMonedas], activacion: [8]},
+                data: {roles: [Role.SuperMonedas], activacion: [8, 0]},
                 canActivate: [AuthGuard],
                 // data: { animation: 'auth' }
             },
@@ -215,7 +215,7 @@ const routes = [
     {
         path: 'bienvenido',
         component: BienvenidoComponent,
-        data: {activacion: [8, 1]},
+        data: {activacion: [8, 1, 0]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
@@ -224,21 +224,21 @@ const routes = [
         path: 'registroDatosPagosProvedores',
         component: RegistroDatosPagosProvedoresComponent,
         // data: {activacion: [1]},
-        data: {activacion: [8, 7], roles: [Role.SuperMonedas]},
+        data: {activacion: [8, 7, 0], roles: [Role.SuperMonedas]},
         canActivate: [AuthGuard],
         // data: { animation: 'auth' }
     },
     {
         path: 'registroFirmaElectronica',
         component: RegistroFirmaElectronicaComponent,
-        data: {activacion: [8]},
+        data: {activacion: [8, 0]},
         canActivate: [AuthGuard],
         // data: { animation: 'auth' }
     },
     {
         path: 'firmar-documentos',
         component: FirmarDocumentosHabilitantesComponent,
-        data: {activacion: [8]},
+        data: {activacion: [8, 0]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
@@ -246,7 +246,7 @@ const routes = [
     {
         path: 'validarResultados',
         component: ValidarResultadosComponent,
-        data: {activacion: [8]},
+        data: {activacion: [8, 0]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
@@ -254,7 +254,7 @@ const routes = [
     {
         path: 'solucitudCredito',
         component: SolicitudCreditosComponent,
-        data: {activacion: [1, 2, 3, 4, 5, 6, 7]},
+        data: {activacion: [1, 2, 3, 4, 5, 6, 7, 0]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
@@ -262,21 +262,21 @@ const routes = [
     {
         path: 'requisitosCredito/:monto',
         component: RequisitiosCreditoComponent,
-        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7]},
+        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7, 0]},
         canActivate: [AuthGuard],
         // data: { animation: 'auth' }
     },
     {
         path: 'finalizar-credito',
         component: FinalizarSolicitudComponent,
-        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7]},
+        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7, 0]},
         canActivate: [AuthGuard],
         // data: { animation: 'auth' }
     },
     {
         path: 'registroProveedores',
         component: RegistroProveedoresComponent,
-        data: {activacion: [8]},
+        data: {activacion: [8, 0]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
@@ -284,7 +284,7 @@ const routes = [
     {
         path: 'pagoProveedores',
         component: PagoProvedorsComponent,
-        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7]},
+        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7, 0]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
@@ -292,7 +292,7 @@ const routes = [
     {
         path: 'saldoDisponible/:proveedor',
         component: SaldoProveedoresComponent,
-        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7]},
+        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7, 0]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }

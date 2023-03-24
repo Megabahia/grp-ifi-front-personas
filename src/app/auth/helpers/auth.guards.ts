@@ -49,6 +49,13 @@ export class AuthGuard implements CanActivate {
                 return true;
             }
 
+            const creditoNegado = route.data?.activacion.includes(grpPersonasUser.creditoAprobado);
+            if (creditoNegado) {
+                console.log('if');
+                this._router.navigate(['/personas/estado-solicitud-credito']);
+                return true;
+            }
+
 
             switch (Number(grpPersonasUser.estado)) {
                 case 1: {
