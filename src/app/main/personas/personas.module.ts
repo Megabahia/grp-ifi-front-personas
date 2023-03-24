@@ -254,7 +254,7 @@ const routes = [
     {
         path: 'solucitudCredito',
         component: SolicitudCreditosComponent,
-        data: {activacion: [1, 2, 3, 4, 5, 6, 7, 0]},
+        data: {activacion: [1, 2, 3, 4, 5, 6, 7]},
         canActivate: [AuthGuard],
 
         // data: { animation: 'auth' }
@@ -262,14 +262,14 @@ const routes = [
     {
         path: 'requisitosCredito/:monto',
         component: RequisitiosCreditoComponent,
-        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7, 0]},
+        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7]},
         canActivate: [AuthGuard],
         // data: { animation: 'auth' }
     },
     {
         path: 'finalizar-credito',
         component: FinalizarSolicitudComponent,
-        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7, 0]},
+        data: {activacion: [8, 1, 2, 3, 4, 5, 6, 7]},
         canActivate: [AuthGuard],
         // data: { animation: 'auth' }
     },
