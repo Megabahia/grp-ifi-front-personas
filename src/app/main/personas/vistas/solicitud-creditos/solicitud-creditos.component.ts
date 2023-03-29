@@ -168,7 +168,7 @@ export class SolicitudCreditosComponent implements OnInit {
                         telefonoDuenoComercial: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
                         direccionDuenoComercial: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]],
                     }),
-                ]),
+                ], [ValidacionesPropias.comercialesTelefonos]),
                 inresosMensualesVentas: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 sueldoConyuge: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 otrosIngresos: ['', [Validators.pattern('^[0-9]*$')]], //
@@ -184,6 +184,17 @@ export class SolicitudCreditosComponent implements OnInit {
         if (this.usuario.persona.empresaInfo) {
             this.formSolicitud.patchValue({...this.usuario.persona.empresaInfo});
             if (this.usuario.persona.empresaInfo.esatdo_civil === 'Casado' || this.usuario.persona.empresaInfo.esatdo_civil === 'Unión libre') {
+                this.casado = true;
+            }
+        }
+        if (localStorage.getItem('credito')) {
+            const credito = JSON.parse(localStorage.getItem('credito'));
+            this.formSolicitud.get('reprsentante').setValue(credito.empresaInfo.reprsentante);
+            this.formSolicitud.get('rucEmpresa').setValue(credito.empresaInfo.rucEmpresa);
+            this.formSolicitud.get('comercial').setValue(credito.empresaInfo.comercial);
+            this.formSolicitud.get('esatdo_civil').setValue(credito.empresaInfo.esatdo_civil);
+            this.formSolicitud.get('celular').setValue(credito.empresaInfo.celular);
+            if (credito.empresaInfo.esatdo_civil === 'Casado' || credito.empresaInfo.esatdo_civil === 'Unión libre') {
                 this.casado = true;
             }
         }

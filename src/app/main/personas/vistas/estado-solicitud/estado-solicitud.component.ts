@@ -4,6 +4,7 @@ import {takeUntil} from 'rxjs/operators';
 import {CoreConfigService} from '../../../../../@core/services/config.service';
 import {AuthenticationService} from '../../../../auth/service';
 import {CoreMenuService} from '../../../../../@core/components/core-menu/core-menu.service';
+import {CreditosPreAprobadosService} from '../creditos-pre-aprobados/creditos-pre-aprobados.service';
 
 @Component({
     selector: 'app-estado-solicitud',
@@ -19,10 +20,12 @@ export class EstadoSolicitudComponent implements OnInit {
     public usuario;
     private _unsubscribeAll: Subject<any>;
     private coreConfig: any;
+    private credito: any;
 
     constructor(
         private _coreConfigService: CoreConfigService,
         private _authenticationService: AuthenticationService,
+        private _creditosPreAprobadosService: CreditosPreAprobadosService,
         private _coreMenuService: CoreMenuService,
     ) {
         this.usuario = this._coreMenuService.grpPersonasUser;
@@ -37,6 +40,12 @@ export class EstadoSolicitudComponent implements OnInit {
                     this.coreConfig = config;
                 });
             this.aprobado = true;
+            this._creditosPreAprobadosService.obtenerCreditoUsuario({
+                estado: 'Aprobado',
+                id: this.usuario.id
+            }).subscribe((info) => {
+                this.credito = info;
+            });
         } else if (localStorage.getItem('estadoCredito') === 'negado') {
             this._coreConfigService.config = {
                 layout: {

@@ -96,7 +96,7 @@ export class CreditRequirementsComponent implements OnInit, OnDestroy {
     }
 
     getInfo() {
-        this.paramService.obtenerListaHijos('MONTO', 'REQUISITOS_MICROCREDIOS').subscribe((data) => {
+        this.paramService.obtenerParametroNombreTipo('MONTO', 'REQUISITOS_MICROCREDIOS').subscribe((data) => {
             this.paramService.obtenerListaPadresSinToken(this.tipoPersona).subscribe((info) => {
                 info.find((item) => {
                     if (data.valor > this.montoCreditoFinal) {
@@ -105,14 +105,14 @@ export class CreditRequirementsComponent implements OnInit, OnDestroy {
                                 return item2;
                             }
                         });
-                        console.log(this.requisitos);
+                        console.log('inferior', this.requisitos);
                     } else {
                         this.requisitos = info.find((item2) => {
                             if (item2.valor === 'SUPERIROR') {
                                 return item2;
                             }
                         });
-                        console.log(this.requisitos);
+                        console.log('superior', this.requisitos);
                     }
                     return item;
                 });

@@ -67,6 +67,8 @@ export class SolicitarCredito {
     cuota?: number;
     estadoCivil?: string;
     checks?: any;
+    razonSocial?: string;
+    rucEmpresa?: string;
 }
 export class RucPersona {
     actividadComercial: string;

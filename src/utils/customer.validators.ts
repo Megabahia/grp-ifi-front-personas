@@ -34,6 +34,37 @@ export class ValidacionesPropias {
         }
     }
 
+    static comercialesTelefonos(control: AbstractControl) {
+        let repetidos = [];
+        control['controls'].filter((value, index) => {
+            let errors = value['controls']['telefonoDuenoComercial']['errors'] || {};
+            delete errors?.['validoPas'];
+            if (Object.entries(errors).length === 0) {
+                value['controls']['telefonoDuenoComercial']['errors'] = null;
+            } else {
+                value['controls']['telefonoDuenoComercial']['errors'] = errors;
+            }
+            control['controls'].filter((value2, index2) => {
+                if (index != index2) {
+                    if (value['controls']['telefonoDuenoComercial']['value'] === value2['controls']['telefonoDuenoComercial']['value']) {
+                        repetidos.push(index);
+                    }
+                }
+            });
+        });
+
+        if (repetidos.length > 2) {
+            repetidos.forEach(index => {
+                let errors = control['controls'][index]['controls']['telefonoDuenoComercial']['errors'] || {};
+                errors.validoPas = true;
+                control['controls'][index]['controls']['telefonoDuenoComercial']['errors'] = errors;
+            });
+            return {multiplo5: true};
+        } else {
+            return null;
+        }
+    }
+
     static padres(control: AbstractControl) {
         const referencias = control['controls'];
         const padres = [];

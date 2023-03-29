@@ -10,6 +10,10 @@ export class CreditosPreAprobadosService {
     constructor(private _httpClient: HttpClient) {
     }
 
+    obtenerCreditoUsuario(datos) {
+        return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPersonas/listOne/usuario/${datos.id}`, datos );
+    }
+
     obtenerListaCreditos(datos) {
         return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPersonas/list/`, datos);
     }

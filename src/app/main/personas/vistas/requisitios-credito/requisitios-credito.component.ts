@@ -155,7 +155,7 @@ export class RequisitiosCreditoComponent implements OnInit {
                     });
                     this.paramService.obtenerListaPadresSinToken(this.tipoPersona).subscribe((info) => {
                         info.find((item) => {
-                            if (data.valor > this.montoBASEDATOS) {
+                            if (localStorage.getItem('montoCreditoFinal') < this.montoBASEDATOS) {
                                 this.requisitos = info.find((item2) => {
                                     if (item2.valor === 'INFERIOR') {
                                         return item2;
@@ -200,7 +200,14 @@ export class RequisitiosCreditoComponent implements OnInit {
                 // });
             }
         );
-        this.solicitarCredito = this.inicialidarSolicitudCredito();
+        if (localStorage.getItem('credito') !== null) {
+            this.solicitarCredito = JSON.parse(localStorage.getItem('credito'));
+            this.solicitarCredito.tipoCredito = '';
+            this.solicitarCredito.empresaInfo = JSON.parse(localStorage.getItem('grpPersonasUser')).persona.empresaInfo;
+            this.solicitarCredito.estadoCivil = JSON.parse(localStorage.getItem('grpPersonasUser')).persona.estadoCivil;
+        } else {
+            this.solicitarCredito = this.inicialidarSolicitudCredito();
+        }
     }
 
     ngOnInit(): void {
@@ -235,11 +242,19 @@ export class RequisitiosCreditoComponent implements OnInit {
         this.solicitarCredito.user_id = this.usuario.id;
         this.solicitarCredito.nombres = this.usuario.persona.nombres;
         this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
-        this.solicitarCredito.numeroIdentificacion = this.usuario.persona.identificacion;
+        this.solicitarCredito.numeroIdentificacion = this.usuario.persona.rucEmpresa;
         this.solicitarCredito.email = this.usuario.email;
         this.solicitarCredito.checks = this.checks;
-        this._creditosAutonomosService.crearCredito(this.solicitarCredito).subscribe((info) => {
-        });
+        this.solicitarCredito.razonSocial = this.usuario.empresaInfo?.refenciaNegocio;
+        this.solicitarCredito.rucEmpresa = this.usuario.empresaInfo?.rucEmpresa;
+        this.solicitarCredito.empresaInfo = this.usuario.persona.empresaInfo;
+        if (localStorage.getItem('credito') !== null) {
+            this._creditosAutonomosService.actualizarCredito(this.solicitarCredito).subscribe((info) => {
+            });
+        } else {
+            this._creditosAutonomosService.crearCredito(this.solicitarCredito).subscribe((info) => {
+            });
+        }
         this._router.navigate(['/personas/finalizar-credito']);
     }
 
