@@ -16,81 +16,6 @@ import {ParametrizacionesService} from '../../servicios/parametrizaciones.servic
     styleUrls: ['./requisitios-credito.component.scss']
 })
 export class RequisitiosCreditoComponent implements OnInit {
-    public checksSolteroInferior = [
-        {'label': 'Copia de cédula Representante legal', 'valor': false},
-        {'label': 'RUC del negocio', 'valor': false},
-        {'label': 'Foto tamaño carnet', 'valor': false},
-        {'label': 'Copia de papeleta de votación Representante Legal.', 'valor': false},
-        {'label': 'Copia de planilla de luz del Negocio', 'valor': false},
-        {'label': 'Copia de planilla de luz del Domicilio', 'valor': false},
-        {'label': 'Copia de Factura de Ventas del negocio del último mes (factura de hace 1 mes)', 'valor': false},
-        {'label': 'Copia de Factura de Ventas del negocio del penúltimo mes (factura de hace 2 meses)', 'valor': false},
-        {'label': 'Copia de Factura de Compra del negocio del último mes (factura de hace 1 mes)', 'valor': false},
-        {'label': 'Copia de Factura de Compra del negocio del penúltimo mes (factura de hace 2 meses)', 'valor': false},
-        {'label': 'Factura pendiente de pago del proveedor.', 'valor': false},
-        {'label': 'Copia de matrícula del vehículo (obligatorio)', 'valor': false},
-        {'label': 'Copia de pago de impuesto predial o copia de escrituras', 'valor': false},
-        {'label': 'Buró de crédito', 'valor': false},
-        {'label': 'Calificación de Buró de Crédito', 'valor': false},
-    ];
-    public checksSolteroSuperior = [
-        {'label': 'Copia de cédula del Representante Legal', 'valor': false},
-        {'label': 'Copia de papeleta de votación del Representante Legal', 'valor': false},
-        {'label': 'RUC del negocio', 'valor': false},
-        {'label': 'Nombramiento del Representante Legal inscrito en el Registro Mercantil.', 'valor': false},
-        {'label': 'Certificado de cumplimiento de la Superintendencia de Compañías.', 'valor': false},
-        {'label': 'Certificado de cumplimiento de obligaciones patronales con el IESS. (En caso de que la empresa no cuente con empleados se requiere una declaración juramentada)', 'valor': false},
-        {'label': 'Nómina de socios y/o accionistas.', 'valor': false},
-        {'label': 'Acta de Junta General u órgano competente autorizando la contratación del crédito.', 'valor': false},
-        {'label': 'Certificado bancario', 'valor': false},
-        {'label': 'Dos referencias comerciales (en caso de importaciones adjuntar copias de facturas).', 'valor': false},
-        {'label': 'Balance de pérdidas y ganancias', 'valor': false},
-        {'label': 'Balance de resultados', 'valor': false},
-        {'label': 'Declaración del IVA de los últimos seis meses.', 'valor': false},
-        {'label': 'Estados de cuenta de tarjeta de crédito (empresas unipersonales).', 'valor': false},
-        {'label': 'Buró de crédito', 'valor': false},
-        {'label': 'Calificación de Buró de Crédito', 'valor': false},
-    ];
-    public checksCasadoInferior = [
-        {'label': 'Copia de cédula Representante legal', 'valor': false},
-        {'label': 'RUC del negocio', 'valor': false},
-        {'label': 'Foto tamaño carnet', 'valor': false},
-        {'label': 'Copia de papeleta de votación Representante Legal.', 'valor': false},
-        {'label': 'Copia de cédula de cónyuge', 'valor': false},
-        {'label': 'Copia de papeleta de votación de cónyuge', 'valor': false},
-        {'label': 'Copia de planilla de luz del Negocio', 'valor': false},
-        {'label': 'Copia de planilla de luz del Domicilio', 'valor': false},
-        {'label': 'Copia de Factura de Ventas del negocio del último mes (factura de hace 1 mes)', 'valor': false},
-        {'label': 'Copia de Factura de Ventas del negocio del penúltimo mes (factura de hace 2 meses)', 'valor': false},
-        {'label': 'Copia de Factura de Compra del negocio del último mes (factura de hace 1 mes)', 'valor': false},
-        {'label': 'Copia de Factura de Compra del negocio del penúltimo mes (factura de hace 2 meses)', 'valor': false},
-        {'label': 'Factura pendiente de pago del proveedor.', 'valor': false},
-        {'label': 'Copia de matrícula del vehículo (obligatorio)', 'valor': false},
-        {'label': 'Copia de pago de impuesto predial o copia de escrituras', 'valor': false},
-        {'label': 'Buró de crédito', 'valor': false},
-        {'label': 'Calificación de Buró de Crédito', 'valor': false},
-    ];
-    public checksCasadoSuperior = [
-        {'label': 'Copia de cédula del Representante Legal', 'valor': false},
-        {'label': 'Copia de papeleta de votación del Representante Legal', 'valor': false},
-        {'label': 'Copia de cédula de cónyuge', 'valor': false},
-        {'label': 'Copia de papeleta de votación cónyuge', 'valor': false},
-        {'label': 'RUC del negocio', 'valor': false},
-        {'label': 'Nombramiento del Representante Legal inscrito en el Registro Mercantil.', 'valor': false},
-        {'label': 'Certificado de cumplimiento de la Superintendencia de Compañías.', 'valor': false},
-        {'label': 'Certificado de cumplimiento de obligaciones patronales con el IESS. (En caso de que la empresa no cuente con empleados se requiere una declaración juramentada)', 'valor': false},
-        {'label': 'Nómina de socios y/o accionistas.', 'valor': false},
-        {'label': 'Acta de Junta General u órgano competente autorizando la contratación del crédito.', 'valor': false},
-        {'label': 'Certificado bancario', 'valor': false},
-        {'label': 'Dos referencias comerciales (en caso de importaciones adjuntar copias de facturas).', 'valor': false},
-        {'label': 'Balance de pérdidas y ganancias', 'valor': false},
-        {'label': 'Balance de resultados', 'valor': false},
-        {'label': 'Declaración del IVA de los últimos seis meses.', 'valor': false},
-        {'label': 'Estados de cuenta de tarjeta de crédito (empresas unipersonales).', 'valor': false},
-        {'label': 'Buró de crédito', 'valor': false},
-        {'label': 'Calificación de Buró de Crédito', 'valor': false},
-    ];
-    public checks = [];
 
     private _unsubscribeAll: Subject<any>;
     tiutlo;
@@ -120,11 +45,11 @@ export class RequisitiosCreditoComponent implements OnInit {
     ) {
         const casados = ['UNIÓN LIBRE', 'CASADO'];
         if (casados.find(item => item === localStorage.getItem('estadoCivil').toUpperCase())) {
-            this.estadoCivil = 'CASADO';
+            this.estadoCivil = 'CASADO_UNION_LIBRE';
         } else {
-            this.estadoCivil = 'SOLTERO';
+            this.estadoCivil = 'SOLTERO_DIVORCIADO';
         }
-        this.tipoPersona = `REQUISITOS_MICROCREDIOS_${this.estadoCivil}`;
+        this.tipoPersona = `MICROCREDITO_${this.estadoCivil}`;
         this._unsubscribeAll = new Subject();
         this._coreConfigService.config = {
             layout: {
@@ -161,7 +86,6 @@ export class RequisitiosCreditoComponent implements OnInit {
                                         return item2;
                                     }
                                 });
-                                this.checks = this.estadoCivil === 'SOLTERO' ? this.checksSolteroInferior : this.checksCasadoInferior ;
                                 console.log('inferiror', this.requisitos);
                             } else {
                                 this.requisitos = info.find((item2) => {
@@ -169,7 +93,6 @@ export class RequisitiosCreditoComponent implements OnInit {
                                         return item2;
                                     }
                                 });
-                                this.checks = this.estadoCivil === 'SOLTERO' ? this.checksSolteroSuperior : this.checksCasadoSuperior ;
                                 console.log('superior', this.requisitos);
                             }
                             return item;
@@ -244,7 +167,6 @@ export class RequisitiosCreditoComponent implements OnInit {
         this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
         this.solicitarCredito.numeroIdentificacion = this.usuario.persona.rucEmpresa;
         this.solicitarCredito.email = this.usuario.email;
-        this.solicitarCredito.checks = this.checks;
         this.solicitarCredito.razonSocial = this.usuario.empresaInfo?.refenciaNegocio;
         this.solicitarCredito.rucEmpresa = this.usuario.empresaInfo?.rucEmpresa;
         this.solicitarCredito.empresaInfo = this.usuario.persona.empresaInfo;
