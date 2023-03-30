@@ -73,12 +73,12 @@ export class CreditRequirementsComponent implements OnInit, OnDestroy {
             tipoPersona = 'NEGOCIOS';
         }
         if (casados.find(item => item === localStorage.getItem('estadoCivil').toUpperCase())) {
-            estadoCivil = 'CASADO';
+            estadoCivil = 'CASADO_UNION_LIBRE';
         } else {
-            estadoCivil = 'SOLTERO';
+            estadoCivil = 'SOLTERO_DIVORCIADO';
         }
         // this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
-        this.tipoPersona = `REQUISITOS_MICROCREDIOS_${estadoCivil}`;
+        this.tipoPersona = `MICROCREDITO_${estadoCivil}`;
         this.getInfo();
     }
 
