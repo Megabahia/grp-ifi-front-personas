@@ -167,7 +167,7 @@ export class RequisitiosCreditoComponent implements OnInit {
         this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
         this.solicitarCredito.numeroIdentificacion = this.usuario.persona.rucEmpresa;
         this.solicitarCredito.email = this.usuario.email;
-        this.solicitarCredito.razonSocial = this.usuario.persona.empresaInfo?.refenciaNegocio;
+        this.solicitarCredito.razonSocial = this.usuario.persona.empresaInfo?.comercial;
         this.solicitarCredito.rucEmpresa = this.usuario.persona.empresaInfo?.rucEmpresa;
         this.solicitarCredito.empresaInfo = this.usuario.persona.empresaInfo;
         if (localStorage.getItem('credito') !== null) {
