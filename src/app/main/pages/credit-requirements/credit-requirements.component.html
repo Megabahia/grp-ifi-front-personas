@@ -3,7 +3,7 @@
         <div class="container pb-5">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-12 text-center">
-                    <img class="appear" src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="250"/>
+                    <img class="appear" src="assets/images/logo/creditopagos.png" alt="brand-logo" width="250"/>
                 </div>
                 <div class="col-md-12 text-center">
                     <div class="row mx-2 justify-content-center align-items-center py-2">
@@ -19,10 +19,14 @@
                     </div>
                     <div class="row mx-2 justify-content-center align-items-center py-2">
                         <div class="col-12">
-                            <button type="submit" rippleEffect class="btn btn-outline-dark mr-1" routerLink="/"
+                            <p style="color: red;"><b>Aplique YA a su línea de crédito dando click en CONTINUAR</b></p>
+                            <br>
+                            <button type="submit" rippleEffect class="btn btn-primary mr-1" routerLink="/"
+                                    style="color: black !important;"
                                     (click)="simulador()">Continuar
                             </button>
-                            <a type="reset" rippleEffect class="btn btn-outline-dark text-black" href="https://credicompra.com/"
+                            <a type="reset" rippleEffect class="btn btn-primary text-black" href="https://credicompra.com/"
+                               style="color: black !important;"
                                (click)="cancelar()">Cancelar
                             </a>
                             <br>
@@ -44,7 +48,9 @@
 
 <!--<div class="footer-LP"></div>-->
 <div class="text-center">
-    <img src="../../../../assets/images/pages/creditopagos.png" height="100px">
+    <span style="color: black !important;"><b>Powered by</b></span>
+    <br>
+    <img src="../assets/images/logo/logo.png" height="50px">
 </div>
 
 <!-- Buynow Button-->

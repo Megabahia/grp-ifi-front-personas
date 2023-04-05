@@ -10,7 +10,7 @@
           <div class="misc-inner">
             <div class="text-center">
               <a href="javascript:void(0);">
-                <img src="assets/images/logo/red-credito.png" alt="brand-logo" width="300"/>
+                <img src="assets/images/logo/creditopagos.png" alt="brand-logo" width="300"/>
               </a>
             </div>
           </div>
@@ -29,6 +29,8 @@
                       <li class="list-group-item" *ngFor="let item of requisitos.config">{{item}}</li>
                     </ul>
                   </div>
+                    <h3 class="mt-2" style="color: red;"><b>Aplique YA a su línea de crédito dando click en CONTINUAR</b></h3>
+                    <br>
                   <div *ngIf="requisitos.config.length>0" class="mt-2">
                     <a (click)="crearCredito()" [href]="'#/personas/finalizar-credito'" class="btn btn-primary" style="color: black !important;">Enviar</a>
                   </div>

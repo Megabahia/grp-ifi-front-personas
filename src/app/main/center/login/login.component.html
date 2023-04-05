@@ -1,8 +1,8 @@
 <div class="auth-wrapper auth-v2">
   <div class="auth-inner row m-0">
     <!-- Brand logo-->
-    <a class="brand-logo" href="javascript:void(0);">
-      <img class="appear" src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="200" />
+      <a class="brand-logo disapear" href="javascript:void(0);">
+      <img src="/assets/images/logo/creditopagos.png" alt="brand-logo" width="150" />
 <!--      <img src="../../../../assets/images/logo/Logo_SAN_JOSE.png" alt="brand-logo" width="200" />-->
 
     </a>
@@ -12,7 +12,7 @@
     <!-- /Brand logo-->
     <!-- Left Text-->
     <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
-      <div class="d-block">
+      <div class="d-block mt-3">
         <br>
         <br>
         <br>
@@ -30,6 +30,9 @@
     <!-- Login-->
     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
       <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
+          <a class="appear" href="javascript:void(0);">
+              <img src="/assets/images/logo/creditopagos.png" alt="brand-logo" width="150"/>
+          </a>
         <h2 class="card-title font-weight-bold mb-1">Bienvenido</h2>
           <p class="text-center ">
               <span style="font-size: 16px;">¿Aun no tienes cuenta?</span><a class="text-primary"
@@ -98,6 +101,13 @@
           <button [disabled]="loading" class="btn btn-primary btn-block" tabindex="4" rippleEffect>
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Iniciar
           </button>
+
+            <div class="text-center mt-3">
+                <!--    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">-->
+                <span style="color: black !important;"><b>Powered by</b></span>
+                <br>
+                <img src="../assets/images/logo/logo.png" height="50px">
+            </div>
         </form>
 <!--        <div class="divider my-2">-->
 <!--          <div class="divider-text">o</div>-->

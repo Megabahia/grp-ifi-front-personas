@@ -69,6 +69,7 @@ export class SolicitarCredito {
     checks?: any;
     razonSocial?: string;
     rucEmpresa?: string;
+    cargarOrigen?: string;
 }
 export class RucPersona {
     actividadComercial: string;

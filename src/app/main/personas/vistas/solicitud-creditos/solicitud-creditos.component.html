@@ -11,7 +11,7 @@
                       <div class="misc-inner">
                         <div class="text-center">
                           <a href="javascript:void(0);">
-                            <img src="assets/images/logo/red-credito.png" alt="brand-logo" width="300"/>
+                            <img src="assets/images/logo/creditopagos.png" alt="brand-logo" width="300"/>
                             <h2 class="azul2 text-bold m-1">ESTÁ EN EL PASO 2 DE 3</h2>
                             <h2 class="azul2 text-bold m-1">Complete sus datos</h2>
                           </a>
@@ -20,7 +20,8 @@
                     </div>
                     <div class=" mb-2 text-center">
                         <h4>
-                          Para acceder a una línea de crédito para pago a sus proveedores, por favor registre los siguientes datos:
+                            Para acceder a la Línea de Crédito para realizar pagos a sus proveedores,
+                            por favor registre los siguientes datos:
                         </h4>
                     </div>
                     <div class="content-body">
@@ -30,13 +31,14 @@
 
                                     <form class="auth-login-form mt-2" [formGroup]="formSolicitud">
                                         <h3>
-                                          DATOS GENERALES DE SU EMPRESA
+                                            DATOS GENERALES DE SU EMPRESA O NEGOCIO
                                         </h3>
                                         <div class="row">
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Nombre del representante legal:
+                                                    <label>
+                                                        Nombre del representante legal o dueño del negocio:
                                                     </label>
                                                     <input type="text" formControlName="reprsentante"
                                                            class="form-control"
@@ -58,7 +60,8 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>RUC de la empresa/negocio
+                                                    <label>
+                                                        RUC de su empresa o negocio:
                                                     </label>
                                                     <input type="text" formControlName="rucEmpresa"
                                                            class="form-control"
@@ -86,7 +89,8 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Nombre comercial de la empresa:
+                                                    <label>
+                                                        Nombre comercial de su empresa o negocio:
                                                     </label>
                                                     <input type="text" formControlName="comercial"
                                                            class="form-control"
@@ -110,7 +114,8 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Actividad económica:
+                                                    <label>
+                                                        Actividad económica de su empresa o negocio:
                                                     </label>
                                                     <input type="text" formControlName="actividadEconomica"
                                                            class="form-control"
@@ -171,7 +176,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>
-                                                        Calle principal de la empresa/negocio:
+                                                        Calle principal de su empresa o negocio:
                                                     </label>
                                                     <input type="text" formControlName="callePrincipal"
                                                            class="form-control"
@@ -193,7 +198,8 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Calle secundaria de la empresa/negocio:
+                                                    <label>
+                                                        Calle secundaria de su empresa o negocio:
                                                     </label>
                                                     <input type="text" formControlName="calleSecundaria"
                                                            class="form-control"
@@ -218,7 +224,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>
-                                                        Referencia de la ubicación de la empresa/negocio:
+                                                        Referencia de la ubicación de su empresa o negocio:
                                                     </label>
                                                     <input type="text" formControlName="refenciaNegocio"
                                                            class="form-control"
@@ -238,10 +244,14 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <h5 style="color: red">Asegúrese de completar toda la información para que su Línea de Crédito sea APROBADA de manera INMEDIATA</h5>
+                                        <h3>DATOS DEL REPRESENTANTE LEGAL O DUEÑO DE LA EMPRESA O NEGOCIO</h3>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>
-                                                        Dirección del domicilio del representante legal de la empresa/negocio:
+                                                        Dirección del domicilio del representante legal o dueño de la empresa o negocio:
                                                     </label>
                                                     <input type="text" formControlName="direccionDomiciolRepresentante"
                                                            class="form-control"
@@ -264,7 +274,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>
-                                                        Estado civil del representante legal de la empresa/negocio:
+                                                        Estado civil del representante legal o dueño de la empresa o negocio:
                                                     </label>
                                                     <select #teams (change)="selectEstadoCivil()"
                                                             class="form-control select2" formControlName="esatdo_civil"
@@ -289,7 +299,8 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Teléfono convencional:
+                                                    <label>
+                                                        Teléfono convencional del representante legal o dueño de la empresa o negocio:
                                                     </label>
                                                     <input type="text" formControlName="telefono"
                                                            mask="0000000000"
@@ -317,7 +328,8 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Celular:
+                                                    <label>
+                                                        Celular del representante legal o dueño de la empresa o negocio:
                                                     </label>
                                                     <input type="text" formControlName="celular"
                                                            class="form-control"
@@ -342,7 +354,8 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>WhastApp:
+                                                    <label>
+                                                        WhatsApp del representante legal o dueño de la empresa o negocio:
                                                     </label>
                                                     <input type="text" formControlName="whatsapp"
                                                            class="form-control"
@@ -601,7 +614,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>
-                                                        Ingresos mensuales en ventas (valor):
+                                                        Registre el Monto de ingresos mensuales de su empresa o negocio:
                                                     </label>
                                                     <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="inresosMensualesVentas"
                                                            class="form-control">
@@ -923,6 +936,8 @@
 
 <!--<div class="footer-LP justify-content-center"></div>-->
 <div class="text-center mt-3">
-  <!--    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">-->
-  <img src="../assets/images/pages/creditopagos.png" height="100px">
+    <!--    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">-->
+    <span style="color: black !important;"><b>Powered by</b></span>
+    <br>
+    <img src="../assets/images/logo/logo.png" height="50px">
 </div>
