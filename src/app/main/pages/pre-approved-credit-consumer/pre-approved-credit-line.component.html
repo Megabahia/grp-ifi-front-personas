@@ -4,33 +4,31 @@
         <div class="container pb-5">
             <div class="row justify-content-center align-items-center py-5">
                 <div class="col-md-12 text-center mb-4">
-                    <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="30%"/>
-                    <h1 class="yellow2 mt-4 text-bold">CrediCompra - Big Puntos</h1>
-                    <h3 class="user-name font-weight-bolder text-center">
-                        Con CrediCompra, realiza compras con créditos otorgados por Entidades Financieras reguladas en
-                        las mejores Casas Comerciales del país.
-                    </h3>
-                    <h3 class="user-name font-weight-bolder text-center">
-                        Y, gana Big Puntos con los que puedes canjear tus productos favoritos en establecimientos
-                        afiliados.
+                    <img src="/assets/images/logo/creditopagos.png" alt="brand-logo" width="300px"/>
+                    <h1 class="yellow2 mt-4 text-bold">CrediCompra - Crédito Pagos</h1>
+                    <h3 class="user-name text-center">
+                        Con tu Línea de Crédito otorgada por una Cooperativa de Ahorro y Crédito regulada puedes
+                        realizar los pagos a tus proveedores de manera fácil y rápida.
+
                     </h3>
                 </div>
                 <div class="col-md-12 text-center">
-                    <h2 class="user-name font-weight-bolder text-center"> ¡FELICIDADES! </h2>
+                    <h2 class="user-name font-weight-bolder azul2 text-center"> ¡FELICIDADES! </h2>
 
 
-                    <h3 class="user-name font-weight-bolder text-center">
-                        Ingresa el código enviado a tu correo para acceder a tu crédito pre aprobado y realizar compras
-                        en las mejores Casas Comerciales del país
+                    <h3 class="user-name text-center">
+                        Ingresa el código enviado a tu correo para acceder a tu Línea de Crédito preaprobada y
+                        realizar los pagos a tus proveedores de manera fácil y rápida.
+
                     </h3>
 
                 </div>
                 <div class="align-items-center " style="text-align: center;  ">
 
                     <form [formGroup]="envioForm" (ngSubmit)="sentCode()">
-                        <div class="row align-items-center ">
+                        <div class="col-12 align-items-center my-2">
                             <div class="form-group align-items-center">
-                                <span class="user-name font-weight-bolder">Código:</span>
+                                <span class="user-name font-weight-bolder">Ingrese el código recibido:</span>
                                 <input size="50" formControlName="code" type="text" class="form-control" name="code">
                                 <div *ngIf="submittedSimulador && getsimuladorForm.code.errors"
                                      class="invalid-feedback" style="display: block;">
@@ -39,9 +37,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row align-items-center">
+                        <div class="col-12 align-items-center my-3">
                             <div class="form-group ">
-                                <span class="user-name font-weight-bolder">#Cédula:</span>
+                                <span class="user-name font-weight-bolder">
+                                    Ingrese el número de cédula del representante legal o dueño de la empresa:
+                                </span>
                                 <input size="50" formControlName="document" type="text" class="form-control"
                                        name="document">
                                 <div *ngIf="submittedSimulador && getsimuladorForm.document.errors"
@@ -62,11 +62,12 @@
                             </div>
                         </div>
                         <div class="col-md-12 text-center">
-                            <a class=" btn btn-primary "
+                            <button class="btn btn-primary"
+                                    style="color: black !important;"
                                (click)="sentCode()"
                             >
-                                OK
-                            </a>
+                                Continuar
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -82,7 +83,9 @@
 
 <!--<div class="footer-LP"></div>-->
 <div class="text-center">
-    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">
+    <span class="azul2"><b>Powered by</b></span>
+    <br>
+    <img src="../assets/images/logo/logo.png" height="50px">
 </div>
 
 <ng-template #mensajeModal let-modal>
