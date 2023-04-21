@@ -6,6 +6,7 @@ import {takeUntil} from 'rxjs/operators';
 import {RecuperarPassService} from './recuperar-pass.service';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {environment} from "../../../../environments/environment";
 
 @Component({
     selector: 'app-recuperar-pass',
@@ -42,7 +43,7 @@ export class RecuperarPassComponent implements OnInit {
         private _recuperarPassService: RecuperarPassService,
         private _modalService: NgbModal,
     ) {
-        this.siteKey = '6Lewc_MgAAAAADbbRC1OjtcpEreTMKro2GqRsl_L';
+        this.siteKey = environment.setKey;
         this._unsubscribeAll = new Subject();
 
         // Configure the layout

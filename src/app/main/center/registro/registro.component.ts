@@ -7,6 +7,7 @@ import {takeUntil} from 'rxjs/operators';
 import {RegistroService} from './registro.service';
 import {Role} from '../../../auth/models/role';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {environment} from "../../../../environments/environment";
 
 
 @Component({
@@ -48,7 +49,7 @@ export class RegistroComponent implements OnInit {
         private _router: Router,
         private _modalService: NgbModal,
     ) {
-        this.siteKey = '6Lewc_MgAAAAADbbRC1OjtcpEreTMKro2GqRsl_L';
+        this.siteKey = environment.setKey;
         this._unsubscribeAll = new Subject();
 
         // Configure the layout

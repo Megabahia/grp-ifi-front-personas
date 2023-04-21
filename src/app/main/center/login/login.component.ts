@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subject, Subscription} from 'rxjs';
 import {AuthenticationService} from '../../../auth/service/authentication.service';
 import {ReCaptchaV3Service} from 'ngx-captcha';
+import {environment} from "../../../../environments/environment";
 import {
     FacebookLoginProvider,
     SocialAuthService,
@@ -71,7 +72,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         private _coreMenuService: CoreMenuService,
         private _modalService: NgbModal
     ) {
-        this.siteKey = '6Lewc_MgAAAAADbbRC1OjtcpEreTMKro2GqRsl_L';
+        this.siteKey = environment.setKey;
         this.captcha = false;
         this._unsubscribeAll = new Subject();
 
