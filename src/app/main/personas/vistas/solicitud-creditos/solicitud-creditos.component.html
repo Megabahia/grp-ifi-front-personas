@@ -20,8 +20,8 @@
                     </div>
                     <div class=" mb-2 text-center">
                         <h4>
-                            Para acceder a la Línea de Crédito para realizar pagos a sus proveedores,
-                            por favor registre los siguientes datos:
+                            Para acceder a la Línea de Crédito para realizar pagos a sus proveedores y/o empleados,
+                            por favor complete la Solicitud de Línea de Crédito:
                         </h4>
                     </div>
                     <div class="content-body">
@@ -300,7 +300,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>
-                                                        Teléfono convencional del representante legal o dueño de la empresa o negocio:
+                                                        Teléfono convencional o celular del representante legal :
                                                     </label>
                                                     <input type="text" formControlName="telefono"
                                                            mask="0000000000"
@@ -312,11 +312,8 @@
                                                     <div *ngIf="controlsFrom.telefono.errors.required">
                                                         Teléfono es requerido
                                                     </div>
-                                                    <div *ngIf="controlsFrom.telefono.errors">
-                                                      Ingrese con el Código de la Provincia
-                                                    </div>
                                                     <div *ngIf="controlsFrom.telefono.errors.minlength">
-                                                        Ingrese minimo 10 caracteres
+                                                        Ingrese 10 dígitos numéricos
                                                     </div>
                                                     <div *ngIf="controlsFrom.telefono.errors.maxlength">
                                                         Ingrese maximo 10 caracteres
@@ -915,6 +912,19 @@
                                             </div>
 
                                         </div>
+
+                                        <div class="mt-1 mb-2 d-flex justify-content-center h5">
+                                            <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck2" formControlName="autorizacion" >
+                                            <label class="custom-control-label" for="customCheck2"><a href="/" target="_blank">Autorización de revisión y tratamiento de información</a></label>
+                                            <div *ngIf="submitted && controlsFrom.autorizacion.errors" class="invalid-feedback" style="display: block;">
+                                                <div *ngIf="controlsFrom.autorizacion.errors.required">Es necesario aceptar</div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+
+
                                         <div class="mt-2 text-center">
                                             <button class="btn btn-primary mr-1" (click)="guardar()" style="color: black !important;">
                                               CONTINUAR
@@ -933,7 +943,7 @@
         <!-- / Error page-->
     </div>
 </div>
-
+<app-need-help [href]="'https://api.whatsapp.com/send?phone=593980283746&text=Hola%20Cr%C3%A9dito%20Pagos.%20Quiero%20realizar%20una%20solicitud%20de%20cr%C3%A9dito%20para%20realizar%20%F0%9F%92%B5%20PAGOS%20A%20MIS%20PROVEEDORES.%20%0AMe%20pueden%20ayudar%20por%20favor%3F%0A%0A '"> </app-need-help>
 <!--<div class="footer-LP justify-content-center"></div>-->
 <div class="text-center mt-3">
     <!--    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">-->

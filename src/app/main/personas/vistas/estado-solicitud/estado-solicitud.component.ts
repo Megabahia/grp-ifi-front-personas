@@ -5,6 +5,7 @@ import {CoreConfigService} from '../../../../../@core/services/config.service';
 import {AuthenticationService} from '../../../../auth/service';
 import {CoreMenuService} from '../../../../../@core/components/core-menu/core-menu.service';
 import {CreditosPreAprobadosService} from '../creditos-pre-aprobados/creditos-pre-aprobados.service';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-estado-solicitud',
@@ -27,6 +28,7 @@ export class EstadoSolicitudComponent implements OnInit {
         private _authenticationService: AuthenticationService,
         private _creditosPreAprobadosService: CreditosPreAprobadosService,
         private _coreMenuService: CoreMenuService,
+        private router: Router
     ) {
         this.usuario = this._coreMenuService.grpPersonasUser;
     }

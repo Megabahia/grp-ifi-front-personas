@@ -24,11 +24,18 @@
               <img src="/assets/images/logo/creditopagos.png" alt="brand-logo" width="150"/>
           </a>
         <h2 class="card-title font-weight-bold mb-1">Bienvenido</h2>
+        <div class="card-text mt-1 mb-3"> Accede hoy a tu Línea de Crédito y paga a tus proveedores y/o empleados de manera fácil y rápida.</div>
           <p class="text-center ">
               <span style="font-size: 16px;">¿Aun no tienes cuenta?</span><a class="text-primary"
                                                                              style="font-size: 16px;"
                                                                              routerLink="/grp/registro"><span>&nbsp;Regístrate</span></a>
           </p>
+        <div class=" text-center card-text mt-1 mb-3 h5">
+          Recuerda que debes tener RUC, Facturación
+          electronica y Firma electronica para acceder a
+          tu Línea de Crédito para pago a proveedores.
+        </div>
+
         <p class="card-text mb-2">Por favor ingresa con tus datos de cuenta</p>
 
         <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
@@ -109,6 +116,7 @@
     <!-- /Login-->
 
   </div>
+  <app-need-help [href]="'https://api.whatsapp.com/send?phone=593980283746&text=Hola%20Cr%C3%A9dito%20Pagos.%20Quiero%20realizar%20una%20solicitud%20de%20cr%C3%A9dito%20para%20realizar%20%F0%9F%92%B5%20PAGOS%20A%20MIS%20PROVEEDORES.%20%0AMe%20pueden%20ayudar%20por%20favor%3F%0A%0A '"> </app-need-help>
 </div>
 <ng-template #mensajeModal let-modal>
   <div class="modal-header">

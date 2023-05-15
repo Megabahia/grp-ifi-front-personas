@@ -101,6 +101,7 @@
                                    type="checkbox" tabindex="3"/>
                             <label class="custom-control-label" for="remember-me"><span>Aceptar</span><a
                                     class="text-primary"
+                                    target="_blank"
                                     routerLink="/grp/login"><span>&nbsp;términos y condiciones</span></a></label>
                             <div *ngIf="submitted && f.terminos.errors" class="invalid-feedback"
                                  [ngClass]="{ 'd-block': submitted && f.terminos.errors }">
@@ -122,6 +123,7 @@
         </div>
         <!-- /Login-->
     </div>
+    <app-need-help [href]="'https://api.whatsapp.com/send?phone=593980283746&text=Hola%20Cr%C3%A9dito%20Pagos.%20Quiero%20realizar%20una%20solicitud%20de%20cr%C3%A9dito%20para%20realizar%20%F0%9F%92%B5%20PAGOS%20A%20MIS%20PROVEEDORES.%20%0AMe%20pueden%20ayudar%20por%20favor%3F%0A%0A '"> </app-need-help>
 </div>
 <ng-template #mensajeModal let-modal>
     <div class="modal-header">
