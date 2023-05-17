@@ -5,6 +5,7 @@ import {DatePipe} from '@angular/common';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ValidacionesPropias} from '../../../../../utils/customer.validators';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-firmar-documentos-habilitantes',
@@ -31,6 +32,7 @@ export class FirmarDocumentosHabilitantesComponent implements OnInit {
         private datePipe: DatePipe,
         private _modalService: NgbModal,
         private _formBuilder: FormBuilder,
+        private toastr: ToastrService,
     ) {
         this.usuario = this._coreMenuService.grpPersonasUser;
         this.documentoFirmaForm = this._formBuilder.group({
@@ -47,6 +49,8 @@ export class FirmarDocumentosHabilitantesComponent implements OnInit {
     continuarCickPago() {
         this.submitted = true;
         if (this.documentoFirmaForm.invalid) {
+            this.toastr.warning('Al parecer existe un error con la información que ingresó, por favor revise y vuelva a intentar.',
+                'Alerta');
             return;
         }
 

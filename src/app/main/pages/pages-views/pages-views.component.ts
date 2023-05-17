@@ -11,6 +11,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {PagesViewsService} from './pages-views.service';
 import moment from 'moment';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-pages-views',
@@ -40,7 +41,8 @@ export class PagesViewsComponent implements OnInit {
         private _router: Router,
         private _formBuilder: FormBuilder,
         private _pages_viewsService: PagesViewsService,
-        private _modalService: NgbModal
+        private _modalService: NgbModal,
+        private toastr: ToastrService,
     ) {
         this.listarProductos();
 
@@ -143,6 +145,8 @@ export class PagesViewsComponent implements OnInit {
         this.submitted = true;
 
         if (this.email_code_Form.invalid) {
+            this.toastr.warning('Al parecer existe un error con la información que ingresó, por favor revise y vuelva a intentar.',
+                'Alerta');
             return;
         }
 
