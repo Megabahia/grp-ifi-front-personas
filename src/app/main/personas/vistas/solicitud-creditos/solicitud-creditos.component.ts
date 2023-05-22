@@ -9,6 +9,7 @@ import {takeUntil} from 'rxjs/operators';
 import {CoreConfigService} from '../../../../../@core/services/config.service';
 import {Subject} from 'rxjs';
 import {ValidacionesPropias} from '../../../../../utils/customer.validators';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import Decimal from 'decimal.js';
 import {ToastrService} from 'ngx-toastr';
 
@@ -55,6 +56,7 @@ export class SolicitudCreditosComponent implements OnInit {
         private _serviceUpdateEmpresa: SolicitudCreditosService,
         private _router: Router,
         private toastr: ToastrService,
+        private modalService: NgbModal,
     ) {
         this._unsubscribeAll = new Subject();
         this._coreConfigService.config = {
@@ -424,6 +426,14 @@ export class SolicitudCreditosComponent implements OnInit {
                 new FormControl(this.formSolicitud.value?.especificaIngresos));
         }
     }
+
+    mostrarTerminos(event: Event, modal: any) {
+        event.preventDefault();
+        this.modalService.open(modal, {
+            size: 'lg'
+        });
+    }
+
 
     comprobarOtrosGastos(event) {
         if (event.target.value > 0) {
