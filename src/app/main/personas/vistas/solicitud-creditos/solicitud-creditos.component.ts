@@ -365,9 +365,8 @@ export class SolicitudCreditosComponent implements OnInit {
 
         this._serviceUpdateEmpresa.actualiarEmpresa(values).subscribe((valor) => {
             console.log('guardado', valor);
-            const newJson = JSON.parse(localStorage.getItem('grpPersonasUser'));
-            newJson.persona.empresaInfo = values.empresaInfo;
-            localStorage.setItem('grpPersonasUser', JSON.stringify(newJson));
+            this.usuario.persona.empresaInfo = valor.empresaInfo;
+            localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
             this._router.navigate([`/personas/requisitosCredito/${localStorage.getItem('montoCreditoFinal')}`]);
         });
         console.log('values', this.formSolicitud.value, values);
