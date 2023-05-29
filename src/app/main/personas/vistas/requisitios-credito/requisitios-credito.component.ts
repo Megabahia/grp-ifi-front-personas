@@ -123,9 +123,10 @@ export class RequisitiosCreditoComponent implements OnInit {
                 // });
             }
         );
+        this.usuario = this._coreMenuService.grpPersonasUser;
         if (localStorage.getItem('credito') !== null) {
             this.solicitarCredito = JSON.parse(localStorage.getItem('credito'));
-            this.solicitarCredito.tipoCredito = '';
+            this.solicitarCredito.tipoCredito = this.solicitarCredito.canal;
             this.solicitarCredito.empresaInfo = JSON.parse(localStorage.getItem('grpPersonasUser')).persona.empresaInfo;
             this.solicitarCredito.estadoCivil = JSON.parse(localStorage.getItem('grpPersonasUser')).persona.estadoCivil;
         } else {
@@ -162,14 +163,16 @@ export class RequisitiosCreditoComponent implements OnInit {
 
     crearCredito() {
         // Agregar informacion al credito
-        this.solicitarCredito.user_id = this.usuario.id;
-        this.solicitarCredito.nombres = this.usuario.persona.nombres;
-        this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
-        this.solicitarCredito.numeroIdentificacion = this.usuario.persona.rucEmpresa;
-        this.solicitarCredito.email = this.usuario.email;
-        this.solicitarCredito.razonSocial = this.usuario.persona.empresaInfo?.comercial;
-        this.solicitarCredito.rucEmpresa = this.usuario.persona.empresaInfo?.rucEmpresa;
-        this.solicitarCredito.empresaInfo = this.usuario.persona.empresaInfo;
+        if (Object.keys(this.usuario).length > 0) {
+            this.solicitarCredito.user_id = this.usuario.id;
+            this.solicitarCredito.nombres = this.usuario.persona.nombres;
+            this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
+            this.solicitarCredito.numeroIdentificacion = this.usuario.persona.rucEmpresa;
+            this.solicitarCredito.email = this.usuario.email;
+            this.solicitarCredito.razonSocial = this.usuario.persona.empresaInfo?.comercial;
+            this.solicitarCredito.rucEmpresa = this.usuario.persona.empresaInfo?.rucEmpresa;
+            this.solicitarCredito.empresaInfo = this.usuario.persona.empresaInfo;
+        }
         if (localStorage.getItem('credito') !== null) {
             this._creditosAutonomosService.actualizarCredito(this.solicitarCredito).subscribe((info) => {
             });
