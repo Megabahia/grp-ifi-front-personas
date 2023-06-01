@@ -193,4 +193,11 @@ export class RegistroComponent implements OnInit {
     captchaValidado(evento) {
         this.captcha = true;
     }
+
+    mostrarTerminos(event: Event, modal: any) {
+        event.preventDefault();
+        this._modalService.open(modal, {
+            size: 'lg'
+        });
+    }
 }

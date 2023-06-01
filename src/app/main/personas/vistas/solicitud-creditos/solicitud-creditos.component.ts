@@ -77,7 +77,6 @@ export class SolicitudCreditosComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.valoresLocalStorage();
         this.paramService.obtenerListaPadresSinToken('VALORES_CALCULAR_CREDITO_CREDICOMPRA').subscribe((info) => {
             info.map(item => {
                 if (item.nombre === 'PORCENTAJE_CONYUGE') {
@@ -185,11 +184,13 @@ export class SolicitudCreditosComponent implements OnInit {
                 totalEgresos: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
                 autorizacion: ['', [Validators.requiredTrue,]], //
             });
+        this.valoresLocalStorage();
         console.log('estado civil', this.usuario.persona.empresaInfo.esatdo_civil);
         if (this.usuario.persona.empresaInfo) {
             this.formSolicitud.patchValue({...this.usuario.persona.empresaInfo});
             if (this.usuario.persona.empresaInfo.esatdo_civil === 'Casado' || this.usuario.persona.empresaInfo.esatdo_civil === 'Unión libre') {
                 this.casado = true;
+                this.selectEstadoCivil();
             }
         }
         if (localStorage.getItem('credito')) {
@@ -201,6 +202,7 @@ export class SolicitudCreditosComponent implements OnInit {
             this.formSolicitud.get('celular').setValue(credito.empresaInfo.celular);
             if (credito.empresaInfo.esatdo_civil === 'Casado' || credito.empresaInfo.esatdo_civil === 'Unión libre') {
                 this.casado = true;
+                this.selectEstadoCivil();
             }
         }
         this.obtenerPaisOpciones();
@@ -222,7 +224,7 @@ export class SolicitudCreditosComponent implements OnInit {
 
     selectEstadoCivil() {
         this.casado = false;
-        this.estadoCivil = this.teams.nativeElement.value;
+        // this.estadoCivil = this.teams.nativeElement.value;
         this.declareFormConyuge();
         console.log(this.formSolicitud.get('esatdo_civil').value);
         if (this.formSolicitud.get('esatdo_civil').value === 'Casado' || this.formSolicitud.get('esatdo_civil').value === 'Unión libre') {
@@ -230,9 +232,13 @@ export class SolicitudCreditosComponent implements OnInit {
             //     .addControl('nombreConyuge', new FormControl('', Validators.required));
             // .setControl('nombreConyuge', new FormControl('', Validators.required));
             (this.formSolicitud as FormGroup).setControl('conyuge', this._formBuilder.group({
-                nombreConyuge: ['', [Validators.required]],
-                telefonoConyuge: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]], //
-                cedulaConyuge: ['', [Validators.required]],
+                nombreConyuge: [this.formSolicitud.value.conyuge?.nombreConyuge, [Validators.required]],
+                telefonoConyuge: [this.formSolicitud.value.conyuge?.telefonoConyuge,
+                    [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]
+                ],
+                cedulaConyuge: [this.formSolicitud.value.conyuge?.cedulaConyuge,
+                    [Validators.required, ValidacionesPropias.cedulaValido, Validators.minLength(10), Validators.maxLength(10)]
+                ],
             }));
             console.log('control conyuge', this.formSolicitud.get('conyuge')['controls']);
             this.casado = true;
@@ -253,7 +259,7 @@ export class SolicitudCreditosComponent implements OnInit {
         console.log(this.estadoCivilStorage);
         if (this.estadoCivilStorage === 'Casado' || this.estadoCivilStorage === 'Unión libre') {
             this.casado = true;
-
+            this.selectEstadoCivil();
         } else {
             console.log('else');
             this.casado = false;

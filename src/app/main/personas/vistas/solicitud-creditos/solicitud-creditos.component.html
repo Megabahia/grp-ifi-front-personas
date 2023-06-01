@@ -450,7 +450,8 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label>Numero de cédula:
+                                                                <label>
+                                                                    Número de cédula de cónyuge:
                                                                 </label>
                                                                 <input type="text" formControlName="cedulaConyuge"
                                                                        class="form-control"
@@ -461,6 +462,18 @@
                                                                  style="display: block;">
                                                                 <div *ngIf="formSolicitud.get('conyuge')['controls'].cedulaConyuge.errors?.required">
                                                                     Cédula es requerido
+                                                                </div>
+                                                                <div *ngIf="formSolicitud.get('conyuge')['controls'].cedulaConyuge.errors?.cedulaInvalid">
+                                                                    Cédula es incorrecta
+                                                                </div>
+                                                                <div *ngIf="formSolicitud.get('conyuge')['controls'].cedulaConyuge.errors?.pattern">
+                                                                    Ingrese solo números
+                                                                </div>
+                                                                <div *ngIf="formSolicitud.get('conyuge')['controls'].cedulaConyuge.errors?.minlength">
+                                                                    Ingrese mínimo 10 dígitos
+                                                                </div>
+                                                                <div *ngIf="formSolicitud.get('conyuge')['controls'].cedulaConyuge.errors?.maxlength">
+                                                                    Ingrese máximo 10 dígitos
                                                                 </div>
                                                             </div>
                                                         </div>
