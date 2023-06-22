@@ -45,6 +45,15 @@ export class SolicitudCreditosComponent implements OnInit {
     public paisReferido3;
     public provinciaReferido3;
     public ciudadReferido3;
+    public paisReComercial1;
+    public provinciaReComercial1;
+    public ciudadReComercial1;
+    public paisReComercial2;
+    public provinciaReComercial2;
+    public ciudadReComercial2;
+    public paisReComercial3;
+    public provinciaReComercial3;
+    public ciudadReComercial3;
     public tipoParentesco = [];
     public listadoEstadoCivil;
     public porcentajeConyuge = 2;
@@ -176,18 +185,27 @@ export class SolicitudCreditosComponent implements OnInit {
                         negocioDuenoComercial: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                         telefonoDuenoComercial: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
                         direccionDuenoComercial: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]],
+                        pais: ['', [Validators.required]],
+                        provincia: ['', [Validators.required]],
+                        ciudad: ['', [Validators.required]],
                     }),
                     this._formBuilder.group({
                         nombresDuenoComercial: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                         negocioDuenoComercial: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                         telefonoDuenoComercial: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
                         direccionDuenoComercial: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]],
+                        pais: ['', [Validators.required]],
+                        provincia: ['', [Validators.required]],
+                        ciudad: ['', [Validators.required]],
                     }),
                     this._formBuilder.group({
                         nombresDuenoComercial: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                         negocioDuenoComercial: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                         telefonoDuenoComercial: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
                         direccionDuenoComercial: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]],
+                        pais: ['', [Validators.required]],
+                        provincia: ['', [Validators.required]],
+                        ciudad: ['', [Validators.required]],
                     }),
                 ], [ValidacionesPropias.comercialesTelefonos]),
                 inresosMensualesVentas: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], //
@@ -288,13 +306,13 @@ export class SolicitudCreditosComponent implements OnInit {
 
     obtenerArrays() {
         this.paramService.obtenerListaTipo('PAIS').subscribe((info) => {
-            this.paises = this.paisEmpresa = this.paisReferido1 = this.paisReferido2 = this.paisReferido3 = info;
+            this.paises = this.paisReComercial1 = this.paisReComercial2 = this.paisReComercial3 = this.paisEmpresa = this.paisReferido1 = this.paisReferido2 = this.paisReferido3 = info;
         });
         this.paramService.obtenerListaTipo('PROVINCIA').subscribe((info) => {
-            this.provincias = this.provinciaEmpresa = this.provinciaReferido1 = this.provinciaReferido2 = this.provinciaReferido3 = info;
+            this.provincias = this.provinciaReComercial1 = this.provinciaReComercial2 = this.provinciaReComercial3 = this.provinciaEmpresa = this.provinciaReferido1 = this.provinciaReferido2 = this.provinciaReferido3 = info;
         });
         this.paramService.obtenerListaTipo('Ciudad').subscribe((info) => {
-            this.ciudades = this.ciudadEmpresa = this.ciudadReferido1 = this.ciudadReferido2 = this.ciudadReferido3 = info;
+            this.ciudades = this.ciudadReComercial1 = this.ciudadReComercial2 = this.ciudadReComercial3 = this.ciudadEmpresa = this.ciudadReferido1 = this.ciudadReferido2 = this.ciudadReferido3 = info;
         });
     }
     obtenerPaisOpciones(event = null, variablePais) {
@@ -312,6 +330,8 @@ export class SolicitudCreditosComponent implements OnInit {
         const idPadre = this.provincias.find(item => item.nombre === event?.target.value)?._id;
         this[variableCiudad] = this.ciudades.filter(item => item.idPadre === idPadre);
     }
+
+
 
     obtenerEstadosCiviles() {
         this.paramService.obtenerListaPadresSinToken('ESTADO_CIVIL').subscribe((info) => {

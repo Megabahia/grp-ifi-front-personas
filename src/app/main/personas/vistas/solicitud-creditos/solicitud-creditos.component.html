@@ -800,13 +800,18 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <h3>REFERENCIAS COMERCIALES</h3>
+                                        <div class="row">
+                                            <div class="col-md-12 my-1">
+                                                <h4>REFERENCIAS COMERCIALES</h4>
+                                            </div>
+                                        </div>
                                         <ng-container formArrayName="comerciales">
                                             <ng-container
                                                     *ngFor="let comercial of formSolicitud.get('comerciales')['controls']; let i = index">
-                                                <h5>
-                                                    REFERENCIAS COMERCIALES {{i + 1}}:
-                                                </h5>
+
+                                                <div class="col-md-12 my-1">
+                                                    <h4>REFERENCIAS COMERCIALES {{i + 1}}:</h4>
+                                                </div>
                                                 <div [formGroup]="comercial">
                                                     <div class="row">
                                                         <div class="col-md-4">
@@ -900,8 +905,71 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="pais">País del negocio</label>
+                                                                <select class="form-control select2" id="pais1"
+                                                                        formControlName="pais"
+                                                                        (change)="obtenerProvinciaOpciones($event, 'provinciaReComercial{{i+1}}')">
+                                                                    <option value="">- Seleccione -</option>
+                                                                    <option *ngFor="let paisOp of paisReComercial1"
+                                                                            value="{{paisOp.nombre}}">{{paisOp.nombre}}</option>
+                                                                </select>
+                                                                <div *ngIf="formSolicitud && comercial.controls?.pais?.errors"
+                                                                     class="invalid-feedback" style="display: block;">
+                                                                    <div *ngIf="comercial.controls?.pais.errors.required">País es
+                                                                        requerido
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="provincia">Provincia del negocio</label>
+                                                                <select class="form-control select2" formControlName="provincia"
+                                                                        id="provincia" (change)="obtenerCiudadOpciones($event, 'ciudadReComercial' + (i+1)) ">
+                                                                    <option value="">- Seleccione -</option>
+                                                                    <option *ngFor="let provinciaOp of provinciaReComercial1"
+                                                                            value="{{provinciaOp.nombre}}">{{provinciaOp.nombre}}</option>
+
+                                                                </select>
+                                                                <div *ngIf="formSolicitud && comercial.controls?.provincia?.errors"
+                                                                     class="invalid-feedback" style="display: block;">
+                                                                    <div *ngIf="comercial.controls?.provincia?.errors.required">Provincia es
+                                                                        requerido
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="ciudad">Ciudad del negocio</label>
+                                                                <select class="form-control select2" formControlName="ciudad"
+                                                                        id="ciudad">
+                                                                    <option value="">- Seleccione -</option>
+                                                                    <ng-container *ngIf="(i+1)==1">
+                                                                        <option *ngFor="let ciudadOp of ciudadReComercial1"
+                                                                                value="{{ciudadOp.nombre}}">{{ciudadOp.nombre}}</option>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="(i+1)==2">
+                                                                        <option *ngFor="let ciudadOp of ciudadReComercial2"
+                                                                                value="{{ciudadOp.nombre}}">{{ciudadOp.nombre}}</option>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="(i+1)==3">
+                                                                        <option *ngFor="let ciudadOp of ciudadReComercial3"
+                                                                                value="{{ciudadOp.nombre}}">{{ciudadOp.nombre}}</option>
+                                                                    </ng-container>
+                                                                </select>
+                                                                <div *ngIf="formSolicitud && comercial.controls?.ciudad.errors"
+                                                                     class="invalid-feedback" style="display: block;">
+                                                                    <div *ngIf="comercial.controls?.ciudad.errors.required">Ciudad es
+                                                                        requerido
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </ng-container>
                                         </ng-container>

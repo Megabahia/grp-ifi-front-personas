@@ -15,7 +15,7 @@ import {RouterModule} from '@angular/router';
 import {ContentHeaderModule} from 'app/layout/components/content-header/content-header.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {SwiperModule} from 'ngx-swiper-wrapper';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CoreTouchspinModule} from '@core/components/core-touchspin/core-touchspin.module';
 import {CoreSidebarModule} from '@core/components';
 import {AuthGuard} from '../../auth/helpers/auth.guards';
@@ -402,6 +402,9 @@ const routes = [
         NgxMaskModule.forRoot(maskConfig),
         SharedModule,
         SharedModule,
+        CommonModule,
+        CoreCommonModule,
+        ReactiveFormsModule,
     ],
     exports: [
         BienvenidoComponent,
