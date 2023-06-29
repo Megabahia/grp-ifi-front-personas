@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CoreConfigService} from '../../../../@core/services/config.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import Decimal from 'decimal.js';
 import {takeUntil} from 'rxjs/operators';
@@ -27,11 +27,15 @@ export class PreApprovedCreditLineComponent implements OnInit {
     constructor(
         private _coreConfigService: CoreConfigService,
         private _formBuilder: FormBuilder,
+        private _route: ActivatedRoute,
         private _router: Router,
         private _preArpovedCreditService: PreArpovedCreditLineService,
         private modalService: NgbModal,
         private toastr: ToastrService,
     ) {
+        this._route.queryParams.subscribe(params => {
+            localStorage.setItem('registrarUsuario', JSON.stringify({email: params['email'], nombre: params['nombre'] }) );
+        });
         const ref = document.referrer;
         const host = document.location.host;
         // if (ref !== 'https://credicompra.com/') {

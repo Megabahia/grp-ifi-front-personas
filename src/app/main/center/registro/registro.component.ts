@@ -36,6 +36,8 @@ export class RegistroComponent implements OnInit {
     private _unsubscribeAll: Subject<any>;
     public captcha: boolean;
     public siteKey: string;
+    public usuarioRegistrar = null;
+    public desabilitar = false;
 
     /**
      * Constructor
@@ -149,8 +151,12 @@ export class RegistroComponent implements OnInit {
      * On init
      */
     ngOnInit(): void {
+        this.usuarioRegistrar = JSON.parse(localStorage.getItem('registrarUsuario'));
+        if (this.usuarioRegistrar) {
+            this.desabilitar = true;
+        }
         this.registerForm = this._formBuilder.group({
-            correo: ['', [Validators.required, Validators.email]],
+            correo: [ this.usuarioRegistrar ? this.usuarioRegistrar.email : '', [Validators.required, Validators.email]],
             // password: ['', [Validators.required]],
             // confirmPassword: ['', [Validators.required]],
             terminos: [false, [Validators.requiredTrue]]
