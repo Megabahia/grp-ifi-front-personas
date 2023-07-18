@@ -697,109 +697,6 @@
                                             </ng-container>
                                         </ng-container>
 
-                                        <h3>
-                                            INGRESOS Y GASTOS DEL NEGOCIO:
-                                        </h3>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>
-                                                        Registre el Monto de ingresos mensuales de su empresa o negocio:
-                                                    </label>
-                                                    <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="inresosMensualesVentas"
-                                                           class="form-control">
-                                                </div>
-                                                <div *ngIf="submitted && controlsFrom.inresosMensualesVentas.errors"
-                                                     class="invalid-feedback"
-                                                     style="display: block;">
-                                                    <div *ngIf="controlsFrom.inresosMensualesVentas.errors.required">
-                                                        Ingresos mensuales es
-                                                        requerido
-                                                    </div>
-                                                    <div *ngIf="controlsFrom.inresosMensualesVentas.errors.pattern">
-                                                        Ingresos solo numeros
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4" *ngIf="casado">
-                                                <div class="form-group">
-                                                    <label>Sueldo cónyuge (VALOR):
-                                                    </label>
-                                                    <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="sueldoConyuge"
-                                                           class="form-control">
-                                                </div>
-                                                <div *ngIf="submitted && controlsFrom.sueldoConyuge.errors"
-                                                     class="invalid-feedback"
-                                                     style="display: block;">
-                                                    <div *ngIf="controlsFrom.sueldoConyuge.errors.required">
-                                                        Sueldo de cónyuge es requerido
-                                                    </div>
-                                                    <div *ngIf="controlsFrom.sueldoConyuge.errors.pattern">
-                                                        Ingresos solo numeros
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Otros ingresos (valor) :
-                                                    </label>
-                                                    <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="otrosIngresos"
-                                                           class="form-control"
-                                                           (change)="comprobarOtrosIngresos($event)">
-                                                </div>
-                                                <div *ngIf="submitted && controlsFrom.otrosIngresos.errors"
-                                                     class="invalid-feedback"
-                                                     style="display: block;">
-                                                    <!--                                                    <div *ngIf="controlsFrom.otrosIngresos.errors.required">-->
-                                                    <!--                                                        Sueldo cónyuge es requerido-->
-                                                    <!--                                                    </div>-->
-                                                    <div *ngIf="controlsFrom.otrosIngresos.errors.pattern">
-                                                        Ingresos solo numeros
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          <div class="col-md-4">
-                                            <div class="form-group">
-                                              <label>
-                                                Especifique otros ingresos (ejemplo: vendo artículos de revista
-                                                en mi tiempo libre, etc.)
-                                              </label>
-                                              <input type="text" formControlName="especificaIngresos"
-                                                     class="form-control"
-                                                     value="">
-                                            </div>
-                                            <div *ngIf="submitted && controlsFrom.especificaIngresos.errors"
-                                                 class="invalid-feedback"
-                                                 style="display: block;">
-                                              <div *ngIf="controlsFrom.especificaIngresos.errors.required">
-                                                Ingrese solo letras requerido
-                                              </div>
-                                              <div *ngIf="controlsFrom.especificaIngresos.errors.pattern">
-                                                Ingrese solo letras requerido
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-4">
-                                            <div class="form-group">
-                                              <label>
-                                                Total ingresos
-                                              </label>
-                                              <input type="text" formControlName="totalIngresos"
-                                                     class="form-control"
-                                                     disabled>
-                                            </div>
-                                            <div *ngIf="submitted && controlsFrom.totalIngresos.errors"
-                                                 class="invalid-feedback"
-                                                 style="display: block;">
-                                              <div *ngIf="controlsFrom.totalIngresos.errors.re">
-                                                Ingrese solo letras requerido
-                                              </div>
-                                              <div *ngIf="controlsFrom.totalIngresos.errors.pattern">
-                                                Ingrese solo letras requerido
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
                                         <div class="row">
                                             <div class="col-md-12 my-1">
                                                 <h4>REFERENCIAS COMERCIALES</h4>
@@ -974,7 +871,110 @@
                                             </ng-container>
                                         </ng-container>
                                         <h3>
-                                            INGRESOS Y GASTOS DEL NEGOCIO:
+                                            INGRESOS DEL NEGOCIO:
+                                        </h3>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Registre el Monto de ingresos mensuales de su empresa o negocio:
+                                                    </label>
+                                                    <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="inresosMensualesVentas"
+                                                           class="form-control">
+                                                </div>
+                                                <div *ngIf="submitted && controlsFrom.inresosMensualesVentas.errors"
+                                                     class="invalid-feedback"
+                                                     style="display: block;">
+                                                    <div *ngIf="controlsFrom.inresosMensualesVentas.errors.required">
+                                                        Ingresos mensuales es
+                                                        requerido
+                                                    </div>
+                                                    <div *ngIf="controlsFrom.inresosMensualesVentas.errors.pattern">
+                                                        Ingresos solo numeros
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4" *ngIf="casado">
+                                                <div class="form-group">
+                                                    <label>Sueldo cónyuge (VALOR):
+                                                    </label>
+                                                    <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="sueldoConyuge"
+                                                           class="form-control">
+                                                </div>
+                                                <div *ngIf="submitted && controlsFrom.sueldoConyuge.errors"
+                                                     class="invalid-feedback"
+                                                     style="display: block;">
+                                                    <div *ngIf="controlsFrom.sueldoConyuge.errors.required">
+                                                        Sueldo de cónyuge es requerido
+                                                    </div>
+                                                    <div *ngIf="controlsFrom.sueldoConyuge.errors.pattern">
+                                                        Ingresos solo numeros
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Otros ingresos (valor) :
+                                                    </label>
+                                                    <input [allowNegativeNumbers]="true" mask="separator.0" (change)="totalIngresos()" type="text" formControlName="otrosIngresos"
+                                                           class="form-control"
+                                                           (change)="comprobarOtrosIngresos($event)">
+                                                </div>
+                                                <div *ngIf="submitted && controlsFrom.otrosIngresos.errors"
+                                                     class="invalid-feedback"
+                                                     style="display: block;">
+                                                    <!--                                                    <div *ngIf="controlsFrom.otrosIngresos.errors.required">-->
+                                                    <!--                                                        Sueldo cónyuge es requerido-->
+                                                    <!--                                                    </div>-->
+                                                    <div *ngIf="controlsFrom.otrosIngresos.errors.pattern">
+                                                        Ingresos solo numeros
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Especifique otros ingresos (ejemplo: vendo artículos de revista
+                                                        en mi tiempo libre, etc.)
+                                                    </label>
+                                                    <input type="text" formControlName="especificaIngresos"
+                                                           class="form-control"
+                                                           value="">
+                                                </div>
+                                                <div *ngIf="submitted && controlsFrom.especificaIngresos.errors"
+                                                     class="invalid-feedback"
+                                                     style="display: block;">
+                                                    <div *ngIf="controlsFrom.especificaIngresos.errors.required">
+                                                        Ingrese solo letras requerido
+                                                    </div>
+                                                    <div *ngIf="controlsFrom.especificaIngresos.errors.pattern">
+                                                        Ingrese solo letras requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Total ingresos
+                                                    </label>
+                                                    <input type="text" formControlName="totalIngresos"
+                                                           class="form-control"
+                                                           disabled>
+                                                </div>
+                                                <div *ngIf="submitted && controlsFrom.totalIngresos.errors"
+                                                     class="invalid-feedback"
+                                                     style="display: block;">
+                                                    <div *ngIf="controlsFrom.totalIngresos.errors.re">
+                                                        Ingrese solo letras requerido
+                                                    </div>
+                                                    <div *ngIf="controlsFrom.totalIngresos.errors.pattern">
+                                                        Ingrese solo letras requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h3>
+                                            GASTOS DEL NEGOCIO:
                                         </h3>
                                         <div class="row">
                                             <div class="col-md-4">
