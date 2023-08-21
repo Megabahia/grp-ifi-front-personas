@@ -100,11 +100,8 @@ export class CreditRequirementsComponent implements OnInit, OnDestroy {
             this.paramService.obtenerListaPadresSinToken(this.tipoPersona).subscribe((info) => {
                 info.find((item) => {
                     if (data.valor > this.montoCreditoFinal) {
-                        console.log('ingresa', info);
                         this.requisitos = info.find((item2) => {
                             if (item2.valor === 'INFERIOR') {
-                                console.log('ingresa', item2);
-                                item2.config = item2.config.split(',');
                                 return item2;
                             }
                         });
@@ -112,7 +109,6 @@ export class CreditRequirementsComponent implements OnInit, OnDestroy {
                     } else {
                         this.requisitos = info.find((item2) => {
                             if (item2.valor === 'SUPERIROR') {
-                                item2.config = item2.config.split(',');
                                 return item2;
                             }
                         });
