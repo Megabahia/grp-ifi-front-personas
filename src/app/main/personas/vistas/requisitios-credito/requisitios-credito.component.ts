@@ -38,7 +38,6 @@ export class RequisitiosCreditoComponent implements OnInit {
     public estadoCivil;
 
     public montoCreditoFinal;
-    public valorSolicitado: number;
     public valorMinimo;
     public loading = false;
     public formulario: FormGroup;
@@ -203,7 +202,7 @@ export class RequisitiosCreditoComponent implements OnInit {
             return;
         }
         // to do  asiganar el nuevo valor  soliciatdo al credito
-        this.solicitarCredito.monto = this.valorSolicitado;
+        this.solicitarCredito.monto = this.Form.monto.value;
         // Agregar informacion al credito
         if (Object.keys(this.usuario).length > 0) {
             this.solicitarCredito.user_id = this.usuario.id;
