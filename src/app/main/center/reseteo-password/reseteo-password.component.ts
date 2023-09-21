@@ -92,7 +92,9 @@ export class ReseteoPasswordComponent implements OnInit {
     });
 
     this.forgotPasswordForm = this._formBuilder.group({
-      password: ['', [Validators.required]],
+        password: ['', [Validators.minLength(8),
+            Validators.pattern('(?=[A-Za-z0-9]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,}).*$'),
+            Validators.required]],
       confirmPassword: ['', [Validators.required]]
     });
 

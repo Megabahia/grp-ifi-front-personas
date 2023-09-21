@@ -221,7 +221,6 @@ export class SolicitudCreditosComponent implements OnInit {
                 autorizacion: ['', [Validators.requiredTrue,]], //
             });
         this.valoresLocalStorage();
-        console.log('estado civil', this.usuario.persona.empresaInfo.esatdo_civil);
         if (this.usuario.persona.empresaInfo) {
             this.formSolicitud.patchValue({...this.usuario.persona.empresaInfo});
             if (this.usuario.persona.empresaInfo.esatdo_civil === 'Casado' || this.usuario.persona.empresaInfo.esatdo_civil === 'Unión libre') {
@@ -315,6 +314,7 @@ export class SolicitudCreditosComponent implements OnInit {
             this.ciudades = this.ciudadReComercial1 = this.ciudadReComercial2 = this.ciudadReComercial3 = this.ciudadEmpresa = this.ciudadReferido1 = this.ciudadReferido2 = this.ciudadReferido3 = info;
         });
     }
+
     obtenerPaisOpciones(event = null, variablePais) {
         const idPadre = this.paises.find(item => item.nombre === event?.target.value)?._id;
         this[variablePais] = this.paises.filter(item => item.idPadre === idPadre);
@@ -330,7 +330,6 @@ export class SolicitudCreditosComponent implements OnInit {
         const idPadre = this.provincias.find(item => item.nombre === event?.target.value)?._id;
         this[variableCiudad] = this.ciudades.filter(item => item.idPadre === idPadre);
     }
-
 
 
     obtenerEstadosCiviles() {
