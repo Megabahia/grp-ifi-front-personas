@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {RegistroDatosPagoProvedoresService} from '../requisito-solicitud-microcreditos/registro-datos-pago-provedores.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {SolicitarCredito} from '../../models/persona';
@@ -10,6 +10,8 @@ import {Subject} from 'rxjs';
 import {CoreConfigService} from '../../../../../@core/services/config.service';
 import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
 import {jsPDF} from 'jspdf';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-requisitios-credito',
@@ -17,6 +19,7 @@ import {jsPDF} from 'jspdf';
     styleUrls: ['./requisitios-credito.component.scss']
 })
 export class RequisitiosCreditoComponent implements OnInit {
+    @ViewChild('modalAviso') modalAviso;
 
     private _unsubscribeAll: Subject<any>;
     tiutlo;
@@ -34,6 +37,17 @@ export class RequisitiosCreditoComponent implements OnInit {
     private tipoPersona: string;
     public estadoCivil;
 
+    public montoCreditoFinal;
+    public valorMinimo;
+    public loading = false;
+    public formulario: FormGroup;
+    public plazo = 12;
+    public mensaje: string;
+
+    get Form() {
+        return this.formulario.controls;
+    }
+
 
     constructor(
         private _coreConfigService: CoreConfigService,
@@ -43,6 +57,7 @@ export class RequisitiosCreditoComponent implements OnInit {
         private _creditosAutonomosService: CreditosAutonomosService,
         private rutaActiva: ActivatedRoute,
         private paramService: ParametrizacionesService,
+        private modalService: NgbModal,
     ) {
         const casados = ['UNIÓN LIBRE', 'CASADO'];
         if (casados.find(item => item === localStorage.getItem('estadoCivil').toUpperCase())) {
@@ -133,11 +148,28 @@ export class RequisitiosCreditoComponent implements OnInit {
         } else {
             this.solicitarCredito = this.inicialidarSolicitudCredito();
         }
+        this.montoCreditoFinal = localStorage.getItem('montoCreditoFinal');
+        this.formulario = new FormGroup({
+            monto: new FormControl(this.montoCreditoFinal, [
+                Validators.required, Validators.pattern('^([0-9])+$'), Validators.max(this.montoCreditoFinal)
+            ]),
+        });
     }
 
     ngOnInit(): void {
 
         this.usuario = this._coreMenuService.grpPersonasUser;
+        this.paramService.obtenerListaPadresSinToken('VALOR_MINIMO_SOLICITAR_CREDITO_MICROCREDITO').subscribe((info) => {
+            this.valorMinimo = info[0].valor;
+            this.formulario.get('monto').setValidators([
+                Validators.required, Validators.pattern('^([0-9])+$'),
+                Validators.max(this.montoCreditoFinal), Validators.min(this.valorMinimo)
+            ]);
+            this.formulario.get('monto').updateValueAndValidity();
+        });
+        this.paramService.obtenerParametroNombreTipo('TIEMPO_PLAZO', 'VALORES_CALCULAR_CREDITO_CREDICOMPRA').subscribe((info) => {
+            this.plazo = info.valor;
+        });
     }
 
     inicialidarSolicitudCredito(): SolicitarCredito {
@@ -163,6 +195,14 @@ export class RequisitiosCreditoComponent implements OnInit {
     }
 
     crearCredito() {
+        // to do poner la parametrización por el 2000 y el 1000
+        if (this.formulario.invalid) {
+            this.mensaje = 'El valor ingresado no es permitido';
+            this.abrirModalLg(this.modalAviso);
+            return;
+        }
+        // to do  asiganar el nuevo valor  soliciatdo al credito
+        this.solicitarCredito.monto = this.Form.monto.value;
         // Agregar informacion al credito
         if (Object.keys(this.usuario).length > 0) {
             this.solicitarCredito.user_id = this.usuario.id;
@@ -213,4 +253,9 @@ export class RequisitiosCreditoComponent implements OnInit {
         }
     }
 
+    abrirModalLg(modal) {
+        this.modalService.open(modal, {
+            size: 'lg'
+        });
+    }
 }
