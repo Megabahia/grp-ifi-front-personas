@@ -35,7 +35,7 @@ export class CreditosAutonomosService {
     }
 
     obtenerInformacion(id) {
-        return this._httpClient.get<any>(`${environment.apiUrl}/personas/personas/listOne/${id}`,);
+        return this._httpClient.get<any>(`${environment.apiUrl}/personas/personas/listOne/${id}`);
     }
 
     crearCredito(datos) {

@@ -4,6 +4,14 @@ import {Router} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
+/**
+ * IFIS
+ * PErsonas
+ * ESta pantalla sirve para informar los paso de la solicitud de credito
+ * Rutas:
+ * No tiene llamada a rutas
+ */
+
 @Component({
   selector: 'app-credit-request',
   templateUrl: './credit-request.component.html',

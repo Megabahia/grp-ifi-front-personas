@@ -9,6 +9,14 @@ import {Subject} from 'rxjs';
 import {PreArpovedCreditLineService} from './pre-arpoved-credit-line.service';
 import {ToastrService} from 'ngx-toastr';
 
+/**
+ * IFIS
+ * PErsonas
+ * ESta pantalla sirve para consultar el codigo del credito preaprobado
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/creditoPreaprobado/codigo`,
+ */
+
 @Component({
     selector: 'app-pre-approved-credit-line',
     templateUrl: './pre-approved-credit-line.component.html',
@@ -34,7 +42,7 @@ export class PreApprovedCreditLineComponent implements OnInit {
         private toastr: ToastrService,
     ) {
         this._route.queryParams.subscribe(params => {
-            localStorage.setItem('registrarUsuario', JSON.stringify({email: params['email'], nombre: params['nombre'] }) );
+            localStorage.setItem('registrarUsuario', JSON.stringify({email: params['email'], nombre: params['nombre']}));
         });
         const ref = document.referrer;
         const host = document.location.host;

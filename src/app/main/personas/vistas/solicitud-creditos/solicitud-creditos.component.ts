@@ -5,13 +5,23 @@ import {CoreMenuService} from '../../../../../@core/components/core-menu/core-me
 import {SolicitudCreditosService} from './solicitud-creditos.service';
 import {Router} from '@angular/router';
 import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
-import {takeUntil} from 'rxjs/operators';
 import {CoreConfigService} from '../../../../../@core/services/config.service';
 import {Subject} from 'rxjs';
 import {ValidacionesPropias} from '../../../../../utils/customer.validators';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import Decimal from 'decimal.js';
 import {ToastrService} from 'ngx-toastr';
+
+/**
+ * IFIS
+ * PErsonas
+ * Esta pantalla sirve para crear una solicitud de credito
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ * `${environment.apiUrl}/central/param/list/tipo/todos/`,
+ * `${environment.apiUrl}/central/param/listar/tipo/todos`,
+ * `${environment.apiUrl}/personas/personas/infoEmpresa/${data.user_id}`,
+ */
 
 @Component({
     selector: 'app-solicitud-creditos',
@@ -279,9 +289,9 @@ export class SolicitudCreditosComponent implements OnInit {
                 new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]));
         } else {
             (this.formSolicitud as FormGroup).setControl('conyuge', this._formBuilder.group({
-                nombreConyuge: ['',],
-                telefonoConyuge: ['',],
-                cedulaConyuge: ['',]
+                nombreConyuge: [''],
+                telefonoConyuge: [''],
+                cedulaConyuge: ['']
             }));
             this.formSolicitud.controls['sueldoConyuge'].setValue(0);
         }

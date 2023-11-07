@@ -15,6 +15,15 @@ import {ToastrService} from 'ngx-toastr';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
+/**
+ * IFIS
+ * PErsonas
+ * ESta pantalla sirve para mostrar el saldo de los proveedores
+ * Rutas:
+ * `${environment.apiUrl}/personas/proveedores/listOne/${data}`
+ * `${environment.apiUrl}/corp/pagoProveedores/update/${datos.get('_id')}`,
+ */
+
 @Component({
     selector: 'app-saldo-proveedores',
     templateUrl: './saldo-proveedores.component.html',

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CoreConfigService} from '@core/services/config.service';
@@ -7,16 +7,23 @@ import {takeUntil} from 'rxjs/operators';
 import {RegistroService} from './registro.service';
 import {Role} from '../../../auth/models/role';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {environment} from "../../../../environments/environment";
+import {environment} from '../../../../environments/environment';
 import {ToastrService} from 'ngx-toastr';
 
+/*
+* IFIS
+* Personas
+* Este pantalla sirve para registar a un usuario
+* Rutas:
+* `${environment.apiUrl}/central/usuarios/create/`,
+* */
 
 @Component({
     selector: 'app-registro',
     templateUrl: './registro.component.html',
     styleUrls: ['./registro.component.scss']
 })
-export class RegistroComponent implements OnInit {
+export class RegistroComponent implements OnInit, OnDestroy {
     @ViewChild('mensajeModal') mensajeModal;
     @ViewChild('mensajeConfirmModal') mensajeConfirmModal;
     //  Public
@@ -39,11 +46,6 @@ export class RegistroComponent implements OnInit {
     public usuarioRegistrar = null;
     public desabilitar = false;
 
-    /**
-     * Constructor
-     *
-     * @param {CoreConfigService} _coreConfigService
-     */
     constructor(
         private _coreConfigService: CoreConfigService,
         private _registroService: RegistroService,
@@ -113,7 +115,7 @@ export class RegistroComponent implements OnInit {
             }
         ).subscribe((info) => {
 
-                if (info.email == 'Ya existe usuarios con este email.') {
+                if (info.email === 'Ya existe usuarios con este email.') {
                     this.error = null;
                     this.loading = false;
                     this.mensaje = info.email;
@@ -156,7 +158,7 @@ export class RegistroComponent implements OnInit {
             this.desabilitar = true;
         }
         this.registerForm = this._formBuilder.group({
-            correo: [ this.usuarioRegistrar ? this.usuarioRegistrar.email : '', [Validators.required, Validators.email]],
+            correo: [this.usuarioRegistrar ? this.usuarioRegistrar.email : '', [Validators.required, Validators.email]],
             // password: ['', [Validators.required]],
             // confirmPassword: ['', [Validators.required]],
             terminos: [false, [Validators.requiredTrue]]
@@ -172,7 +174,7 @@ export class RegistroComponent implements OnInit {
     }
 
     compararPassword() {
-        if (this.f.password.value == this.f.confirmPassword.value) {
+        if (this.f.password.value === this.f.confirmPassword.value) {
             this.passwordSimilar = true;
         } else {
             this.passwordSimilar = false;
