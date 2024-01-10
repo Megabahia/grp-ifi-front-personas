@@ -137,7 +137,7 @@ export class SolicitudCreditosComponent implements OnInit {
                 calleSecundaria: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
                 refenciaNegocio: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
                 direccionDomiciolRepresentante: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.\\s]+')]], //
-                esatdo_civil: ['', [Validators.required]], //
+                esatdo_civil: [localStorage.getItem('estadoCivil'), [Validators.required]], //
                 correo: [this.usuario.email, [Validators.required, Validators.email]], //
                 telefono: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
                 celular: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]],
@@ -296,6 +296,7 @@ export class SolicitudCreditosComponent implements OnInit {
         } else {
             console.log('else');
             this.casado = false;
+            this.selectEstadoCivil();
         }
         this.tipoPersonaStorage = localStorage.getItem('tipoPersona');
         this.montoCreditoFinalStorage = localStorage.getItem('montoCreditoFinal');
