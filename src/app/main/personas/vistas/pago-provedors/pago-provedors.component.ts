@@ -5,7 +5,16 @@ import {Router} from '@angular/router';
 import {AuthenticationService} from '../../../../auth/service';
 import {PagoProvedorsService} from './pago-provedors.service';
 import {ToastrService} from 'ngx-toastr';
-import {log} from 'util';
+
+/**
+ * IFIS
+ * Personas
+ * ESta pantalla sirve para pagar a los proveedores
+ * Rutas:
+ * `${environment.apiUrl}/personas/proveedores/list/`,
+ * `${environment.apiUrl}/personas/proveedores/listOne/${data}`
+ * `${environment.apiUrl}/corp/pagoProveedores/create/`,
+ */
 
 @Component({
     selector: 'app-pago-provedors',

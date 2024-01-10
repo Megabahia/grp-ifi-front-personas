@@ -6,6 +6,14 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 
+/**
+ * IFIS
+ * PErsonas
+ * Esta pantalla sirve para registrar la informacion de la firma electronica
+ * Rutas:
+ * `${environment.apiUrl}/corp/firmaElectronica/create/`,
+ */
+
 @Component({
     selector: 'app-registro-firma-electronica',
     templateUrl: './registro-firma-electronica.component.html',
@@ -15,7 +23,6 @@ export class RegistroFirmaElectronicaComponent implements OnInit {
     @ViewChild('mensajeModal') mensajeModal;
 
     public firmaForm: FormGroup;
-    public firmaFormData: FormData;
     public submitted = false;
     public mensaje = 'Su información ha sido almacenada con éxito.';
 

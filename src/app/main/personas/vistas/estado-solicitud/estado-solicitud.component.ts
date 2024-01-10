@@ -5,7 +5,15 @@ import {CoreConfigService} from '../../../../../@core/services/config.service';
 import {AuthenticationService} from '../../../../auth/service';
 import {CoreMenuService} from '../../../../../@core/components/core-menu/core-menu.service';
 import {CreditosPreAprobadosService} from '../creditos-pre-aprobados/creditos-pre-aprobados.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+
+/**
+ * IFIS
+ * PErsonas
+ * ESta pantalla sirve para mostrar el estado de solicitud
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/listOne/usuario/${datos.id}`,
+ */
 
 @Component({
     selector: 'app-estado-solicitud',

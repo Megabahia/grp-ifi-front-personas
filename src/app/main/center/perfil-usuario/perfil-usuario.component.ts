@@ -17,6 +17,21 @@ import {Router} from '@angular/router';
 import {ParametrizacionesService} from '../../personas/servicios/parametrizaciones.service';
 import {ToastrService} from 'ngx-toastr';
 
+/*
+* IFIS
+* PErsonas
+* Esta pantalla sirve para registar el perfil del usuario
+* Rutas:
+* `${environment.apiUrl}/personas/personas/listOne/${id}`
+* `${environment.apiUrl}/personas/historialLaboral/listOne/${user_id}`
+* `${environment.apiUrl}/central/usuarios/update/${datos.id}`
+* `${environment.apiUrl}/personas/personas/update/${datos.user_id}`
+* `${environment.apiUrl}/personas/personas/update/imagen/${id}`
+* `${environment.apiUrl}/central/param/list/tipo/todos/`,
+* `${environment.apiUrl}/central/param/list/filtro/nombre`,
+* `${environment.apiUrl}/personas/historialLaboral/update/${user_id}`
+* */
+
 @Component({
     selector: 'app-perfil-usuario',
     templateUrl: './perfil-usuario.component.html',
@@ -271,7 +286,6 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
             .subscribe(
                 (info) => {
                     if (info.error) {
-                        // this.abrirModal(info.error);
                         this.mensaje = info.error;
                         this.abrirModal(this.mensajeModal);
                         return;

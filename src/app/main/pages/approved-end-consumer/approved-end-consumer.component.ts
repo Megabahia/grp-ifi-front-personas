@@ -3,9 +3,16 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CoreConfigService} from '../../../../@core/services/config.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import Decimal from 'decimal.js';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+
+/**
+ * IFIS
+ * Personas
+ * Este metodo sirve para mostrar la informacion final de la solicitud del credito
+ * Rutas:
+ * no llama a ninguna ruta
+ */
 
 @Component({
     selector: 'app-approved-end-consumer',
@@ -14,8 +21,6 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class ApprovedEndConsumerComponent implements OnInit {
     public envioForm: FormGroup;
-    public submittedSimulador = false;
-    public pathSent;
     @ViewChild('mensajeModal') mensajeModal;
     public mensaje = '';
     public monto;
@@ -65,14 +70,9 @@ export class ApprovedEndConsumerComponent implements OnInit {
         };
     }
 
-    get getsimuladorForm() {
-        return this.envioForm.controls;
-    }
-
     cerrarModal() {
         this.modalService.dismissAll();
     }
-
 
     abrirModal(modal) {
         this.modalService.open(modal);

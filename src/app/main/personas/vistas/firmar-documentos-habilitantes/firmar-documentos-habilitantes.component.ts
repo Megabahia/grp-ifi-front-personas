@@ -7,6 +7,15 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ValidacionesPropias} from '../../../../../utils/customer.validators';
 import {ToastrService} from 'ngx-toastr';
 
+/**
+ * IFIS
+ * PERSonas
+ * Esta pantalla sirve para mostrar los documentos habilitantes que puedan firmar electronicamente
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('_id')}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/list/`,
+ */
+
 @Component({
     selector: 'app-firmar-documentos-habilitantes',
     templateUrl: './firmar-documentos-habilitantes.component.html',

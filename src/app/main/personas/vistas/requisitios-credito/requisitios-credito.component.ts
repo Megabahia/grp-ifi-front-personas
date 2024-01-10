@@ -13,6 +13,17 @@ import {jsPDF} from 'jspdf';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
+/**
+ * IFIS
+ * Personas
+ * Esta pantalla sirve para mostrar los requisitos del credito
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/create/`,
+ */
+
 @Component({
     selector: 'app-requisitios-credito',
     templateUrl: './requisitios-credito.component.html',
@@ -30,8 +41,6 @@ export class RequisitiosCreditoComponent implements OnInit {
         _id: ''
     };
     montoBASEDATOS;
-    requisitosINFEROR;
-    requisitosSUPERIOR;
     public usuario: User;
     private solicitarCredito: SolicitarCredito;
     private tipoPersona: string;
@@ -228,7 +237,7 @@ export class RequisitiosCreditoComponent implements OnInit {
             const y = 10;
             const maxWidth = 180; // Ancho máximo del párrafo
 
-            doc.text(text, x, y, { maxWidth });
+            doc.text(text, x, y, {maxWidth});
 
             // Convierte el documento en un archivo Blob
             const pdfBlob = doc.output('blob');

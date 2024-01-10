@@ -3,10 +3,9 @@ import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {first, takeUntil} from 'rxjs/operators';
 import {CoreConfigService} from '../../../../@core/services/config.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, Subject, Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {AuthenticationService} from '../../../auth/service/authentication.service';
-import {ReCaptchaV3Service} from 'ngx-captcha';
-import {environment} from "../../../../environments/environment";
+import {environment} from '../../../../environments/environment';
 import {ToastrService} from 'ngx-toastr';
 import {
     FacebookLoginProvider,
@@ -18,7 +17,16 @@ import {Role} from 'app/auth/models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CreditosPreAprobadosService} from '../../personas/vistas/creditos-pre-aprobados/creditos-pre-aprobados.service';
 import {CoreMenuService} from '../../../../@core/components/core-menu/core-menu.service';
-import {menu} from '../../../menu/menu';
+
+/*
+* IFIS
+* Personas
+* ESta pantalla sirve para iniciar sesion en la aplicacion
+* Rutas:
+* `${environment.apiUrl}/central/auth/login/`
+* `${environment.apiUrl}/central/usuarios/create/`,
+* `${environment.apiUrl}/central/auth/loginFacebook/`
+*/
 
 @Component({
     selector: 'app-login',
@@ -56,11 +64,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     // Private
     private _unsubscribeAll: Subject<any>;
 
-    /**
-     * Constructor
-     *
-     * @param {CoreConfigService} _coreConfigService
-     */
+
     constructor(
         private _coreConfigService: CoreConfigService,
         private _formBuilder: FormBuilder,
@@ -259,7 +263,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             })
             .subscribe(
                 (info) => {
-                    if (info.email == 'Ya existe usuarios con este email.') {
+                    if (info.email === 'Ya existe usuarios con este email.') {
                         this.login();
                     } else {
                         this.error = null;

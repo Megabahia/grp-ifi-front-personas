@@ -11,6 +11,17 @@ import {Router} from '@angular/router';
 import {BienvenidoService} from '../bienvenido/bienvenido.service';
 import {ToastrService} from 'ngx-toastr';
 
+/**
+ * IFIS
+ * PErsonas
+ * Esta pantalla sirve para completar el perfil de la persona
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ * `${environment.apiUrl}/personas/personas/update/${datos.user_id}`,
+ * `${environment.apiUrl}/central/usuarios/update/${datos.id}`,
+ */
+
 @Component({
     selector: 'app-perfil-completar',
     templateUrl: './perfil-completar.component.html',
